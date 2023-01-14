@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE student PUBLIC "-//Portland State University//DTD CS410J Grade Book//EN" "http://www.cs.pdx.edu/~whitlock/dtds/gradebook.dtd">
+<student enrolled-section="graduate">
+<id>smahato</id>
+<firstName>Shreyoshi</firstName>
+<lastName>Mahato</lastName>
+<nickName>shreyoshi</nickName>
+<email>smahato@pdx.edu</email>
+<major>CS</major>
+<notes>
+<note>Shreyoshi "shreyoshi" Mahato would like to learn industry standard java</note>
+<note>Shreyoshi "shreyoshi" Mahato has these comments: nothing</note>
+</notes>
+</student>
