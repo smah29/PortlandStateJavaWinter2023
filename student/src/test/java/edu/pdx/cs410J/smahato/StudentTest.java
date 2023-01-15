@@ -12,8 +12,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
  * they also make use of the <a href="http://hamcrest.org/JavaHamcrest/">hamcrest</a>
  * matchers for more readable assertion statements.
  */
-public class StudentTest
-{
+public class StudentTest {
 
   @Test
   void studentNamedPatIsNamedPat() {
@@ -22,4 +21,9 @@ public class StudentTest
     assertThat(pat.getName(), equalTo(name));
   }
 
+  @Test
+  void allStudentSaysThisClassIsTooMuchWork() {
+    Student student = new Student("Name", new ArrayList<>(), 0.0, "female");
+    assertThat(student.says(), equalTo("This class is too much work"));
+  }
 }
