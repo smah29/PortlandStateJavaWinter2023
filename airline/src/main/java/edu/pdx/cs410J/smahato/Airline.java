@@ -8,6 +8,9 @@ public class Airline extends AbstractAirline<Flight> {
   private final String name;
 
   public Airline(String name) {
+    if (name == null || name.isBlank()) {
+      throw new NullPointerException("Airline name cannot be null or blank");
+    }
     this.name = name;
   }
 
