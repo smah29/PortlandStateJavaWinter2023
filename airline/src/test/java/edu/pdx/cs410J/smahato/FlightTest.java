@@ -2,6 +2,8 @@ package edu.pdx.cs410J.smahato;
 
 import org.junit.jupiter.api.Test;
 
+import java.time.DateTimeException;
+
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -153,5 +155,87 @@ public class FlightTest {
   void testSameSourceAndDestination() {
     assertThrows(DuplicateAirportCodeException.class, () -> new Flight(1, "PDX", "PDX", "10/10/2020 10:10", "10/10/2020 11:10"));
   }
+
+  // Test create flight with null departureString
+  @Test
+  void testNullDepartureString() {
+    assertThrows(NullPointerException.class, () -> new Flight(1, "PDX", "LAX", null, "10/10/2020 11:10"));
+  }
+
+  // Test create flight with empty departureString
+  @Test
+  void testEmptyDepartureString() {
+    assertThrows(NullPointerException.class, () -> new Flight(1, "PDX", "LAX", "", "10/10/2020 11:10"));
+  }
+
+  // Test create flight with departureString as 10/10/20 10:10 (The year should always be four digits)
+  @Test
+  void testDepartureStringWithInvalidYear() {
+    assertThrows(DateTimeException.class, () -> new Flight(1, "PDX", "LAX", "10/10/20 10:10", "10/10/2020 11:10"));
+  }
+
+  //Test create flight with departureString as 21/10/2020 10:10 (The month should be between 1 and 12)
+  @Test
+  void testDepartureStringWithInvalidMonth() {
+    assertThrows(DateTimeException.class, () -> new Flight(1, "PDX", "LAX", "21/10/2020 10:10", "10/10/2020 11:10"));
+  }
+
+  //Test create flight with departureString as 0/10/2020 10:10 (The month should be between 1 and 12)
+  @Test
+  void testDepartureStringWithInvalidMonth0() {
+    assertThrows(DateTimeException.class, () -> new Flight(1, "PDX", "LAX", "0/10/2020 10:10", "10/10/2020 11:10"));
+  }
+
+  //Test create flight with departureString with invalid 31 day in Feb
+  @Test
+  void testDepartureStringWithInvalidDayInFeb() {
+    assertThrows(DateTimeException.class, () -> new Flight(1, "PDX", "LAX", "2/31/2020 10:10", "10/10/2020 11:10"));
+  }
+
+  //Test create flight with departureString with invalid 29 day in Feb
+  @Test
+  void testDepartureStringWith29DayInFeb() {
+    assertThrows(DateTimeException.class, () -> new Flight(1, "PDX", "LAX", "2/29/2019 10:10", "10/10/2020 11:10"));
+  }
+
+  //Test create flight with departureString with invalid 29 day in Feb, not divisible by 400, not a leap year
+  @Test
+  void testDepartureStringWith29DayInFebInYear1000() {
+    assertThrows(DateTimeException.class, () -> new Flight(1, "PDX", "LAX", "2/29/1000 10:10", "10/10/2020 11:10"));
+  }
+
+  //Test create flight with departureString with leap year day in Feb
+  @Test
+  void testDepartureStringWithLeapYearDayInFeb() {
+    Flight flight = new Flight(1, "PDX", "LAX", "2/29/2020 10:10", "10/10/2020 11:10");
+    assertThat(flight.getDepartureString(), equalTo("2/29/2020 10:10"));
+  }
+
+  //Test create flight with departureString with day 32 (The day should be between 1 and 31)
+  @Test
+  void testDepartureStringWithInvalidDay() {
+    assertThrows(DateTimeException.class, () -> new Flight(1, "PDX", "LAX", "12/32/2020 10:10", "10/10/2020 11:10"));
+  }
+
+  //Test create flight with departureString as 10/0/2020 10:10 (The day should be between 1 and 31)
+  @Test
+  void testDepartureStringWithInvalidDay0() {
+    assertThrows(DateTimeException.class, () -> new Flight(1, "PDX", "LAX", "10/0/2020 10:10", "10/10/2020 11:10"));
+  }
+
+  // Test create flight with ArrivalString as 10/10/2020 25:10 (The hour should be between 0 and 23)
+  @Test
+  void testArrivalStringWithInvalidHour() {
+    assertThrows(DateTimeException.class, () -> new Flight(1, "PDX", "LAX", "10/10/2020 11:10", "2/29/2000 25:10"));
+  }
+
+  // Test create flight with ArrivalString as 10/10/2020 10:60 (The minute should be between 0 and 59)
+  @Test
+  void testArrivalStringWithInvalidMinute() {
+    assertThrows(DateTimeException.class, () -> new Flight(1, "PDX", "LAX", "10/10/2020 11:10", "2/10/2020 10:60"));
+  }
+
+  // No more test cases required for the arrivalString as the same tests have been written for the departureString
+  // invalid validateFlightSchedule have been already tested both for departureString and arrivalString
 
 }
