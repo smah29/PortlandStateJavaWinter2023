@@ -17,12 +17,12 @@ public class AirlineUtils {
    */
   public static void validateAirportCodes(String[][] airportCodes) {
     Set<String> uniqueAirportCodes = new HashSet<>();
-    for (int i = 0; i < airportCodes.length; i++) {
+    for (String[] airportCode : airportCodes) {
       // HasSet returns true if this set did not already contain the specified element
-      if (!uniqueAirportCodes.add(airportCodes[i][0])) {
+      if (!uniqueAirportCodes.add(airportCode[0])) {
         throw new DuplicateAirportCodeException("Source and destination cannot be same");
       }
-      airportCodeValidation(airportCodes[i][0], airportCodes[i][1]);
+      airportCodeValidation(airportCode[0], airportCode[1]);
     }
   }
 
@@ -50,7 +50,7 @@ public class AirlineUtils {
    */
   private static void airportCodeAlphabeticCheck(String airportCode, String airportType) {
     if (!airportCode.matches(ALPHABETS)) {
-      String onlyAlphabetsRequired = MUST_CONTAIN_ONLY_ALPHABETS.replace(TARGET, airportType);
+      String onlyAlphabetsRequired = airportType + " must contain only alphabets";
       if (airportType.equals(SOURCE))
         throw new InvalidSourceException(onlyAlphabetsRequired);
       else
@@ -67,7 +67,7 @@ public class AirlineUtils {
    */
   private static void airportCodeLengthCheck(String airportCode, String airportType) {
     if (airportCode.length() != AIRPORT_CODE_LENGTH) {
-      String threeLetterCodeRequired = MUST_BE_EXACTLY_3_CHARACTERS_LONG.replace(TARGET, airportType);
+      String threeLetterCodeRequired = airportType + " must be exactly 3 characters long";
       if (airportType.equals(SOURCE))
         throw new InvalidSourceException(threeLetterCodeRequired);
       else
@@ -84,6 +84,6 @@ public class AirlineUtils {
    */
   private static void airportCodeNullCheck(String airportCode, String airportType) {
     if (airportCode == null || airportCode.isEmpty())
-      throw new NullPointerException(CANNOT_BE_NULL_OR_EMPTY.replace(TARGET, airportType));
+      throw new NullPointerException(airportType + " cannot be null or empty");
   }
 }
