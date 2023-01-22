@@ -1,7 +1,6 @@
 package edu.pdx.cs410J.smahato;
 
 import edu.pdx.cs410J.InvokeMainTestCase;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.BufferedReader;
@@ -40,10 +39,9 @@ class Project1IT extends InvokeMainTestCase {
    * Tests that invoking the main method with all arguments prints flight details
    */
   @Test
-  @Disabled
   void testAllValidCommandLineArguments() {
     MainMethodResult result = invokeMain("-print", "CS410J Air Express", "1", "PDX", "10/10/2020", "10:10", "LAX", "10/10/2020", "10:10");
-    assertThat(result.getTextWrittenToStandardOut(), equalTo("Flight 1 departs PDX at 10/10/2020 10:10 arrives LAX at 10/10/2020 10:10"));
+    assertThat(result.getTextWrittenToStandardOut(), equalTo("Flight 1 departs PDX at 10/10/2020 10:10 arrives LAX at 10/10/2020 10:10\n"));
   }
 
   /**
@@ -72,5 +70,23 @@ class Project1IT extends InvokeMainTestCase {
   void testWithMoreThan9CommandLineArguments() {
     MainMethodResult result = invokeMain("-print", "CS410J Air Express", "1", "PDX", "10/10/2020", "10:10", "LAX", "10/10/2020", "10:10", "extraArgument");
     assertThat(result.getTextWrittenToStandardError(), equalTo(EXTRA_COMMAND_LINE_ARGS));
+  }
+
+  /**
+   * Tests that invoking the main method with no -print option prints nothing to System.out
+   */
+  @Test
+  void testCommandLineArgumentsWithNoPrintOption() {
+    MainMethodResult result = invokeMain("CS410J Air Express", "1", "PDX", "10/10/2020", "10:10", "LAX", "10/10/2020", "10:10");
+    assertThat(result.getTextWrittenToStandardOut(), equalTo(""));
+  }
+
+  /**
+   * Tests that invoking the main method with less than 9 arguments issues a missing args error
+   */
+  @Test
+  void testWithLessThan9CommandLineArguments() {
+    MainMethodResult result = invokeMain("-print", "CS410J Air Express", "1", "PDX", "10/10/2020", "10:10", "LAX", "10/10/2020");
+    assertThat(result.getTextWrittenToStandardError(), equalTo(MISSING_COMMAND_LINE_ARGS));
   }
 }
