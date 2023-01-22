@@ -7,10 +7,13 @@ import java.time.DateTimeException;
  */
 public class DateTimeUtils {
 
+  /**
+   * date and time should be of format mm/dd/yyyy hh:mm
+   */
   public static final String BE_OF_FORMAT_MM_DD_YYYY_HH_MM = " date and time should be of format mm/dd/yyyy hh:mm";
 
   /**
-   * Validate the flight schedules
+   * Validate the flight schedules ex dateTimeNullCheck and dateTimeFormatCheck
    *
    * @param flightSchedules <p>array of flight schedules and their types ex departure/arrival</p>
    */

@@ -8,8 +8,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import static edu.pdx.cs410J.smahato.ErrorMessages.EXTRA_COMMAND_LINE_ARGS;
-import static edu.pdx.cs410J.smahato.ErrorMessages.MISSING_COMMAND_LINE_ARGS;
+import static edu.pdx.cs410J.smahato.AirlineConstants.*;
+import static edu.pdx.cs410J.smahato.DateTimeUtils.BE_OF_FORMAT_MM_DD_YYYY_HH_MM;
+import static edu.pdx.cs410J.smahato.ErrorMessages.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -89,4 +90,52 @@ class Project1IT extends InvokeMainTestCase {
     MainMethodResult result = invokeMain("-print", "CS410J Air Express", "1", "PDX", "10/10/2020", "10:10", "LAX", "10/10/2020");
     assertThat(result.getTextWrittenToStandardError(), equalTo(MISSING_COMMAND_LINE_ARGS));
   }
+
+  /**
+   * Tests that invoking the main method with invalid flight number issues an error message
+   * and does not print flight details
+   */
+  @Test
+  void testWithInvalidFlightNumber() {
+    MainMethodResult result = invokeMain("-print", "CS410J Air Express", "PDX", "1", "10/10/2020", "10:10", "LAX", "10/10/2020", "10:10");
+    assertThat(result.getTextWrittenToStandardError(), equalTo("Flight number must be an integer!" + README + "\n"));
+  }
+
+  /**
+   * Tests that invoking the main method with invalid Departure Date and Time format issues an error message
+   * and does not print flight details
+   */
+  @Test
+  void testDepartureDateTimeExchangedArguments() {
+    MainMethodResult result = invokeMain("-print", "CS410J Air Express", "1", "PDX", "10:10", "10/10/2020", "LAX", "10/10/2020", "10:10");
+    assertThat(result.getTextWrittenToStandardError(), equalTo(DEPARTURE + BE_OF_FORMAT_MM_DD_YYYY_HH_MM + README + "\n"));
+  }
+
+  /**
+   * invalid airport code, order is interchanged between arrival date and destination
+   */
+  @Test
+  void testInValidAirPortCodeArguments() {
+    MainMethodResult result = invokeMain("-print", "CS410J Air Express", "1", "PDX", "10/10/2020", "10:10", "10/10/2020", "10:10", "LAX");
+    assertThat(result.getTextWrittenToStandardError(), equalTo(DESTINATION + MUST_BE_EXACTLY_3_CHARACTERS_LONG + README + "\n"));
+  }
+
+  /**
+   * source and destination airport code are same which is invalid
+   */
+  @Test
+  void testWithSrcDestSame() {
+    MainMethodResult result = invokeMain("-print", "CS410J Air Express", "1", "PDX", "10/10/2020", "10:10", "PDX", "10/10/2020", "10:10");
+    assertThat(result.getTextWrittenToStandardError(), equalTo(SOURCE_AND_DESTINATION_CANNOT_BE_SAME + README + "\n"));
+  }
+
+  /**
+   * Airline name cannot be empty
+   */
+  @Test
+  void testWithBlankAirlineName() {
+    MainMethodResult result = invokeMain("-print", "", "1", "PDX", "10/10/2020", "10:10", "LAX", "10/10/2020", "10:10");
+    assertThat(result.getTextWrittenToStandardError(), equalTo("Airline name" + CANNOT_BE_NULL_OR_EMPTY + README + "\n"));
+  }
+
 }

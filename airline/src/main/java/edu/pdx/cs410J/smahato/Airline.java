@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import static edu.pdx.cs410J.smahato.AirlineConstants.CANNOT_BE_NULL_OR_EMPTY;
+
 /**
  * Airline has and name and a list of flights
  */
@@ -26,7 +28,7 @@ public class Airline extends AbstractAirline<Flight> {
    */
   public Airline(String name) {
     if (name == null || name.isBlank()) {
-      throw new NullPointerException("Airline name cannot be null or blank");
+      throw new NullPointerException("Airline name" + CANNOT_BE_NULL_OR_EMPTY);
     }
     this.name = name;
     this.flights = new ArrayList<>();

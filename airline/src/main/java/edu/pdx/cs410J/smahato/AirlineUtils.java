@@ -20,7 +20,7 @@ public class AirlineUtils {
     for (String[] airportCode : airportCodes) {
       // HasSet returns true if this set did not already contain the specified element
       if (!uniqueAirportCodes.add(airportCode[0])) {
-        throw new AirportCodeException("Source and destination cannot be same");
+        throw new AirportCodeException(SOURCE_AND_DESTINATION_CANNOT_BE_SAME);
       }
       airportCodeValidation(airportCode[0], airportCode[1]);
     }
@@ -50,7 +50,7 @@ public class AirlineUtils {
    */
   private static void airportCodeAlphabeticCheck(String airportCode, String airportType) {
     if (!airportCode.matches(ALPHABETS)) {
-      throw new AirportCodeException(airportType + " must contain only alphabets");
+      throw new AirportCodeException(airportType + MUST_CONTAIN_ONLY_ALPHABETS);
     }
   }
 
@@ -63,7 +63,7 @@ public class AirlineUtils {
    */
   private static void airportCodeLengthCheck(String airportCode, String airportType) {
     if (airportCode.length() != AIRPORT_CODE_LENGTH) {
-      throw new AirportCodeException(airportType + " must be exactly 3 characters long");
+      throw new AirportCodeException(airportType + MUST_BE_EXACTLY_3_CHARACTERS_LONG);
     }
   }
 
@@ -76,6 +76,6 @@ public class AirlineUtils {
    */
   private static void airportCodeNullCheck(String airportCode, String airportType) {
     if (airportCode == null || airportCode.isEmpty())
-      throw new NullPointerException(airportType + " cannot be null or empty");
+      throw new NullPointerException(airportType + CANNOT_BE_NULL_OR_EMPTY);
   }
 }

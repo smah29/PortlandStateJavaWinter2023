@@ -3,7 +3,9 @@ package edu.pdx.cs410J.smahato;
 import edu.pdx.cs410J.AbstractFlight;
 
 import static edu.pdx.cs410J.smahato.AirlineConstants.*;
-
+/**
+ * Flight has a number, source, destination, departure time and arrival time
+ */
 public class Flight extends AbstractFlight {
 
   private final int number;
@@ -14,6 +16,15 @@ public class Flight extends AbstractFlight {
 
   // creating this constructor will not compile initially as the zero argument constructor is called at many places
   // so, we need to create a zero argument constructor as well
+  /**
+   * Creates a new flight with the given number, source, destination, departure time and arrival time
+   *
+   * @param number Flight number
+   * @param source Source airport code
+   * @param destination Destination airport code
+   * @param departureString Departure time
+   * @param arrivalString Arrival time
+   */
   public Flight(int number, String source, String destination, String departureString, String arrivalString) {
     this.number = number;
 

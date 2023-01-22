@@ -1,14 +1,14 @@
 package edu.pdx.cs410J.smahato;
 
-import com.google.common.annotations.VisibleForTesting;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.time.DateTimeException;
 import java.util.ArrayList;
 import java.util.stream.Stream;
 
+import static edu.pdx.cs410J.smahato.ErrorMessages.README;
 import static edu.pdx.cs410J.smahato.ErrorMessages.EXTRA_COMMAND_LINE_ARGS;
 import static edu.pdx.cs410J.smahato.ErrorMessages.MISSING_COMMAND_LINE_ARGS;
 
@@ -17,13 +17,9 @@ import static edu.pdx.cs410J.smahato.ErrorMessages.MISSING_COMMAND_LINE_ARGS;
  */
 public class Project1 {
 
-  @VisibleForTesting
-  static boolean isValidDateAndTime(String dateAndTime) {
-    return true;
-  }
-
   public static void main(String[] args) {
-    if (args == null || args.length == 0) {
+    int length = args.length;
+    if (length == 0) {
       System.err.print(MISSING_COMMAND_LINE_ARGS);
       return;
     }
@@ -41,7 +37,7 @@ public class Project1 {
       }
       return;
     }
-    if (args.length > 9) {
+    if (length > 9) {
       System.err.print(EXTRA_COMMAND_LINE_ARGS);
       return;
     }
@@ -50,13 +46,20 @@ public class Project1 {
     if (!print) {
       return;
     }
-    if (args.length != 9) {
+    if (length != 9) {
       System.err.print(MISSING_COMMAND_LINE_ARGS);
       return;
     }
-    Airline airline = new Airline(args[1]);
-    Flight flight = new Flight(Integer.parseInt(args[2]), args[3], args[6], args[4] + " " + args[5], args[7] + " " + args[8]);
-    airline.addFlight(flight);
-    System.out.println(new ArrayList<>(airline.getFlights()).get(0).toString());
+    try {
+      // args[0] is -print expected
+      Airline airline = new Airline(args[1]);
+      Flight flight = new Flight(Integer.parseInt(args[2]), args[3], args[6], args[4] + " " + args[5], args[7] + " " + args[8]);
+      airline.addFlight(flight);
+      System.out.println(new ArrayList<>(airline.getFlights()).get(0).toString());
+    } catch (NumberFormatException e) {
+      System.err.println("Flight number must be an integer!" + README);
+    } catch (DateTimeException | AirportCodeException | NullPointerException e) {
+      System.err.println(e.getMessage() + README);
+    }
   }
 }
