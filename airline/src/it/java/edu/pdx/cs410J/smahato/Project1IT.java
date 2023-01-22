@@ -4,8 +4,14 @@ import edu.pdx.cs410J.InvokeMainTestCase;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.hamcrest.CoreMatchers.equalTo;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
+import static edu.pdx.cs410J.smahato.ErrorMessages.MISSING_COMMAND_LINE_ARGS;
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
@@ -26,14 +32,30 @@ class Project1IT extends InvokeMainTestCase {
   @Test
   void testNoCommandLineArguments() {
     MainMethodResult result = invokeMain();
-    assertThat(result.getTextWrittenToStandardError(), containsString("Missing command line arguments"));
+    assertThat(result.getTextWrittenToStandardError(), equalTo(MISSING_COMMAND_LINE_ARGS));
   }
 
   // Test with all arguments
   @Test
   @Disabled
   void testAllValidCommandLineArguments() {
-    MainMethodResult result = invokeMain("CS410J Air Express", "1", "PDX", "10/10/2020", "10:10", "LAX", "10/10/2020", "10:10");
+    MainMethodResult result = invokeMain("-print", "CS410J Air Express", "1", "PDX", "10/10/2020", "10:10", "LAX", "10/10/2020", "10:10");
     assertThat(result.getTextWrittenToStandardOut(), equalTo("Flight 1 departs PDX at 10/10/2020 10:10 arrives LAX at 10/10/2020 10:10"));
+  }
+
+  @Test
+  void testReadme() {
+    MainMethodResult result = invokeMain("-README");
+    try {
+      InputStream readme = Project1.class.getResourceAsStream("README.txt");
+      assertThat(readme, not(nullValue()));
+      BufferedReader reader = new BufferedReader(new InputStreamReader(readme));
+      String line;
+      while ((line = reader.readLine()) != null) {
+        assertThat(result.getTextWrittenToStandardOut(), containsString(line));
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 }
