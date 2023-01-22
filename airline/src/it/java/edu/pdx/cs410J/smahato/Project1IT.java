@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import static edu.pdx.cs410J.smahato.ErrorMessages.EXTRA_COMMAND_LINE_ARGS;
 import static edu.pdx.cs410J.smahato.ErrorMessages.MISSING_COMMAND_LINE_ARGS;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -35,7 +36,9 @@ class Project1IT extends InvokeMainTestCase {
     assertThat(result.getTextWrittenToStandardError(), equalTo(MISSING_COMMAND_LINE_ARGS));
   }
 
-  // Test with all arguments
+  /**
+   * Tests that invoking the main method with all arguments prints flight details
+   */
   @Test
   @Disabled
   void testAllValidCommandLineArguments() {
@@ -43,6 +46,9 @@ class Project1IT extends InvokeMainTestCase {
     assertThat(result.getTextWrittenToStandardOut(), equalTo("Flight 1 departs PDX at 10/10/2020 10:10 arrives LAX at 10/10/2020 10:10"));
   }
 
+  /**
+   * Tests that invoking the main method with the -README argument prints the README.txt
+   */
   @Test
   void testReadme() {
     MainMethodResult result = invokeMain("-README");
@@ -57,5 +63,14 @@ class Project1IT extends InvokeMainTestCase {
     } catch (IOException e) {
       e.printStackTrace();
     }
+  }
+
+  /**
+   * Tests that invoking the main method with extra arguments issues an error
+   */
+  @Test
+  void testWithMoreThan9CommandLineArguments() {
+    MainMethodResult result = invokeMain("-print", "CS410J Air Express", "1", "PDX", "10/10/2020", "10:10", "LAX", "10/10/2020", "10:10", "extraArgument");
+    assertThat(result.getTextWrittenToStandardError(), equalTo(EXTRA_COMMAND_LINE_ARGS));
   }
 }

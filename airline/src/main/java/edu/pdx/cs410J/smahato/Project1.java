@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import static edu.pdx.cs410J.smahato.ErrorMessages.EXTRA_COMMAND_LINE_ARGS;
 import static edu.pdx.cs410J.smahato.ErrorMessages.MISSING_COMMAND_LINE_ARGS;
 
 /**
@@ -38,6 +39,10 @@ public class Project1 {
         }
         return;
       }
+    }
+    if (args.length > 9) {
+      System.err.print(EXTRA_COMMAND_LINE_ARGS);
+      return;
     }
   }
 }
