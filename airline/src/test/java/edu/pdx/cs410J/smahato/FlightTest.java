@@ -38,6 +38,17 @@ public class FlightTest {
   }
 
   /**
+   * Test create a flight with flightNumber as abc
+   * should throw an exception
+   */
+  @Test
+  void createFlightWithNumberAsAbc() {
+    assertThrows(NumberFormatException.class, () ->
+        new Flight(Integer.parseInt("abc"), "PDX", "LAX", "10/10/2020 10:10", "10/10/2020 11:10")
+    );
+  }
+
+  /**
    * Test create flight with null source
    * NullPointerException is thrown because source cannot be null
    */
@@ -57,44 +68,44 @@ public class FlightTest {
 
   /**
    * Test create flight with source as only A
-   * InvalidSourceException is thrown because the source is not a valid airport code  (it is only one character long)
+   * AirportCodeException is thrown because the source is not a valid airport code  (it is only one character long)
    */
   @Test
   void testSourceAsOnlyA() {
-    assertThrows(InvalidSourceException.class, () -> new Flight(1, "A", "LAX", "10/10/2020 10:10", "10/10/2020 11:10"));
+    assertThrows(AirportCodeException.class, () -> new Flight(1, "A", "LAX", "10/10/2020 10:10", "10/10/2020 11:10"));
   }
 
   /**
    * Test create flight with source as apple
-   * InvalidSourceException is thrown because source must be exactly 3 characters long
+   * AirportCodeException is thrown because source must be exactly 3 characters long
    */
   @Test
   void testSourceAsApple() {
-    assertThrows(InvalidSourceException.class, () -> new Flight(1, "apple", "LAX", "10/10/2020 10:10", "10/10/2020 11:10"));
+    assertThrows(AirportCodeException.class, () -> new Flight(1, "apple", "LAX", "10/10/2020 10:10", "10/10/2020 11:10"));
   }
 
   /**
    * Test create flight with source as 123
-   * InvalidSourceException is thrown because the source is not a valid airport code (it is not alphabets)
+   * AirportCodeException is thrown because the source is not a valid airport code (it is not alphabets)
    */
 
   @Test
   void testSourceAs123() {
-    assertThrows(InvalidSourceException.class, () -> new Flight(1, "123", "LAX", "10/10/2020 10:10", "10/10/2020 11:10"));
+    assertThrows(AirportCodeException.class, () -> new Flight(1, "123", "LAX", "10/10/2020 10:10", "10/10/2020 11:10"));
   }
 
   /**
    * Test create flight with source as 1a3
-   * InvalidSourceException is thrown because the source is not a valid airport code (it is not alphabets)
+   * AirportCodeException is thrown because the source is not a valid airport code (it is not alphabets)
    */
   @Test
   void testSourceAs1a3() {
-    assertThrows(InvalidSourceException.class, () -> new Flight(1, "1a3", "LAX", "10/10/2020 10:10", "10/10/2020 11:10"));
+    assertThrows(AirportCodeException.class, () -> new Flight(1, "1a3", "LAX", "10/10/2020 10:10", "10/10/2020 11:10"));
   }
 
   /**
    * Test create flight with null destination
-   * InvalidDestinationException is thrown because destination is null
+   * NullPointerException is thrown because destination is null
    */
   @Test
   void testNullDestination() {
@@ -103,7 +114,7 @@ public class FlightTest {
 
   /**
    * Test create flight with empty destination
-   * InvalidDestinationException is thrown because the destination is blank
+   * NullPointerException is thrown because the destination is blank
    */
   @Test
   void testEmptyDestination() {
@@ -112,39 +123,39 @@ public class FlightTest {
 
   /**
    * Test create flight with destination as only A
-   * InvalidDestinationException is thrown because the destination is not a valid airport code  (it is only one character long)
+   * AirportCodeException is thrown because the destination is not a valid airport code  (it is only one character long)
    */
   @Test
   void testDestinationAsOnlyA() {
-    assertThrows(InvalidDestinationException.class, () -> new Flight(1, "PDX", "A", "10/10/2020 10:10", "10/10/2020 11:10"));
+    assertThrows(AirportCodeException.class, () -> new Flight(1, "PDX", "A", "10/10/2020 10:10", "10/10/2020 11:10"));
   }
 
   /**
    * Test create flight with destination as apple
-   * InvalidDestinationException is thrown because the destination is not a valid airport code  (it is more than three characters long)
+   * AirportCodeException is thrown because the destination is not a valid airport code  (it is more than three characters long)
    */
   @Test
   void testDestinationAsApple() {
-    assertThrows(InvalidDestinationException.class, () -> new Flight(1, "PDX", "apple", "10/10/2020 10:10", "10/10/2020 11:10"));
+    assertThrows(AirportCodeException.class, () -> new Flight(1, "PDX", "apple", "10/10/2020 10:10", "10/10/2020 11:10"));
   }
 
   /**
    * Test create flight with destination as 123
-   * InvalidDestinationException is thrown as the destination is not a valid airport code (it is not alphabets)
+   * AirportCodeException is thrown as the destination is not a valid airport code (it is not alphabets)
    */
 
   @Test
   void testDestinationAs123() {
-    assertThrows(InvalidDestinationException.class, () -> new Flight(1, "PDX", "123", "10/10/2020 10:10", "10/10/2020 11:10"));
+    assertThrows(AirportCodeException.class, () -> new Flight(1, "PDX", "123", "10/10/2020 10:10", "10/10/2020 11:10"));
   }
 
   /**
    * Test create flight with destination as 1a3
-   * InvalidDestinationException is thrown because the destination is not a valid airport code (it is not alphabets)
+   * AirportCodeException is thrown because the destination is not a valid airport code (it is not alphabets)
    */
   @Test
   void testDestinationAs1a3() {
-    assertThrows(InvalidDestinationException.class, () -> new Flight(1, "PDX", "1a3", "10/10/2020 10:10", "10/10/2020 11:10"));
+    assertThrows(AirportCodeException.class, () -> new Flight(1, "PDX", "1a3", "10/10/2020 10:10", "10/10/2020 11:10"));
   }
 
   /**
@@ -153,7 +164,7 @@ public class FlightTest {
    */
   @Test
   void testSameSourceAndDestination() {
-    assertThrows(DuplicateAirportCodeException.class, () -> new Flight(1, "PDX", "PDX", "10/10/2020 10:10", "10/10/2020 11:10"));
+    assertThrows(AirportCodeException.class, () -> new Flight(1, "PDX", "PDX", "10/10/2020 10:10", "10/10/2020 11:10"));
   }
 
   // Test create flight with null departureString

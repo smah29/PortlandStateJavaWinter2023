@@ -13,11 +13,12 @@ public class Project1 {
   }
 
   public static void main(String[] args) {
-//    Flight flight = new Flight();  // Refer to one of Dave's classes so that we can be sure it is on the classpath
-    System.err.println("Missing command line arguments");
+    if (args == null || args.length != 8) {
+      System.err.println("Missing command line arguments!\nTo run this program, please provide the following in order: airline name, flight number, source, departure date and time(mm/dd/yyyy hh:mm), destination, arrival date and time(mm/dd/yyyy hh:mm)");
+      return;
+    }
     for (String arg : args) {
       System.out.println(arg);
     }
   }
-
 }
