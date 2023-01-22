@@ -6,8 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.time.DateTimeException;
 import java.util.ArrayList;
-import java.util.stream.Stream;
-
+import java.util.Arrays;
 import static edu.pdx.cs410J.smahato.ErrorMessages.README;
 import static edu.pdx.cs410J.smahato.ErrorMessages.EXTRA_COMMAND_LINE_ARGS;
 import static edu.pdx.cs410J.smahato.ErrorMessages.MISSING_COMMAND_LINE_ARGS;
@@ -23,7 +22,7 @@ public class Project1 {
       System.err.print(MISSING_COMMAND_LINE_ARGS);
       return;
     }
-    boolean found = Stream.of(args).anyMatch(s -> s.equals("-README"));
+    boolean found = Arrays.asList(args).contains("-README");
     if (found) {
       try {
         InputStream readme = Project1.class.getResourceAsStream("README.txt");
@@ -42,7 +41,7 @@ public class Project1 {
       return;
     }
     //If the -print option is not present, then the program should print nothing to System.out.
-    boolean print = Stream.of(args).anyMatch(s -> s.equals("-print"));
+    boolean print = Arrays.asList(args).contains("-print");
     if (!print) {
       return;
     }
