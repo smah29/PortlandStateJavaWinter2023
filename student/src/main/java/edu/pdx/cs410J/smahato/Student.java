@@ -3,11 +3,15 @@ package edu.pdx.cs410J.smahato;
 import edu.pdx.cs410J.lang.Human;
 
 import java.util.ArrayList;
-                                                                                    
+import java.util.Arrays;
+
 /**                                                                                 
  * This class is represents a <code>Student</code>.                                 
  */                                                                                 
-public class Student extends Human {                                                
+public class Student extends Human {
+  private final ArrayList<String> classes;
+  private final double gpa;
+  private final String gender;
                                                                                     
   /**                                                                               
    * Creates a new <code>Student</code>                                             
@@ -21,9 +25,27 @@ public class Student extends Human {
    *        The student's grade point average                                       
    * @param gender                                                                  
    *        The student's gender ("male", "female", or "other", case insensitive)
-   */                                                                               
+   */
   public Student(String name, ArrayList<String> classes, double gpa, String gender) {
     super(name);
+    if (name == null) {
+      throw new NullPointerException("Name cannot be null");
+    }
+    if (classes == null) {
+      throw new NullPointerException("Classes cannot be null");
+    }
+    if (gpa < 0) {
+      throw new IllegalArgumentException("GPA cannot be negative");
+    }
+    if (gender == null) {
+      throw new NullPointerException("gender cannot be null");
+    }
+    if (Arrays.stream(Gender.values()).noneMatch(s -> s.name().equalsIgnoreCase(gender))) {
+      throw new IllegalArgumentException("Gender value is not valid");
+    }
+    this.classes = classes;
+    this.gpa = gpa;
+    this.gender = Gender.valueOf(gender.toLowerCase()).name();
   }
 
   /**                                                                               
