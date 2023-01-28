@@ -1,8 +1,10 @@
 package edu.pdx.cs410J.smahato;
 
 import edu.pdx.cs410J.AbstractFlight;
+import edu.pdx.cs410J.smahato.utils.AirlineValidationUtils;
+import edu.pdx.cs410J.smahato.utils.DateTimeUtils;
 
-import static edu.pdx.cs410J.smahato.AirlineConstants.*;
+import static edu.pdx.cs410J.smahato.constants.AirlineConstants.*;
 /**
  * Flight has a number, source, destination, departure time and arrival time
  */
@@ -14,8 +16,6 @@ public class Flight extends AbstractFlight {
   private final String departureString;
   private final String arrivalString;
 
-  // creating this constructor will not compile initially as the zero argument constructor is called at many places
-  // so, we need to create a zero argument constructor as well
   /**
    * Creates a new flight with the given number, source, destination, departure time and arrival time
    *
@@ -29,7 +29,7 @@ public class Flight extends AbstractFlight {
     this.number = number;
 
     String[][] airportCodes = {{source, SOURCE}, {destination, DESTINATION}};
-    AirlineUtils.validateAirportCodes(airportCodes);
+    AirlineValidationUtils.validateAirportCodes(airportCodes);
     this.source = source;
     this.destination = destination;
 

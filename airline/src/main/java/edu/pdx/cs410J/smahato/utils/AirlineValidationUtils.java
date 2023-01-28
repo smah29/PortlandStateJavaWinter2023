@@ -1,14 +1,16 @@
-package edu.pdx.cs410J.smahato;
+package edu.pdx.cs410J.smahato.utils;
+
+import edu.pdx.cs410J.smahato.AirportCodeException;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import static edu.pdx.cs410J.smahato.AirlineConstants.*;
+import static edu.pdx.cs410J.smahato.constants.AirlineConstants.*;
 
 /**
  * This class contains utility methods for validating airline data
  */
-public class AirlineUtils {
+public class AirlineValidationUtils {
 
   /**
    * Validate the airport codes

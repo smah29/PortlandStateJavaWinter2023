@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import static edu.pdx.cs410J.smahato.AirlineConstants.CANNOT_BE_NULL_OR_EMPTY;
+import static edu.pdx.cs410J.smahato.constants.AirlineConstants.CANNOT_BE_NULL_OR_EMPTY;
 
 /**
  * Airline has and name and a list of flights
@@ -19,7 +19,7 @@ public class Airline extends AbstractAirline<Flight> {
   /**
    * List of flights
    */
-  private List<Flight> flights;
+  private final List<Flight> flights;
 
   /**
    * Creates a new airline with the given name and empty list of flights
