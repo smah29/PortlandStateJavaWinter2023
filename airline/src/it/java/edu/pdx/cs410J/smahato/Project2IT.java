@@ -17,15 +17,15 @@ import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
- * An integration test for the {@link Project2} main class.
+ * An integration test for the {@link Project1} main class.
  */
 class Project2IT extends InvokeMainTestCase {
 
   /**
-   * Invokes the main method of {@link Project2} with the given arguments.
+   * Invokes the main method of {@link Project1} with the given arguments.
    */
   private MainMethodResult invokeMain(String... args) {
-    return invokeMain(Project2.class, args);
+    return invokeMain(Project1.class, args);
   }
 
   /**
@@ -53,7 +53,7 @@ class Project2IT extends InvokeMainTestCase {
   void testReadme() {
     MainMethodResult result = invokeMain("-README");
     try {
-      InputStream readme = Project2.class.getResourceAsStream("README.txt");
+      InputStream readme = Project1.class.getResourceAsStream("README.txt");
       assertThat(readme, not(nullValue()));
       BufferedReader reader = new BufferedReader(new InputStreamReader(readme));
       String line;

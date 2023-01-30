@@ -1,7 +1,5 @@
 package edu.pdx.cs410J.smahato;
 
-import edu.pdx.cs410J.smahato.utils.FilePathInputUtils;
-import edu.pdx.cs410J.smahato.utils.InputUtils;
 import edu.pdx.cs410J.smahato.utils.P1InputUtils;
 import edu.pdx.cs410J.smahato.utils.P2InputUtils;
 
@@ -19,7 +17,7 @@ import static edu.pdx.cs410J.smahato.constants.OptionConstants.*;
 /**
  * The main class for the CS410J airline Project 2
  */
-public class Project2 {
+public class Project1 {
   /**
    * Main method for Project 2,
    * it has the logic to check the command line arguments and print the README or flight or save the airline to a file
@@ -70,7 +68,7 @@ public class Project2 {
    */
   private static void printREADME() {
     try {
-      InputStream readme = Project2.class.getResourceAsStream("README.txt");
+      InputStream readme = Project1.class.getResourceAsStream("README.txt");
       BufferedReader reader = new BufferedReader(new InputStreamReader(readme));
       String line;
       while ((line = reader.readLine()) != null) {
