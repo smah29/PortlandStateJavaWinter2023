@@ -34,17 +34,24 @@ public class Project2 {
       System.err.print(MISSING_COMMAND_LINE_ARGS);
     } else if (input.contains(README)) {
       printREADME();
-    } else if (!input.contains(PRINT)) {
     } else if (!input.contains(TEXT_FILE)) {
-      InputUtils inputUtils = new P1InputUtils(input);
+      P1InputUtils inputUtils = new P1InputUtils(input);
+      if (!input.contains(PRINT)) {
+        inputUtils.setExpectedNumberOfArgs(inputUtils.getExpectedNumberOfArgs() - 1);
+        inputUtils.setStartIndex(inputUtils.getStartIndex() - 1);
+      }
       airline = inputUtils.getAirline();
-      if (airline != null) printAddedFlight(airline);
+      if (airline != null && input.contains(PRINT)) printAddedFlight(airline);
     } else {
-      FilePathInputUtils filePathInputUtils = new P2InputUtils(input);
+      P2InputUtils filePathInputUtils = new P2InputUtils(input);
+      if (!input.contains(PRINT)) {
+        filePathInputUtils.setExpectedNumberOfArgs(filePathInputUtils.getExpectedNumberOfArgs() - 1);
+        filePathInputUtils.setStartIndex(filePathInputUtils.getStartIndex() - 1);
+      }
       airline = filePathInputUtils.getAirline();
       if (airline != null) {
         boolean saved = filePathInputUtils.saveAirlineToFile(airline);
-        if (saved) printAddedFlight(airline);
+        if (saved && input.contains(PRINT)) printAddedFlight(airline);
       }
     }
   }

@@ -84,6 +84,15 @@ class Project2IT extends InvokeMainTestCase {
   }
 
   /**
+   * Tests that invoking the main method with no -print option but an error prints the error
+   */
+  @Test
+  void testCommandLineArgumentsWithNoPrintOptionButError() {
+    MainMethodResult result = invokeMain("CS410J Air Express", "1s", "PDX", "10/10/2020", "10:10", "LAX", "10/10/2020", "10:10");
+    assertThat(result.getTextWrittenToStandardError(), equalTo(FLIGHT_NUMBER_MUST_BE_AN_INTEGER + README_MESSAGE + "\n"));
+  }
+
+  /**
    * Tests that invoking the main method with less than 9 arguments issues a missing args error
    */
   @Test
@@ -146,6 +155,24 @@ class Project2IT extends InvokeMainTestCase {
   void testP2AllValidCommandLineArguments() {
     MainMethodResult result = invokeMain("-print", "-textFile", "file.txt", "CS410J Air Express", "1", "PDX", "10/10/2020", "10:10", "LAX", "10/10/2020", "10:10");
     assertThat(result.getTextWrittenToStandardOut(), equalTo("Flight 1 departs PDX at 10/10/2020 10:10 arrives LAX at 10/10/2020 10:10\n"));
+  }
+
+  /**
+   * P2 test with no print
+   */
+  @Test
+  void testP2WithNoPrint() {
+    MainMethodResult result = invokeMain("-textFile", "file.txt", "CS410J Air Express", "1", "PDX", "10/10/2020", "10:10", "LAX", "10/10/2020", "10:10");
+    assertThat(result.getTextWrittenToStandardOut(), equalTo(""));
+  }
+
+  /**
+   * P2 test with no print but returns error
+   */
+  @Test
+  void testP2WithNoPrintButError() {
+    MainMethodResult result = invokeMain("-textFile", "file.txt", "", "1", "PDX", "10/10/2020", "10:10", "LAX", "10/10/2020", "10:10");
+    assertThat(result.getTextWrittenToStandardError(), equalTo("Airline name" + CANNOT_BE_NULL_OR_EMPTY + README_MESSAGE + "\n"));
   }
 
   /**

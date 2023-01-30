@@ -30,11 +30,11 @@ public class P1InputUtils implements InputUtils {
   /**
    * Expected number of arguments according to Project ex 9 in Project 1
    */
-  public final int expectedNumberOfArgs;
+  public int expectedNumberOfArgs;
   /**
    * Index of the first argument where airline name starts ex 1 in Project 1
    */
-  public final int startIndex;
+  public int startIndex;
 
   /**
    * Constructor for P1InputUtils
@@ -55,6 +55,22 @@ public class P1InputUtils implements InputUtils {
   public P1InputUtils(List<String> input, int expectedNumberOfArgs, int startIndex) {
     this.input = input;
     this.expectedNumberOfArgs = expectedNumberOfArgs;
+    this.startIndex = startIndex;
+  }
+
+  public int getExpectedNumberOfArgs() {
+    return expectedNumberOfArgs;
+  }
+
+  public int getStartIndex() {
+    return startIndex;
+  }
+
+  public void setExpectedNumberOfArgs(int expectedNumberOfArgs) {
+    this.expectedNumberOfArgs = expectedNumberOfArgs;
+  }
+
+  public void setStartIndex(int startIndex) {
     this.startIndex = startIndex;
   }
 
@@ -129,6 +145,7 @@ public class P1InputUtils implements InputUtils {
 
   /**
    * creates an {@link Airline} object from the input list and add the flight to the airline
+   *
    * @return {@link Airline} object
    */
   @Override
