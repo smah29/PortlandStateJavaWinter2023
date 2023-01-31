@@ -1,4 +1,4 @@
-package edu.pdx.cs410J.smahato;
+package edu.pdx.cs410J.smahato.exception;
 
 /**
  * This exception is thrown when the airport code is not valid, it must be 3-letter code, source and destination cannot be same

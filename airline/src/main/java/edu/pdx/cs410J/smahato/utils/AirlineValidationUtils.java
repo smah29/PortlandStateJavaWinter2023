@@ -1,6 +1,7 @@
 package edu.pdx.cs410J.smahato.utils;
 
-import edu.pdx.cs410J.smahato.AirportCodeException;
+import edu.pdx.cs410J.AirportNames;
+import edu.pdx.cs410J.smahato.exception.AirportCodeException;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -41,6 +42,20 @@ public class AirlineValidationUtils {
     airportCodeNullCheck(airportCode, airportType);
     airportCodeLengthCheck(airportCode, airportType);
     airportCodeAlphabeticCheck(airportCode, airportType);
+    airportCodeExistsInAirportNames(airportCode, airportType);
+  }
+
+  /**
+   * Validate the airport code
+   * <p>airport code must match the AirportNames map keys</p>
+   *
+   * @param airportCode <p>airport code given as input by the user</p>
+   * @param airportType <p>airport type such as source or destination</p>
+   */
+  private static void airportCodeExistsInAirportNames(String airportCode, String airportType) {
+    if (AirportNames.getName(airportCode.toUpperCase()) == null) {
+      throw new AirportCodeException(airportType + MUST_BE_A_VALID_AIRPORT_CODE);
+    }
   }
 
   /**

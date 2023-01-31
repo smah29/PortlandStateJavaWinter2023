@@ -42,4 +42,8 @@ public interface AirlineConstants {
    * Flight number must be an integer!
    */
   String FLIGHT_NUMBER_MUST_BE_AN_INTEGER = "Flight number must be an integer!";
+  /**
+   * Airport code must be a valid airport code, it is not present in names map of {@link edu.pdx.cs410J.AirportNames} class
+   */
+  String MUST_BE_A_VALID_AIRPORT_CODE = " must be a valid airport code";
 }

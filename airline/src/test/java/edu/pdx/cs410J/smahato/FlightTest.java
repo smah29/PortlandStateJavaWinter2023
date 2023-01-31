@@ -1,5 +1,6 @@
 package edu.pdx.cs410J.smahato;
 
+import edu.pdx.cs410J.smahato.exception.AirportCodeException;
 import org.junit.jupiter.api.Test;
 
 import java.time.DateTimeException;
