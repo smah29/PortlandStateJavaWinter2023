@@ -3,31 +3,14 @@ package edu.pdx.cs410J.smahato.utils;
 import edu.pdx.cs410J.AirportNames;
 import edu.pdx.cs410J.smahato.exception.AirportCodeException;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import static edu.pdx.cs410J.smahato.constants.AirlineConstants.*;
+import static edu.pdx.cs410J.smahato.constants.AirlineConstants.AIRPORT_CODE_LENGTH;
+import static edu.pdx.cs410J.smahato.constants.AirlineConstants.ALPHABETS;
+import static edu.pdx.cs410J.smahato.constants.ErrorMessages.*;
 
 /**
  * This class contains utility methods for validating airline data
  */
 public class AirlineValidationUtils {
-
-  /**
-   * Validate the airport codes
-   *
-   * @param airportCodes <p>array of airport codes and their types ex source/destination</p>
-   */
-  public static void validateAirportCodes(String[][] airportCodes) {
-    Set<String> uniqueAirportCodes = new HashSet<>();
-    for (String[] airportCode : airportCodes) {
-      // HasSet returns true if this set did not already contain the specified element
-      if (!uniqueAirportCodes.add(airportCode[0])) {
-        throw new AirportCodeException(SOURCE_AND_DESTINATION_CANNOT_BE_SAME);
-      }
-      airportCodeValidation(airportCode[0], airportCode[1]);
-    }
-  }
 
   /**
    * Validate the airport code
@@ -38,7 +21,7 @@ public class AirlineValidationUtils {
    * @param airportCode <p>airport code given as input by the user</p>
    * @param airportType <p>airport type such as source or destination</p>
    */
-  private static void airportCodeValidation(String airportCode, String airportType) {
+  public static void validateAirportCode(String airportCode, String airportType) {
     airportCodeNullCheck(airportCode, airportType);
     airportCodeLengthCheck(airportCode, airportType);
     airportCodeAlphabeticCheck(airportCode, airportType);

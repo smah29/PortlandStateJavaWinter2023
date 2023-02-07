@@ -6,7 +6,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import static edu.pdx.cs410J.smahato.constants.AirlineConstants.CANNOT_BE_NULL_OR_EMPTY;
+import static edu.pdx.cs410J.smahato.constants.ErrorMessages.CANNOT_BE_NULL_OR_EMPTY;
+
 
 /**
  * Airline has and name and a list of flights

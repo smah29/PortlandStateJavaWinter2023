@@ -5,6 +5,10 @@ import edu.pdx.cs410J.AirlineDumper;
 import java.io.PrintWriter;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.Date;
+
+import static edu.pdx.cs410J.smahato.constants.DateFormatConstants.FLIGHT_SCHEDULE_FORMAT;
+import static edu.pdx.cs410J.smahato.constants.FileConstants.SEPARATOR;
 
 /**
  * <code>TextDumper</code> class for Project 2 dumps airline object in file.
@@ -29,10 +33,13 @@ public class TextDumper implements AirlineDumper<Airline> {
     ) {
       pw.println(airline.getName());
       new ArrayList<>(airline.getFlights()).forEach(flight -> {
-        String[] array = {String.valueOf(flight.getNumber()), flight.getSource(), flight.getDestination(), flight.getDepartureString(), flight.getArrivalString()};
-        pw.println(String.join(",", array));
+        String destinationString = FLIGHT_SCHEDULE_FORMAT.format(flight.getDeparture());
+        String arrivalString = FLIGHT_SCHEDULE_FORMAT.format(flight.getArrival());
+        String[] array = {String.valueOf(flight.getNumber()), flight.getSource(), flight.getDestination(), destinationString, arrivalString};
+        pw.println(String.join(SEPARATOR, array));
       });
       pw.flush();
     }
   }
+
 }

@@ -2,29 +2,12 @@ package edu.pdx.cs410J.smahato.utils;
 
 import java.time.DateTimeException;
 
+import static edu.pdx.cs410J.smahato.constants.DateFormatConstants.MM_DD_YYYY_HH_MM_A;
+
 /**
  * This class contains utility methods for validating flight schedules
  */
 public class DateTimeUtils {
-
-  /**
-   * date and time should be of format mm/dd/yyyy hh:mm
-   */
-  public static final String BE_OF_FORMAT_MM_DD_YYYY_HH_MM = " date and time should be of format mm/dd/yyyy hh:mm";
-
-  /**
-   * Validate the flight schedules ex dateTimeNullCheck and dateTimeFormatCheck
-   *
-   * @param flightSchedules <p>array of flight schedules and their types ex departure/arrival</p>
-   */
-  public static void validateFlightSchedule(String[][] flightSchedules) {
-    for (String[] flightDateTime : flightSchedules) {
-      String dateTime = flightDateTime[0];
-      String flightScheduleType = flightDateTime[1];
-      dateTimeNullCheck(dateTime, flightScheduleType);
-      dateTimeFormatCheck(dateTime, flightScheduleType);
-    }
-  }
 
   /**
    * Validate the flight schedule
@@ -33,9 +16,9 @@ public class DateTimeUtils {
    * @param dateTime           <p>flight schedule given as input by the user</p>
    * @param flightScheduleType <p>flight schedule type such as departure or arrival</p>
    */
-  private static void dateTimeFormatCheck(String dateTime, String flightScheduleType) {
-    if (!dateTime.matches("\\d{1,2}/\\d{1,2}/\\d{4} \\d{1,2}:\\d{1,2}")) {
-      throw new DateTimeException(flightScheduleType + BE_OF_FORMAT_MM_DD_YYYY_HH_MM);
+  public static void dateTimeFormatCheck(String dateTime, String flightScheduleType) {
+    if (!dateTime.matches("\\d{1,2}/\\d{1,2}/\\d{4} \\d{1,2}:\\d{1,2} [ap]m")) {
+      throw new DateTimeException("Invalid " + flightScheduleType + " date format! Please follow the format: " + MM_DD_YYYY_HH_MM_A);
     }
     String[] dateTimeSplit = dateTime.split(" ");
     String date = dateTimeSplit[0];
@@ -66,8 +49,8 @@ public class DateTimeUtils {
         }
       }
     }
-    if (hourInt > 23) {
-      throw new DateTimeException(flightScheduleType + " hour should be between 0 and 23");
+    if (hourInt > 12) {
+      throw new DateTimeException(flightScheduleType + " hour should be between 0 and 12");
     }
     if (minuteInt > 59) {
       throw new DateTimeException(flightScheduleType + " minute should be between 0 and 59");
@@ -99,8 +82,8 @@ public class DateTimeUtils {
    * @param flightDateTime     date and time
    * @param flightScheduleType type of date and time ex departure or arrival
    */
-  private static void dateTimeNullCheck(String flightDateTime, String flightScheduleType) {
-    if (flightDateTime == null || flightDateTime.isEmpty())
+  public static void dateTimeNullCheck(String flightDateTime, String flightScheduleType) {
+    if (flightDateTime == null || flightDateTime.isBlank())
       throw new NullPointerException(flightScheduleType + " Date and time cannot be null or empty");
   }
 }

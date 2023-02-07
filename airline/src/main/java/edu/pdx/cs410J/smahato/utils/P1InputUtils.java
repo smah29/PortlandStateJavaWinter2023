@@ -7,7 +7,7 @@ import edu.pdx.cs410J.smahato.Flight;
 import java.time.DateTimeException;
 import java.util.List;
 
-import static edu.pdx.cs410J.smahato.constants.AirlineConstants.FLIGHT_NUMBER_MUST_BE_AN_INTEGER;
+import static edu.pdx.cs410J.smahato.constants.ErrorMessages.FLIGHT_NUMBER_MUST_BE_AN_INTEGER;
 import static edu.pdx.cs410J.smahato.constants.ErrorMessages.README_MESSAGE;
 
 /**
@@ -18,7 +18,7 @@ public class P1InputUtils implements InputUtils {
   /**
    * Constant field Expected number of arguments in the input list
    */
-  public static final int EXPECTED_INPUT_SIZE = 9;
+  public static final int EXPECTED_INPUT_SIZE = 11;
   /**
    * Constant field Index of the first argument where airline name starts
    */
@@ -111,7 +111,7 @@ public class P1InputUtils implements InputUtils {
    */
   @Override
   public String getDepartureString() {
-    return getValueAtIndex(input, startIndex, 3, 4);
+    return getValueAtIndex(input, startIndex, 3, 4, 5);
   }
 
   /**
@@ -121,7 +121,7 @@ public class P1InputUtils implements InputUtils {
    */
   @Override
   public String getDestination() {
-    return getValueAtIndex(input, startIndex, 5);
+    return getValueAtIndex(input, startIndex, 6);
   }
 
   /**
@@ -131,7 +131,7 @@ public class P1InputUtils implements InputUtils {
    */
   @Override
   public String getArrivalString() {
-    return getValueAtIndex(input, startIndex, 6, 7);
+    return getValueAtIndex(input, startIndex, 7, 8, 9);
   }
 
   /**

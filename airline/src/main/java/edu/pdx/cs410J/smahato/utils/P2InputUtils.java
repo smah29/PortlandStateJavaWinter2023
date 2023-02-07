@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static edu.pdx.cs410J.smahato.constants.AirlineConstants.AIRLINE_NAME_MISMATCH;
+import static edu.pdx.cs410J.smahato.constants.ErrorMessages.AIRLINE_NAME_MISMATCH;
 import static edu.pdx.cs410J.smahato.constants.OptionConstants.TEXT_FILE;
 
 /**
@@ -23,7 +23,7 @@ public class P2InputUtils extends P1InputUtils implements FilePathInputUtils {
   /**
    * Constant field Expected number of arguments in the input list ex 11 in Project 2
    */
-  public static final int EXPECTED_INPUT_SIZE = 11;
+  public static final int EXPECTED_INPUT_SIZE = 13;
   /**
    * Constant field Index of the first argument where airline name starts ex 3 in Project 2
    */
