@@ -79,7 +79,7 @@ class Project2IT extends InvokeMainTestCase {
    */
   @Test
   void testCommandLineArgumentsWithNoPrintOption() {
-    MainMethodResult result = invokeMain("CS410J Air Express", "1", "PDX", "10/10/2020", "10:10", "LAX", "10/10/2020", "10:10");
+    MainMethodResult result = invokeMain("CS410J Air Express", "1", "PDX", "10/10/2020", "10:10", "am", "LAX", "10/10/2020", "10:11", "am");
     assertThat(result.getTextWrittenToStandardOut(), equalTo(""));
   }
 
@@ -171,7 +171,7 @@ class Project2IT extends InvokeMainTestCase {
    */
   @Test
   void testP2WithNoPrint() {
-    MainMethodResult result = invokeMain("-textFile", "file.txt", "CS410J Air Express", "1", "PDX", "10/10/2020", "10:10", "LAX", "10/10/2020", "10:10");
+    MainMethodResult result = invokeMain("-textFile", "file.txt", "CS410J Air Express", "1", "PDX", "10/10/2020", "10:10", "am", "LAX", "10/10/2020", "10:11", "am");
     assertThat(result.getTextWrittenToStandardOut(), equalTo(""));
   }
 

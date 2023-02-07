@@ -32,7 +32,7 @@ public class TextDumper implements AirlineDumper<Airline> {
         PrintWriter pw = new PrintWriter(this.writer)
     ) {
       pw.println(airline.getName());
-      new ArrayList<>(airline.getFlights()).forEach(flight -> {
+      new ArrayList<>(airline.getFlights()).stream().sorted().forEach(flight -> {
         String destinationString = FLIGHT_SCHEDULE_FORMAT.format(flight.getDeparture());
         String arrivalString = FLIGHT_SCHEDULE_FORMAT.format(flight.getArrival());
         String[] array = {String.valueOf(flight.getNumber()), flight.getSource(), flight.getDestination(), destinationString, arrivalString};
