@@ -32,8 +32,8 @@ public class TextDumper implements AirlineDumper<Airline> {
     ) {
       pw.println(airline.getName());
       new ArrayList<>(airline.getFlights()).forEach(flight -> {
-        String destinationString = FLIGHT_SCHEDULE_FORMAT.format(flight.getDeparture());
-        String arrivalString = FLIGHT_SCHEDULE_FORMAT.format(flight.getArrival());
+        String destinationString = FLIGHT_SCHEDULE_FORMAT.format(flight.getDeparture()).toLowerCase();
+        String arrivalString = FLIGHT_SCHEDULE_FORMAT.format(flight.getArrival()).toLowerCase();
         String[] array = {String.valueOf(flight.getNumber()), flight.getSource(), flight.getDestination(), destinationString, arrivalString};
         pw.println(String.join(TEXT_FILE_SEPARATOR, array));
       });
