@@ -12,18 +12,21 @@ import java.util.List;
 
 import static edu.pdx.cs410J.smahato.constants.OptionConstants.*;
 
+/**
+ * P3InputUtils extends {@link P2InputUtils} has additional logic of pretty printing
+ */
 public class P3InputUtils extends P2InputUtils {
   /**
-   * Constant field Expected number of arguments in the input list ex 11 in Project 2
+   * Constant field Expected number of arguments in the input list ex 15 in Project 3
    */
   public static final int EXPECTED_INPUT_SIZE = 15;
   /**
-   * Constant field Index of the first argument where airline name starts ex 3 in Project 2
+   * Constant field Index of the first argument where airline name starts ex 5 in Project 3
    */
   public static final int START_INDEX = 5;
 
   /**
-   * Constructor for P2InputUtils, set the expected number of arguments and start index to Project 2 specific values
+   * Constructor for P3InputUtils, set the expected number of arguments and start index to Project 3 specific values
    *
    * @param input List of arguments
    */
@@ -35,6 +38,10 @@ public class P3InputUtils extends P2InputUtils {
     }
   }
 
+  /**
+   * @param airline which will be dumped earlier is std out or file
+   * @return true/ false based on whether the newly added file has to be printed after this
+   */
   public boolean prettyPrintAirline(Airline airline) {
     Airline airlineFromTextFile = null;
     if (this.input.contains(TEXT_FILE)) {

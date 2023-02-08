@@ -21,7 +21,7 @@ public class PrettyPrinter implements AirlineDumper<Airline> {
   }
 
   /**
-   * Dumps the contents of the airline object in file.
+   * Dumps the contents of the airline object in file or std output.
    * Flight details are dumped in the following format: <code>flightNumber,source,destination,departureTime,arrivalTime,duration</code>
    *
    * @param airline Airline object to be dumped
