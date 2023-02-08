@@ -9,6 +9,7 @@ import java.util.List;
 
 import static edu.pdx.cs410J.smahato.constants.ErrorMessages.FLIGHT_NUMBER_MUST_BE_AN_INTEGER;
 import static edu.pdx.cs410J.smahato.constants.ErrorMessages.README_MESSAGE;
+import static edu.pdx.cs410J.smahato.constants.OptionConstants.PRINT;
 
 /**
  * P1InputUtils implements {@link InputUtils} is used to get the input from the command line arguments.
@@ -54,8 +55,13 @@ public class P1InputUtils implements InputUtils {
    */
   public P1InputUtils(List<String> input, int expectedNumberOfArgs, int startIndex) {
     this.input = input;
-    this.expectedNumberOfArgs = expectedNumberOfArgs;
-    this.startIndex = startIndex;
+    if (!this.input.contains(PRINT)) {
+      this.expectedNumberOfArgs = expectedNumberOfArgs - 1;
+      this.startIndex = startIndex - 1;
+    } else {
+      this.expectedNumberOfArgs = expectedNumberOfArgs;
+      this.startIndex = startIndex;
+    }
   }
 
   public int getExpectedNumberOfArgs() {
@@ -64,14 +70,6 @@ public class P1InputUtils implements InputUtils {
 
   public int getStartIndex() {
     return startIndex;
-  }
-
-  public void setExpectedNumberOfArgs(int expectedNumberOfArgs) {
-    this.expectedNumberOfArgs = expectedNumberOfArgs;
-  }
-
-  public void setStartIndex(int startIndex) {
-    this.startIndex = startIndex;
   }
 
   /**

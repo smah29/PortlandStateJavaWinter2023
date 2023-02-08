@@ -6,7 +6,7 @@ import edu.pdx.cs410J.ParserException;
 import java.io.BufferedReader;
 import java.io.Reader;
 
-import static edu.pdx.cs410J.smahato.constants.FileConstants.SEPARATOR;
+import static edu.pdx.cs410J.smahato.constants.FileConstants.TEXT_FILE_SEPARATOR;
 
 /**
  * <code>TextParser</code> class for Project 2 tries to read <code>Airline</code> from file
@@ -38,7 +38,7 @@ public class TextParser implements AirlineParser<Airline> {
       Airline airline = new Airline(airlineName);
       String flightDetails;
       while ((flightDetails = br.readLine()) != null) {
-        String[] array = flightDetails.split(SEPARATOR);
+        String[] array = flightDetails.split(TEXT_FILE_SEPARATOR);
         Flight flight = new Flight(Integer.parseInt(array[0]), array[1], array[2], array[3], array[4]);
         airline.addFlight(flight);
       }

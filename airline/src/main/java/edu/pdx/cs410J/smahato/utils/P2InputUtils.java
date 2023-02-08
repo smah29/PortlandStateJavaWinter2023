@@ -35,7 +35,11 @@ public class P2InputUtils extends P1InputUtils implements FilePathInputUtils {
    * @param input List of arguments
    */
   public P2InputUtils(List<String> input) {
-    super(input, EXPECTED_INPUT_SIZE, START_INDEX);
+    this(input, EXPECTED_INPUT_SIZE, START_INDEX);
+  }
+
+  public P2InputUtils(List<String> input, int expectedNumberOfArgs, int startIndex) {
+    super(input, expectedNumberOfArgs, startIndex);
   }
 
   /**
@@ -43,8 +47,8 @@ public class P2InputUtils extends P1InputUtils implements FilePathInputUtils {
    *
    * @return Index of the file path in the input list
    */
-  private int getFilePathIndex() {
-    return input.indexOf(TEXT_FILE) + 1;
+  private int getFilePathIndex(String option) {
+    return input.indexOf(option) + 1;
   }
 
   /**
@@ -53,19 +57,19 @@ public class P2InputUtils extends P1InputUtils implements FilePathInputUtils {
    * @return File path from the input list
    */
   @Override
-  public String getFilePath() {
-    return input.get(getFilePathIndex());
+  public String getFilePath(String option) {
+    return input.get(getFilePathIndex(option));
   }
 
   /**
    * Saves the airline to a file
    *
    * @param airline Airline to be saved
-   * @return True if airline is saved successfully, false otherwise
+   * @return Airline if airline is saved successfully, null otherwise
    */
   @Override
-  public boolean saveAirlineToFile(Airline airline) {
-    String filePath = getFilePath();
+  public Airline saveAirlineToFile(Airline airline) {
+    String filePath = getFilePath(TEXT_FILE);
     File file = new File(filePath);
     if (file.exists()) {
       try {
@@ -73,7 +77,7 @@ public class P2InputUtils extends P1InputUtils implements FilePathInputUtils {
         if (airline.getName().equals(airlineFromFile.getName())) {
           airlineFromFile.addFlight(new ArrayList<>(airline.getFlights()).get(0));
           new TextDumper(new FileWriter(file)).dump(airlineFromFile);
-          return true;
+          return airlineFromFile;
         } else {
           System.err.println(AIRLINE_NAME_MISMATCH);
         }
@@ -83,12 +87,12 @@ public class P2InputUtils extends P1InputUtils implements FilePathInputUtils {
     } else {
       try {
         new TextDumper(new FileWriter(file)).dump(airline);
-        return true;
+        return airline;
       } catch (IOException e) {
         System.err.println("Error creating file: " + filePath);
       }
     }
-    return false;
+    return null;
   }
 
 }

@@ -14,13 +14,13 @@ public interface FilePathInputUtils extends InputUtils {
    *
    * @return File path
    */
-  String getFilePath();
+  String getFilePath(String option);
 
   /**
    * Saves airline to file
    *
    * @param airline Airline object
-   * @return true if airline is saved to file, false otherwise
+   * @return Airline if airline is saved to file, null otherwise
    */
-  boolean saveAirlineToFile(Airline airline);
+  Airline saveAirlineToFile(Airline airline);
 }

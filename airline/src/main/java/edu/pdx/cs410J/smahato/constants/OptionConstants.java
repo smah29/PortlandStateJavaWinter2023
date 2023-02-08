@@ -16,4 +16,6 @@ public interface OptionConstants {
    * If textFile option is not present, then flights information is not dumped to a file
    */
   String TEXT_FILE = "-textFile";
+
+  String PRETTY = "-pretty";
 }

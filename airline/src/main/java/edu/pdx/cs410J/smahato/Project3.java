@@ -2,6 +2,7 @@ package edu.pdx.cs410J.smahato;
 
 import edu.pdx.cs410J.smahato.utils.P1InputUtils;
 import edu.pdx.cs410J.smahato.utils.P2InputUtils;
+import edu.pdx.cs410J.smahato.utils.P3InputUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -32,27 +33,27 @@ public class Project3 {
       System.err.print(MISSING_COMMAND_LINE_ARGS);
     } else if (input.contains(README)) {
       printREADME();
-    } else if (!input.contains(TEXT_FILE)) {
-      P1InputUtils inputUtils = new P1InputUtils(input);
-      if (!input.contains(PRINT)) {
-        inputUtils.setExpectedNumberOfArgs(inputUtils.getExpectedNumberOfArgs() - 1);
-        inputUtils.setStartIndex(inputUtils.getStartIndex() - 1);
+    } else if (input.contains(PRETTY)) {
+      P3InputUtils p3InputUtils = new P3InputUtils(input);
+      airline = p3InputUtils.getAirline();
+      if (airline != null) {
+        boolean noConsoleOutputOrError = p3InputUtils.prettyPrintAirline(airline);
+        if (noConsoleOutputOrError && input.contains(PRINT)) printAddedFlight(airline);
       }
-      airline = inputUtils.getAirline();
-      if (airline != null && input.contains(PRINT)) printAddedFlight(airline);
-    } else {
+    } else if (input.contains(TEXT_FILE)) {
       P2InputUtils filePathInputUtils = new P2InputUtils(input);
-      if (!input.contains(PRINT)) {
-        filePathInputUtils.setExpectedNumberOfArgs(filePathInputUtils.getExpectedNumberOfArgs() - 1);
-        filePathInputUtils.setStartIndex(filePathInputUtils.getStartIndex() - 1);
-      }
       airline = filePathInputUtils.getAirline();
       if (airline != null) {
-        boolean saved = filePathInputUtils.saveAirlineToFile(airline);
-        if (saved && input.contains(PRINT)) printAddedFlight(airline);
+        Airline airlineFromFile = filePathInputUtils.saveAirlineToFile(airline);
+        if (airlineFromFile != null && input.contains(PRINT)) printAddedFlight(airline);
       }
+    } else {
+      P1InputUtils inputUtils = new P1InputUtils(input);
+      airline = inputUtils.getAirline();
+      if (airline != null && input.contains(PRINT)) printAddedFlight(airline);
     }
   }
+
 
   /**
    * Prints the flight that was added to the airline

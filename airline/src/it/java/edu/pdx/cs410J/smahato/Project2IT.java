@@ -13,7 +13,6 @@ import static edu.pdx.cs410J.smahato.constants.AirlineConstants.*;
 import static edu.pdx.cs410J.smahato.constants.DateFormatConstants.MM_DD_YYYY_HH_MM_A;
 import static edu.pdx.cs410J.smahato.constants.ErrorMessages.*;
 import static org.hamcrest.CoreMatchers.*;
-import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
@@ -228,5 +227,56 @@ class Project2IT extends InvokeMainTestCase {
   void testWithFileInDir() {
     MainMethodResult result = invokeMain("-print", "-textFile", "a/b/c/file.txt", "CS410J Air Express", "1", "PDX", "10/10/2020", "10:10", "am", "LAX", "10/10/2020", "11:10", "am");
     assertThat(result.getTextWrittenToStandardError(), equalTo("Error creating file: a/b/c/file.txt\n"));
+  }
+
+  /**
+   * P3 test with valid command line arguments
+   */
+  @Test
+  void testP3AllValidCommandLineArguments() {
+    MainMethodResult result = invokeMain("-print", "-textFile", "file1", "-pretty", "file2", "CS410J Air Express", "1", "PDX", "10/10/2020", "10:10", "am", "LAX", "10/10/2020", "11:10", "am");
+    assertThat(result.getTextWrittenToStandardOut(), equalTo("Flight 1 departs PDX at 10/10/20, 10:10 AM arrives LAX at 10/10/20, 11:10 AM\n"));
+  }
+
+  @Test
+  void testP3InvalidPrettyFile() {
+    MainMethodResult result = invokeMain("-print", "-textFile", "file1", "-pretty", "/a/a.txt", "CS410J Air Express", "1", "PDX", "10/10/2020", "10:10", "am", "LAX", "10/10/2020", "11:10", "am");
+    assertThat(result.getTextWrittenToStandardError(), equalTo("Error creating file: /a/a.txt\n"));
+  }
+
+  @Test
+  void testP3WithInvalidTextFile() {
+    MainMethodResult result = invokeMain("-print", "-textFile", "/a/b.txt", "-pretty", "file2", "CS410J Air Express", "1", "PDX", "10/10/2020", "10:10", "am", "LAX", "10/10/2020", "11:10", "am");
+    assertThat(result.getTextWrittenToStandardError(), equalTo("Error creating file: /a/b.txt\n"));
+  }
+
+  @Test
+  void testP3WithInvalidParseTextFile() {
+    MainMethodResult result = invokeMain("-print", "-textFile", "file2", "-pretty", "file1", "CS410J Air Express", "1", "PDX", "10/10/2020", "10:10", "am", "LAX", "10/10/2020", "11:10", "am");
+    assertThat(result.getTextWrittenToStandardError(), equalTo("Error reading file: file2\n"));
+  }
+
+  @Test
+  void testP3WithNoPrint() {
+    MainMethodResult result = invokeMain("-textFile", "file1", "-pretty", "file2", "CS410J Air Express", "1", "PDX", "10/10/2020", "9:10", "am", "LAX", "10/10/2020", "11:10", "am");
+    assertThat(result.getTextWrittenToStandardOut(), equalTo(""));
+  }
+
+  @Test
+  void testP3WithNoTextFile() {
+    MainMethodResult result = invokeMain("-pretty", "file2", "CS410J Air Express", "1", "PDX", "10/10/2020", "10:1", "am", "LAX", "10/10/2020", "11:10", "am");
+    assertThat(result.getTextWrittenToStandardOut(), equalTo(""));
+  }
+
+  @Test
+  void testP3WithHyphenInFileNameOfPretty() {
+    MainMethodResult result = invokeMain("-pretty", "-", "CS410J Air Express", "1", "ABE", "10/10/2020", "10:10", "am", "LAX", "10/10/2020", "11:10", "am");
+    assertThat(result.getTextWrittenToStandardError(), equalTo(""));
+  }
+
+  @Test
+  void testP3WithHyphenInFileNameOfPrettyWithPrint() {
+    MainMethodResult result = invokeMain("-print", "-pretty", "-", "CS410J Air Express", "1", "ABE", "10/10/2020", "10:10", "am", "LAX", "10/10/2020", "11:10", "am");
+    assertThat(result.getTextWrittenToStandardError(), equalTo(""));
   }
 }
