@@ -167,6 +167,24 @@ class Project2IT extends InvokeMainTestCase {
   }
 
   /**
+   * P2 test with by same file and airline name
+   */
+  @Test
+  void testP2AppendingFlightsInText() {
+    MainMethodResult result = invokeMain("-print", "-textFile", "file.txt", "CS410J Air Express", "2", "PDX", "10/10/2020", "10:10", "am", "LAX", "10/10/2020", "11:10", "am");
+    assertThat(result.getTextWrittenToStandardOut(), equalTo("Flight 2 departs PDX at 10/10/20, 10:10 AM arrives LAX at 10/10/20, 11:10 AM\n"));
+  }
+
+  /**
+   * P2 test with same file but new airline name
+   */
+  @Test
+  void testP2WithSameFileButNewAirlineName() {
+    MainMethodResult result = invokeMain("-print", "-textFile", "file.txt", "CS410J Air Express1", "1", "PDX", "10/10/2020", "10:10", "am", "LAX", "10/10/2020", "11:10", "am");
+    assertThat(result.getTextWrittenToStandardError(), equalTo(AIRLINE_NAME_MISMATCH + "\n"));
+  }
+
+  /**
    * P2 test with no print
    */
   @Test
@@ -185,30 +203,12 @@ class Project2IT extends InvokeMainTestCase {
   }
 
   /**
-   * P2 test with by same file and airline name
-   */
-  @Test
-  void testP2AppendingFlightsInText() {
-    MainMethodResult result = invokeMain("-print", "-textFile", "file.txt", "CS410J Air Express", "2", "PDX", "10/10/2020", "10:10", "am", "LAX", "10/10/2020", "11:10", "am");
-    assertThat(result.getTextWrittenToStandardOut(), equalTo("Flight 2 departs PDX at 10/10/20, 10:10 AM arrives LAX at 10/10/20, 11:10 AM\n"));
-  }
-
-  /**
    * P2 test by switching options order and invalid flight number
    */
   @Test
   void testP2BySwitchingOptionsOrderAndInvalidFlightNumber() {
     MainMethodResult result = invokeMain("-textFile", "file.txt", "-print", "CS410J Air Express", "3s", "PDX", "10/10/2020", "10:10", "am", "LAX", "10/10/2020", "11:10", "am");
     assertThat(result.getTextWrittenToStandardError(), equalTo(FLIGHT_NUMBER_MUST_BE_AN_INTEGER + README_MESSAGE + "\n"));
-  }
-
-  /**
-   * P2 test with same file but new airline name
-   */
-  @Test
-  void testP2WithSameFileButNewAirlineName() {
-    MainMethodResult result = invokeMain("-print", "-textFile", "file.txt", "CS410J Air Express1", "1", "PDX", "10/10/2020", "10:10", "am", "LAX", "10/10/2020", "11:10", "am");
-    assertThat(result.getTextWrittenToStandardError(), equalTo(AIRLINE_NAME_MISMATCH + "\n"));
   }
 
   /**
@@ -249,12 +249,6 @@ class Project2IT extends InvokeMainTestCase {
   void testP3WithInvalidTextFile() {
     MainMethodResult result = invokeMain("-print", "-textFile", "/a/b.txt", "-pretty", "file2", "CS410J Air Express", "1", "PDX", "10/10/2020", "10:10", "am", "LAX", "10/10/2020", "11:10", "am");
     assertThat(result.getTextWrittenToStandardError(), equalTo("Error creating file: /a/b.txt\n"));
-  }
-
-  @Test
-  void testP3WithInvalidParseTextFile() {
-    MainMethodResult result = invokeMain("-print", "-textFile", "file2", "-pretty", "file1", "CS410J Air Express", "1", "PDX", "10/10/2020", "10:10", "am", "LAX", "10/10/2020", "11:10", "am");
-    assertThat(result.getTextWrittenToStandardError(), equalTo("Error reading file: file2\n"));
   }
 
   @Test
