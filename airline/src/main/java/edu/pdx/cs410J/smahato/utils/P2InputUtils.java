@@ -77,17 +77,18 @@ public class P2InputUtils extends P1InputUtils implements FilePathInputUtils {
       } catch (FileNotFoundException e) {
         System.err.println("Error reading file: " + filePath);
       }
+      if (airlineFromFile == null) return null;
       if (airline.getName().equals(airlineFromFile.getName())) {
-          airlineFromFile.addFlight(new ArrayList<>(airline.getFlights()).get(0));
+        airlineFromFile.addFlight(new ArrayList<>(airline.getFlights()).get(0));
         try {
           new TextDumper(new FileWriter(file)).dump(airlineFromFile);
         } catch (IOException e) {
           System.err.println("Error writing file: " + filePath);
         }
         return airlineFromFile;
-        } else {
-          System.err.println(AIRLINE_NAME_MISMATCH);
-        }
+      } else {
+        System.err.println(AIRLINE_NAME_MISMATCH);
+      }
     } else {
       try {
         new TextDumper(new FileWriter(file)).dump(airline);
