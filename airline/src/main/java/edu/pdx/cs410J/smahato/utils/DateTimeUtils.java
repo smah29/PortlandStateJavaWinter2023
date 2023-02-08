@@ -17,7 +17,7 @@ public class DateTimeUtils {
    * @param flightScheduleType <p>flight schedule type such as departure or arrival</p>
    */
   public static void dateTimeFormatCheck(String dateTime, String flightScheduleType) {
-    if (!dateTime.matches("\\d{1,2}/\\d{1,2}/\\d{4} \\d{1,2}:\\d{1,2} [ap]m")) {
+    if (!dateTime.matches("\\d{1,2}/\\d{1,2}/\\d{4} \\d{1,2}:\\d{1,2} [apAP][mM]")) {
       throw new DateTimeException("Invalid " + flightScheduleType + " date format! Please follow the format: " + MM_DD_YYYY_HH_MM_A);
     }
     String[] dateTimeSplit = dateTime.split(" ");
