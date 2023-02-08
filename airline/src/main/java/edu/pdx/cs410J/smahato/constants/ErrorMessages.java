@@ -40,7 +40,7 @@ public interface ErrorMessages {
   /**
    * Airline name doesn't match with the one in the file!
    */
-  String AIRLINE_NAME_MISMATCH = "Airline name doesn't match with the one in the file!";
+  String AIRLINE_NAME_MISMATCH = "Airline name doesn't match with the one in the text file!";
   /**
    * Flight number must be an integer!
    */
