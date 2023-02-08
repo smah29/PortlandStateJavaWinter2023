@@ -5,10 +5,7 @@ import edu.pdx.cs410J.smahato.Airline;
 import edu.pdx.cs410J.smahato.TextDumper;
 import edu.pdx.cs410J.smahato.TextParser;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,18 +69,25 @@ public class P2InputUtils extends P1InputUtils implements FilePathInputUtils {
     String filePath = getFilePath(TEXT_FILE);
     File file = new File(filePath);
     if (file.exists()) {
+      Airline airlineFromFile = null;
       try {
-        Airline airlineFromFile = new TextParser(new FileReader(file)).parse();
-        if (airline.getName().equals(airlineFromFile.getName())) {
+        airlineFromFile = new TextParser(new FileReader(file)).parse();
+      } catch (ParserException e) {
+        System.err.println("Error parsing file: " + filePath);
+      } catch (FileNotFoundException e) {
+        System.err.println("Error reading file: " + filePath);
+      }
+      if (airline.getName().equals(airlineFromFile.getName())) {
           airlineFromFile.addFlight(new ArrayList<>(airline.getFlights()).get(0));
+        try {
           new TextDumper(new FileWriter(file)).dump(airlineFromFile);
-          return airlineFromFile;
+        } catch (IOException e) {
+          System.err.println("Error writing file: " + filePath);
+        }
+        return airlineFromFile;
         } else {
           System.err.println(AIRLINE_NAME_MISMATCH);
         }
-      } catch (IOException | ParserException e) {
-        System.err.println("Error reading file: " + filePath);
-      }
     } else {
       try {
         new TextDumper(new FileWriter(file)).dump(airline);
