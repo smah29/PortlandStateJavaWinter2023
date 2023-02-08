@@ -1,8 +1,8 @@
 package edu.pdx.cs410J.smahato.utils;
 
 import edu.pdx.cs410J.smahato.Airline;
-import edu.pdx.cs410J.smahato.exception.AirportCodeException;
 import edu.pdx.cs410J.smahato.Flight;
+import edu.pdx.cs410J.smahato.exception.AirportCodeException;
 
 import java.time.DateTimeException;
 import java.util.List;

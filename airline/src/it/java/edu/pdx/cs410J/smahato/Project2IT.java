@@ -9,7 +9,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.UUID;
 
-import static edu.pdx.cs410J.smahato.constants.AirlineConstants.*;
+import static edu.pdx.cs410J.smahato.constants.AirlineConstants.DEPARTURE;
+import static edu.pdx.cs410J.smahato.constants.AirlineConstants.DESTINATION;
 import static edu.pdx.cs410J.smahato.constants.DateFormatConstants.MM_DD_YYYY_HH_MM_A;
 import static edu.pdx.cs410J.smahato.constants.ErrorMessages.*;
 import static org.hamcrest.CoreMatchers.*;

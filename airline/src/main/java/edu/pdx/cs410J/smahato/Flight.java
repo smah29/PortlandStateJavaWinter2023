@@ -11,7 +11,8 @@ import java.util.Date;
 
 import static edu.pdx.cs410J.smahato.constants.AirlineConstants.*;
 import static edu.pdx.cs410J.smahato.constants.DateFormatConstants.*;
-import static edu.pdx.cs410J.smahato.constants.ErrorMessages.*;
+import static edu.pdx.cs410J.smahato.constants.ErrorMessages.DEPARTURE_BEFORE_ARRIVAL;
+import static edu.pdx.cs410J.smahato.constants.ErrorMessages.SOURCE_AND_DESTINATION_CANNOT_BE_SAME;
 
 /**
  * Flight has a number, source, destination, departure time and arrival time

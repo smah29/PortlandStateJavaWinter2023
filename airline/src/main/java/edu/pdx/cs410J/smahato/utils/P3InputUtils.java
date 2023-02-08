@@ -1,16 +1,15 @@
 package edu.pdx.cs410J.smahato.utils;
 
-import edu.pdx.cs410J.ParserException;
 import edu.pdx.cs410J.smahato.Airline;
 import edu.pdx.cs410J.smahato.PrettyPrinter;
-import edu.pdx.cs410J.smahato.TextDumper;
-import edu.pdx.cs410J.smahato.TextParser;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-import static edu.pdx.cs410J.smahato.constants.ErrorMessages.AIRLINE_NAME_MISMATCH;
 import static edu.pdx.cs410J.smahato.constants.OptionConstants.*;
 
 public class P3InputUtils extends P2InputUtils {
