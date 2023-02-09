@@ -19,7 +19,7 @@ public interface DateFormatConstants {
   SimpleDateFormat FLIGHT_SCHEDULE_FORMAT = new SimpleDateFormat(MM_DD_YYYY_HH_MM_A);
 
   /**
-   * short date format for writing to file ex . MM/dd/yyyy, hh:mm a
+   * short date format for writing to file ex MM/dd/yyyy, hh:mm a
    */
   DateFormat SHORT_DF = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.US);
 }
