@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static edu.pdx.cs410J.smahato.constants.ErrorMessages.AIRLINE_NAME_MISMATCH;
-import static edu.pdx.cs410J.smahato.constants.OptionConstants.TEXT_FILE;
+import static edu.pdx.cs410J.smahato.constants.Options.TEXT_FILE;
 
 /**
  * P2InputUtils implements {@link FilePathInputUtils} and extends {@link P1InputUtils} is used to get the input from the command line arguments.
@@ -38,6 +38,13 @@ public class P2InputUtils extends P1InputUtils implements FilePathInputUtils {
     this(input, EXPECTED_INPUT_SIZE, START_INDEX);
   }
 
+  /**
+   * Constructor for P2InputUtils used by {@link P3InputUtils}
+   *
+   * @param input                List of arguments
+   * @param expectedNumberOfArgs Expected number of arguments according to Project ex 11 in Project 2
+   * @param startIndex           Index of the first argument where airline name starts ex 3 in Project 2
+   */
   public P2InputUtils(List<String> input, int expectedNumberOfArgs, int startIndex) {
     super(input, expectedNumberOfArgs, startIndex);
   }
@@ -52,8 +59,9 @@ public class P2InputUtils extends P1InputUtils implements FilePathInputUtils {
   }
 
   /**
-   * Gets the file path from the input list
+   * Gets the file path from the input list which is the input value just after the option
    *
+   * @param option options allowed by airline application
    * @return File path from the input list
    */
   @Override
@@ -69,7 +77,7 @@ public class P2InputUtils extends P1InputUtils implements FilePathInputUtils {
    */
   @Override
   public Airline saveAirlineToFile(Airline airline) {
-    String filePath = getFilePath(TEXT_FILE);
+    String filePath = getFilePath(TEXT_FILE.getOption());
     File file = new File(filePath);
     if (file.exists()) {
       try {

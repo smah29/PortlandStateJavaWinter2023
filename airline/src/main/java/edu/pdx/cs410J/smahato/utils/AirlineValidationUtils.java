@@ -37,7 +37,7 @@ public class AirlineValidationUtils {
    */
   private static void airportCodeExistsInAirportNames(String airportCode, String airportType) {
     if (AirportNames.getName(airportCode.toUpperCase()) == null) {
-      throw new AirportCodeException(airportType + MUST_BE_A_VALID_AIRPORT_CODE);
+      throw new AirportCodeException(airportType + "(" + airportCode + ")" + MUST_BE_A_VALID_AIRPORT_CODE);
     }
   }
 
@@ -50,7 +50,7 @@ public class AirlineValidationUtils {
    */
   private static void airportCodeAlphabeticCheck(String airportCode, String airportType) {
     if (!airportCode.matches(ALPHABETS)) {
-      throw new AirportCodeException(airportType + MUST_CONTAIN_ONLY_ALPHABETS);
+      throw new AirportCodeException(airportType + "(" + airportCode + ")" + MUST_CONTAIN_ONLY_ALPHABETS);
     }
   }
 
@@ -63,7 +63,7 @@ public class AirlineValidationUtils {
    */
   private static void airportCodeLengthCheck(String airportCode, String airportType) {
     if (airportCode.length() != AIRPORT_CODE_LENGTH) {
-      throw new AirportCodeException(airportType + MUST_BE_EXACTLY_3_CHARACTERS_LONG);
+      throw new AirportCodeException(airportType + "(" + airportCode + ")" + MUST_BE_EXACTLY_3_CHARACTERS_LONG);
     }
   }
 

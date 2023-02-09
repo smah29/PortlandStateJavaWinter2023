@@ -2,14 +2,14 @@ package edu.pdx.cs410J.smahato.utils;
 
 import edu.pdx.cs410J.smahato.Airline;
 import edu.pdx.cs410J.smahato.Flight;
+import edu.pdx.cs410J.smahato.constants.Options;
 import edu.pdx.cs410J.smahato.exception.AirportCodeException;
 
 import java.time.DateTimeException;
 import java.util.List;
 
-import static edu.pdx.cs410J.smahato.constants.ErrorMessages.FLIGHT_NUMBER_MUST_BE_AN_INTEGER;
-import static edu.pdx.cs410J.smahato.constants.ErrorMessages.README_MESSAGE;
-import static edu.pdx.cs410J.smahato.constants.OptionConstants.PRINT;
+import static edu.pdx.cs410J.smahato.constants.ErrorMessages.*;
+import static edu.pdx.cs410J.smahato.constants.Options.PRINT;
 
 /**
  * P1InputUtils implements {@link InputUtils} is used to get the input from the command line arguments.
@@ -55,7 +55,7 @@ public class P1InputUtils implements InputUtils {
    */
   public P1InputUtils(List<String> input, int expectedNumberOfArgs, int startIndex) {
     this.input = input;
-    if (!this.input.contains(PRINT)) {
+    if (!this.input.contains(PRINT.getOption())) {
       this.expectedNumberOfArgs = expectedNumberOfArgs - 1;
       this.startIndex = startIndex - 1;
     } else {
@@ -64,10 +64,16 @@ public class P1InputUtils implements InputUtils {
     }
   }
 
+  /**
+   * @return the expected number of arguments in the input list
+   */
   public int getExpectedNumberOfArgs() {
     return expectedNumberOfArgs;
   }
 
+  /**
+   * @return the start index of the airline name in the input list
+   */
   public int getStartIndex() {
     return startIndex;
   }
@@ -88,8 +94,8 @@ public class P1InputUtils implements InputUtils {
    * @return Flight number
    */
   @Override
-  public int getFlightNumber() {
-    return Integer.parseInt(getValueAtIndex(input, startIndex, 1));
+  public String getFlightNumber() {
+    return getValueAtIndex(input, startIndex, 1);
   }
 
   /**
@@ -133,12 +139,22 @@ public class P1InputUtils implements InputUtils {
   }
 
   /**
-   * checks if the actual number of arguments is same as expected number of arguments
+   * checks if the actual number of arguments is same or less than expected number of arguments
    *
-   * @return true if actual number of arguments is same as expected number of arguments else false
+   * @return true if actual number of arguments is same or less than expected number of arguments else false and prints the error message accordingly
    */
-  public boolean isActualNumberOfArgsSameAsExpected() {
-    return isActualNumberOfArgsSameAsExpected(input.size(), this.expectedNumberOfArgs);
+  public boolean isActualNumberOfArgsSameOrLessThanExpected() {
+    int compare = compare(input.size(), this.expectedNumberOfArgs);
+    if (compare > 0) {
+      if (input.stream().filter(val -> val.startsWith("-") && val.length() > 1).anyMatch(val -> !Options.exists(val))) {
+        System.err.print(UNKNOWN_OPTION);
+      } else {
+        System.err.print(EXTRA_COMMAND_LINE_ARGS);
+      }
+      return false;
+    } else {
+      return true;
+    }
   }
 
   /**
@@ -148,7 +164,7 @@ public class P1InputUtils implements InputUtils {
    */
   @Override
   public Airline getAirline() {
-    if (isActualNumberOfArgsSameAsExpected()) {
+    if (isActualNumberOfArgsSameOrLessThanExpected()) {
       try {
         Airline airline = new Airline(getAirlineName());
 
@@ -158,7 +174,7 @@ public class P1InputUtils implements InputUtils {
 
         return airline;
       } catch (NumberFormatException e) {
-        System.err.println(FLIGHT_NUMBER_MUST_BE_AN_INTEGER + README_MESSAGE);
+        System.err.println(getFlightNumber() + " - " + FLIGHT_NUMBER_MUST_BE_AN_INTEGER + README_MESSAGE);
       } catch (DateTimeException | AirportCodeException | NullPointerException e) {
         System.err.println(e.getMessage() + README_MESSAGE);
       }

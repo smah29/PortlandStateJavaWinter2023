@@ -1,8 +1,12 @@
 package edu.pdx.cs410J.smahato.utils;
 
+import java.text.ParseException;
 import java.time.DateTimeException;
+import java.util.Date;
 
+import static edu.pdx.cs410J.smahato.constants.DateFormatConstants.FLIGHT_SCHEDULE_FORMAT;
 import static edu.pdx.cs410J.smahato.constants.DateFormatConstants.MM_DD_YYYY_HH_MM_A;
+import static edu.pdx.cs410J.smahato.constants.ErrorMessages.CANNOT_BE_NULL_OR_EMPTY;
 
 /**
  * This class contains utility methods for validating flight schedules
@@ -18,7 +22,7 @@ public class DateTimeUtils {
    */
   public static void dateTimeFormatCheck(String dateTime, String flightScheduleType) {
     if (!dateTime.matches("\\d{1,2}/\\d{1,2}/\\d{4} \\d{1,2}:\\d{1,2} [apAP][mM]")) {
-      throw new DateTimeException("Invalid " + flightScheduleType + " date format! Please follow the format: " + MM_DD_YYYY_HH_MM_A);
+      throw new DateTimeException("Invalid " + flightScheduleType + " date format - " + dateTime + "! Please follow the format: " + MM_DD_YYYY_HH_MM_A);
     }
     String[] dateTimeSplit = dateTime.split(" ");
     String date = dateTimeSplit[0];
@@ -84,6 +88,24 @@ public class DateTimeUtils {
    */
   public static void dateTimeNullCheck(String flightDateTime, String flightScheduleType) {
     if (flightDateTime == null || flightDateTime.isBlank())
-      throw new NullPointerException(flightScheduleType + " Date and time cannot be null or empty");
+      throw new NullPointerException(flightScheduleType + " Date and time" + CANNOT_BE_NULL_OR_EMPTY);
+  }
+
+  /**
+   * This method converts the date and time string to a Date object
+   *
+   * @param dateTime           date and time string
+   * @param flightScheduleType type of date and time ex departure or arrival
+   * @return Date object
+   */
+  public static Date getDateFromString(String dateTime, String flightScheduleType) {
+    try {
+      dateTimeNullCheck(dateTime, flightScheduleType);
+      Date date = FLIGHT_SCHEDULE_FORMAT.parse(dateTime);
+      dateTimeFormatCheck(dateTime, flightScheduleType);
+      return date;
+    } catch (ParseException e) {
+      throw new DateTimeException("Invalid " + flightScheduleType + " date format - " + dateTime + "! Please follow the format: " + MM_DD_YYYY_HH_MM_A);
+    }
   }
 }

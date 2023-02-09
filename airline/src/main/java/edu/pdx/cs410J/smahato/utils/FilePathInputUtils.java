@@ -12,7 +12,8 @@ public interface FilePathInputUtils extends InputUtils {
   /**
    * Returns the file path from the input list
    *
-   * @return File path
+   * @param option options allowed by airline application
+   * @return File path after the option
    */
   String getFilePath(String option);
 

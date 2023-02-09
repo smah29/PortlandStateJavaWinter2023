@@ -19,6 +19,10 @@ public interface ErrorMessages {
    * Extra command line arguments!
    */
   String EXTRA_COMMAND_LINE_ARGS = "Extra command line arguments!" + README_MESSAGE;
+  /**
+   * Unknown Options!
+   */
+  String UNKNOWN_OPTION = "Unknown Options!" + README_MESSAGE;
 
   /**
    * must be exactly 3 characters long
@@ -35,7 +39,7 @@ public interface ErrorMessages {
   /**
    * cannot be null or empty
    */
-  String CANNOT_BE_NULL_OR_EMPTY = " cannot be null or empty";
+  String CANNOT_BE_NULL_OR_EMPTY = " is missing!";
 
   /**
    * Airline name doesn't match with the one in the file!
@@ -50,5 +54,8 @@ public interface ErrorMessages {
    */
   String MUST_BE_A_VALID_AIRPORT_CODE = " must be a valid airport code";
 
+  /**
+   * Departure should be before arrival
+   */
   String DEPARTURE_BEFORE_ARRIVAL = DEPARTURE + " should be before " + ARRIVAL;
 }

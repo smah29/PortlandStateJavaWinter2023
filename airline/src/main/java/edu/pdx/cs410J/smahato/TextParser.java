@@ -39,7 +39,7 @@ public class TextParser implements AirlineParser<Airline> {
       String flightDetails;
       while ((flightDetails = br.readLine()) != null) {
         String[] array = flightDetails.split(TEXT_FILE_SEPARATOR);
-        Flight flight = new Flight(Integer.parseInt(array[0]), array[1], array[2], array[3], array[4]);
+        Flight flight = new Flight(array[0], array[1], array[2], array[3], array[4]);
         airline.addFlight(flight);
       }
       return airline;

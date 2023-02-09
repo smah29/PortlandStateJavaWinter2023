@@ -3,23 +3,22 @@ package edu.pdx.cs410J.smahato;
 import edu.pdx.cs410J.AbstractFlight;
 import edu.pdx.cs410J.smahato.exception.AirportCodeException;
 import edu.pdx.cs410J.smahato.utils.AirlineValidationUtils;
-import edu.pdx.cs410J.smahato.utils.DateTimeUtils;
 
-import java.text.ParseException;
 import java.time.DateTimeException;
 import java.util.Date;
 
 import static edu.pdx.cs410J.smahato.constants.AirlineConstants.*;
-import static edu.pdx.cs410J.smahato.constants.DateFormatConstants.*;
+import static edu.pdx.cs410J.smahato.constants.DateFormatConstants.SHORT_DF;
 import static edu.pdx.cs410J.smahato.constants.ErrorMessages.DEPARTURE_BEFORE_ARRIVAL;
 import static edu.pdx.cs410J.smahato.constants.ErrorMessages.SOURCE_AND_DESTINATION_CANNOT_BE_SAME;
+import static edu.pdx.cs410J.smahato.utils.DateTimeUtils.getDateFromString;
 
 /**
  * Flight has a number, source, destination, departure time and arrival time
  */
 public class Flight extends AbstractFlight implements Comparable<Flight> {
 
-  private final int number;
+  private int number;
   private String source;
   private String destination;
   private String departureString;
@@ -36,12 +35,13 @@ public class Flight extends AbstractFlight implements Comparable<Flight> {
    * @param departureString Departure time
    * @param arrivalString   Arrival time
    */
-  public Flight(int number, String source, String destination, String departureString, String arrivalString) {
-    this.number = number;
+  public Flight(String number, String source, String destination, String departureString, String arrivalString) {
+    if (number == null || number.isBlank()) throw new NullPointerException("Flight Number is missing!");
+    this.number = Integer.parseInt(number);
     setSource(source);
+    setDeparture(departureString);
     setDestination(destination);
     if (this.source.equals(this.destination)) throw new AirportCodeException(SOURCE_AND_DESTINATION_CANNOT_BE_SAME);
-    setDeparture(departureString);
     setArrival(arrivalString);
     if (this.departure.compareTo(this.arrival) > -1)
       throw new DateTimeException(DEPARTURE_BEFORE_ARRIVAL);
@@ -103,17 +103,6 @@ public class Flight extends AbstractFlight implements Comparable<Flight> {
   private void setArrival(String arrivalString) {
     this.arrival = getDateFromString(arrivalString, ARRIVAL);
     this.arrivalString = SHORT_DF.format(this.arrival);
-  }
-
-  private static Date getDateFromString(String dateTime, String flightScheduleType) {
-    try {
-      DateTimeUtils.dateTimeNullCheck(dateTime, flightScheduleType);
-      Date date = FLIGHT_SCHEDULE_FORMAT.parse(dateTime);
-      DateTimeUtils.dateTimeFormatCheck(dateTime, flightScheduleType);
-      return date;
-    } catch (ParseException e) {
-      throw new DateTimeException("Invalid " + flightScheduleType + " date format! Please follow the format: " + MM_DD_YYYY_HH_MM_A);
-    }
   }
 
   private void setSource(String source) {

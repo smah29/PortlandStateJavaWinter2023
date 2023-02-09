@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import static edu.pdx.cs410J.smahato.constants.ErrorMessages.EXTRA_COMMAND_LINE_ARGS;
-import static edu.pdx.cs410J.smahato.constants.ErrorMessages.MISSING_COMMAND_LINE_ARGS;
 
 /**
  * Interface InputUtils contains abstract methods to get values (airline and flight information) from arguments
@@ -21,10 +20,11 @@ public interface InputUtils {
    * @param input      List of arguments
    * @param startIndex Index of the first argument where airline name starts
    * @param indexArray Array of indices of arguments which needs to be concatenated like date and time
-   * @return
+   * @return String by coming all given index values with space as separator
    */
   default String getValueAtIndex(List<String> input, int startIndex, int... indexArray) {
-    return Arrays.stream(indexArray).mapToObj(index -> input.get(startIndex + index)).reduce("", (a, b) -> a + " " + b).trim();
+    int inputSize = input.size();
+    return Arrays.stream(indexArray).filter(idx -> (startIndex + idx) < inputSize).mapToObj(index -> input.get(startIndex + index)).reduce("", (a, b) -> a + " " + b).trim();
   }
 
   /**
@@ -32,18 +32,16 @@ public interface InputUtils {
    *
    * @param actualNumberOfArgs   Number of arguments in the input list
    * @param expectedNumberOfArgs Expected number of arguments according to Project ex 9 in Project 1 and 11 in Project 2
-   * @return true if the number of arguments are correct, false otherwise, and prints the error message accordingly
+   * @return 1, 0,-1 if the number of arguments are less, equal or greater than expected
    */
-  default boolean isActualNumberOfArgsSameAsExpected(int actualNumberOfArgs, int expectedNumberOfArgs) {
+  default int compare(int actualNumberOfArgs, int expectedNumberOfArgs) {
     if (actualNumberOfArgs > expectedNumberOfArgs) {
-      System.err.print(EXTRA_COMMAND_LINE_ARGS);
-      return false;
+      return 1;
     }
     if (actualNumberOfArgs != expectedNumberOfArgs) {
-      System.err.print(MISSING_COMMAND_LINE_ARGS);
-      return false;
+      return -1;
     }
-    return true;
+    return 0;
   }
 
   /**
@@ -58,7 +56,7 @@ public interface InputUtils {
    *
    * @return Flight number
    */
-  int getFlightNumber();
+  String getFlightNumber();
 
   /**
    * Returns the source from the input list

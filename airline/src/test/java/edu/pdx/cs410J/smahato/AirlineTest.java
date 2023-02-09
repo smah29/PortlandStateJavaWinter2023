@@ -37,7 +37,7 @@ public class AirlineTest {
   @Test
   void testAddFlight() {
     Airline airline = new Airline("CS410J Air Express");
-    Flight flight = new Flight(1, "PDX", "LAX", "10/10/2020 10:10 am", "10/10/2020 11:10 am");
+    Flight flight = new Flight("1", "PDX", "LAX", "10/10/2020 10:10 am", "10/10/2020 11:10 am");
     airline.addFlight(flight);
     assertThat(airline.getFlights().size(), equalTo(1));
   }
@@ -46,9 +46,9 @@ public class AirlineTest {
   @Test
   void testAddTwoFlights() {
     Airline airline = new Airline("CS410J Air Express");
-    Flight flight1 = new Flight(1, "PDX", "LAX", "10/10/2020 10:10 am", "10/10/2020 11:10 am");
-    Flight flight2 = new Flight(2, "LAX", "PDX", "10/10/2020 12:10 am", "10/10/2020 11:10 am");
-    Flight flight3 = new Flight(3, "LAX", "ABE", "10/10/2020 12:20 am", "10/10/2020 11:10 am");
+    Flight flight1 = new Flight("1", "PDX", "LAX", "10/10/2020 10:10 am", "10/10/2020 11:10 am");
+    Flight flight2 = new Flight("2", "LAX", "PDX", "10/10/2020 12:10 am", "10/10/2020 11:10 am");
+    Flight flight3 = new Flight("3", "LAX", "ABE", "10/10/2020 12:20 am", "10/10/2020 11:10 am");
     airline.addFlight(flight1);
     airline.addFlight(flight2);
     airline.addFlight(flight3);

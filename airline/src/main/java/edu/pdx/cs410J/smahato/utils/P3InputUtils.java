@@ -10,7 +10,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-import static edu.pdx.cs410J.smahato.constants.OptionConstants.*;
+import static edu.pdx.cs410J.smahato.constants.Options.*;
 
 /**
  * P3InputUtils extends {@link P2InputUtils} has additional logic of pretty printing
@@ -32,7 +32,7 @@ public class P3InputUtils extends P2InputUtils {
    */
   public P3InputUtils(List<String> input) {
     super(input, EXPECTED_INPUT_SIZE, START_INDEX);
-    if (!this.input.contains(TEXT_FILE)) {
+    if (!this.input.contains(TEXT_FILE.getOption())) {
       this.expectedNumberOfArgs = this.getExpectedNumberOfArgs() - 2;
       this.startIndex = this.getStartIndex() - 2;
     }
@@ -44,15 +44,15 @@ public class P3InputUtils extends P2InputUtils {
    */
   public boolean prettyPrintAirline(Airline airline) {
     Airline airlineFromTextFile = null;
-    if (this.input.contains(TEXT_FILE)) {
+    if (this.input.contains(TEXT_FILE.getOption())) {
       airlineFromTextFile = saveAirlineToFile(airline);
     } else {
       airlineFromTextFile = airline;
     }
     if (airlineFromTextFile != null) {
-      String prettyFilePath = getFilePath(PRETTY);
+      String prettyFilePath = getFilePath(PRETTY.getOption());
       if (prettyFilePath.equals("-")) {
-        if (this.input.contains(PRINT))
+        if (this.input.contains(PRINT.getOption()))
           System.out.println(new ArrayList<>(airline.getFlights()).get(0));
         new PrettyPrinter(new PrintWriter(System.out)).dump(airlineFromTextFile);
         return false;

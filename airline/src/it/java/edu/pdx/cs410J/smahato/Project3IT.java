@@ -18,7 +18,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 /**
  * An integration test for the {@link Project3} main class.
  */
-class Project2IT extends InvokeMainTestCase {
+class Project3IT extends InvokeMainTestCase {
 
   /**
    * Invokes the main method of {@link Project3} with the given arguments.
@@ -74,6 +74,17 @@ class Project2IT extends InvokeMainTestCase {
   }
 
   /**
+   * Tests that invoking the main method with extra options issues an error
+   */
+  @Test
+  void testWithUnknownOption() {
+    MainMethodResult result = invokeMain("-print", "-unKnownOption", "CS410J Air Express", "1", "PDX", "10/10/2020", "10:10", "am", "LAX", "10/10/2020", "10:10", "am");
+    assertThat(result.getTextWrittenToStandardError(), equalTo(UNKNOWN_OPTION));
+    MainMethodResult result1 = invokeMain("-print", "-", "CS410J Air Express", "1", "PDX", "10/10/2020", "10:10", "am", "LAX", "10/10/2020", "10:10", "am");
+    assertThat(result1.getTextWrittenToStandardError(), equalTo(EXTRA_COMMAND_LINE_ARGS));
+  }
+
+  /**
    * Tests that invoking the main method with no -print option prints nothing
    */
   @Test
@@ -88,7 +99,7 @@ class Project2IT extends InvokeMainTestCase {
   @Test
   void testCommandLineArgumentsWithNoPrintOptionButError() {
     MainMethodResult result = invokeMain("CS410J Air Express", "1s", "PDX", "10/10/2020", "10:10", "am", "LAX", "10/10/2020", "10:10", "am");
-    assertThat(result.getTextWrittenToStandardError(), equalTo(FLIGHT_NUMBER_MUST_BE_AN_INTEGER + README_MESSAGE + "\n"));
+    assertThat(result.getTextWrittenToStandardError(), equalTo("1s - " + FLIGHT_NUMBER_MUST_BE_AN_INTEGER + README_MESSAGE + "\n"));
   }
 
   /**
@@ -97,7 +108,7 @@ class Project2IT extends InvokeMainTestCase {
   @Test
   void testWithLessThan9CommandLineArguments() {
     MainMethodResult result = invokeMain("-print", "CS410J Air Express", "1", "PDX", "10/10/2020", "10:10", "LAX", "10/10/2020");
-    assertThat(result.getTextWrittenToStandardError(), equalTo(MISSING_COMMAND_LINE_ARGS));
+    assertThat(result.getTextWrittenToStandardError(), equalTo("Invalid " + DEPARTURE + " date format - 10/10/2020 10:10 LAX! Please follow the format: " + MM_DD_YYYY_HH_MM_A + README_MESSAGE + "\n"));
   }
 
   /**
@@ -107,7 +118,7 @@ class Project2IT extends InvokeMainTestCase {
   @Test
   void testWithInvalidFlightNumber() {
     MainMethodResult result = invokeMain("-print", "CS410J Air Express", "PDX", "1", "10/10/2020", "10:10", "am", "LAX", "10/10/2020", "10:10", "am");
-    assertThat(result.getTextWrittenToStandardError(), equalTo(FLIGHT_NUMBER_MUST_BE_AN_INTEGER + README_MESSAGE + "\n"));
+    assertThat(result.getTextWrittenToStandardError(), equalTo("PDX - " + FLIGHT_NUMBER_MUST_BE_AN_INTEGER + README_MESSAGE + "\n"));
   }
 
   /**
@@ -117,7 +128,7 @@ class Project2IT extends InvokeMainTestCase {
   @Test
   void testDepartureDateTimeExchangedArguments() {
     MainMethodResult result = invokeMain("-print", "CS410J Air Express", "1", "PDX", "10:10", "10/10/2020", "am", "LAX", "10/10/2020", "10:10", "am");
-    assertThat(result.getTextWrittenToStandardError(), equalTo("Invalid " + DEPARTURE + " date format! Please follow the format: " + MM_DD_YYYY_HH_MM_A + README_MESSAGE + "\n"));
+    assertThat(result.getTextWrittenToStandardError(), equalTo("Invalid " + DEPARTURE + " date format - 10:10 10/10/2020 am! Please follow the format: " + MM_DD_YYYY_HH_MM_A + README_MESSAGE + "\n"));
   }
 
   /**
@@ -126,7 +137,7 @@ class Project2IT extends InvokeMainTestCase {
   @Test
   void testInValidAirPortCodeArguments() {
     MainMethodResult result = invokeMain("-print", "CS410J Air Express", "1", "PDX", "10/10/2020", "10:10", "am", "10/10/2020", "10:10", "pm", "LAX");
-    assertThat(result.getTextWrittenToStandardError(), equalTo(DESTINATION + MUST_BE_EXACTLY_3_CHARACTERS_LONG + README_MESSAGE + "\n"));
+    assertThat(result.getTextWrittenToStandardError(), equalTo(DESTINATION + "(10/10/2020)" + MUST_BE_EXACTLY_3_CHARACTERS_LONG + README_MESSAGE + "\n"));
   }
 
   /**
@@ -207,7 +218,7 @@ class Project2IT extends InvokeMainTestCase {
   @Test
   void testP2BySwitchingOptionsOrderAndInvalidFlightNumber() {
     MainMethodResult result = invokeMain("-textFile", "textFile", "-print", "CS410J Air Express", "3s", "PDX", "10/10/2020", "10:10", "am", "LAX", "10/10/2020", "11:10", "am");
-    assertThat(result.getTextWrittenToStandardError(), equalTo(FLIGHT_NUMBER_MUST_BE_AN_INTEGER + README_MESSAGE + "\n"));
+    assertThat(result.getTextWrittenToStandardError(), equalTo("3s - " + FLIGHT_NUMBER_MUST_BE_AN_INTEGER + README_MESSAGE + "\n"));
   }
 
   /**
@@ -231,7 +242,7 @@ class Project2IT extends InvokeMainTestCase {
   @Test
   void testP3WithInvalidFlight() {
     MainMethodResult result = invokeMain("-print", "-textFile", "textFile", "-pretty", "prettyFile", "CS410J Air Express", "1s", "PDX", "10/10/2020", "10:10", "am", "LAX", "10/10/2020", "11:10", "am");
-    assertThat(result.getTextWrittenToStandardError(), equalTo(FLIGHT_NUMBER_MUST_BE_AN_INTEGER + README_MESSAGE + "\n"));
+    assertThat(result.getTextWrittenToStandardError(), equalTo("1s - " + FLIGHT_NUMBER_MUST_BE_AN_INTEGER + README_MESSAGE + "\n"));
   }
 
   @Test
