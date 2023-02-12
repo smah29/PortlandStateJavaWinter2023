@@ -9,8 +9,4 @@ public interface FileConstants {
    * separator used for separating fields in text file
    */
   String TEXT_FILE_SEPARATOR = "#";
-  /**
-   * separator used for separating fields in pretty file
-   */
-  String PRETTY_FILE_SEPARATOR = " | ";
 }

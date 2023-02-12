@@ -1,6 +1,5 @@
 package edu.pdx.cs410J.smahato;
 
-import edu.pdx.cs410J.smahato.constants.Options;
 import edu.pdx.cs410J.smahato.utils.P1InputUtils;
 import edu.pdx.cs410J.smahato.utils.P2InputUtils;
 import edu.pdx.cs410J.smahato.utils.P3InputUtils;
@@ -13,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static edu.pdx.cs410J.smahato.constants.ErrorMessages.MISSING_COMMAND_LINE_ARGS;
 import static edu.pdx.cs410J.smahato.constants.Options.*;
 
 /**
@@ -28,11 +26,8 @@ public class Project3 {
    */
   public static void main(String[] args) {
     List<String> input = Arrays.asList(args);
-    int inputSize = input.size();
     Airline airline;
-    if (inputSize == 0) {
-      System.err.print(MISSING_COMMAND_LINE_ARGS);
-    } else if (input.contains(README.getOption())) {
+    if (input.contains(README.getOption())) {
       printREADME();
     } else if (input.contains(PRETTY.getOption())) {
       P3InputUtils p3InputUtils = new P3InputUtils(input);
