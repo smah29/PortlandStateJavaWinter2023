@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static edu.pdx.cs410J.smahato.constants.ErrorMessages.MISSING_COMMAND_LINE_ARGS;
 import static edu.pdx.cs410J.smahato.constants.Options.*;
 
 /**
@@ -26,9 +27,13 @@ public class Project3 {
    */
   public static void main(String[] args) {
     List<String> input = Arrays.asList(args);
+    int inputSize = input.size();
     Airline airline;
-    if (input.contains(README.getOption())) {
-      printREADME();
+    if (inputSize == 0) {
+      System.err.println(MISSING_COMMAND_LINE_ARGS);
+      printFile("usage.txt");
+    } else if (input.contains(README.getOption())) {
+      printFile("README.txt");
     } else if (input.contains(PRETTY.getOption())) {
       P3InputUtils p3InputUtils = new P3InputUtils(input);
       airline = p3InputUtils.getAirline();
@@ -61,18 +66,18 @@ public class Project3 {
   }
 
   /**
-   * Prints the README file
+   * Prints the file
    */
-  private static void printREADME() {
+  private static void printFile(String fileName) {
     try {
-      InputStream readme = Project3.class.getResourceAsStream("README.txt");
-      BufferedReader reader = new BufferedReader(new InputStreamReader(readme));
+      InputStream resource = Project3.class.getResourceAsStream(fileName);
+      BufferedReader reader = new BufferedReader(new InputStreamReader(resource));
       String line;
       while ((line = reader.readLine()) != null) {
         System.out.println(line);
       }
     } catch (IOException e) {
-      System.err.println("Error reading README.txt");
+      System.err.println("Error reading " + fileName);
     }
   }
 }

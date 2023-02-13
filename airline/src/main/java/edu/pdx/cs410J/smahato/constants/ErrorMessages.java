@@ -12,6 +12,10 @@ public interface ErrorMessages {
    */
   String README_MESSAGE = " Use options -README to get help" + "\n";
   /**
+   * Missing command line arguments!
+   */
+  String MISSING_COMMAND_LINE_ARGS = "Missing command line arguments!";
+  /**
    * Extra command line arguments!
    */
   String EXTRA_COMMAND_LINE_ARGS = "Extra command line arguments!" + README_MESSAGE;
