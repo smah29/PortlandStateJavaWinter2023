@@ -15,6 +15,11 @@ import static edu.pdx.cs410J.smahato.constants.FileConstants.TEXT_FILE_SEPARATOR
 public class TextDumper implements AirlineDumper<Airline> {
   private final Writer writer;
 
+  /**
+   * Creates a new <code>TextDumper</code> object.
+   *
+   * @param writer The writer to which the airline will be written
+   */
   public TextDumper(Writer writer) {
     this.writer = writer;
   }

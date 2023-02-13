@@ -67,6 +67,7 @@ public class Project3 {
 
   /**
    * Prints the file
+   * @param fileName Name of the file
    */
   private static void printFile(String fileName) {
     try {

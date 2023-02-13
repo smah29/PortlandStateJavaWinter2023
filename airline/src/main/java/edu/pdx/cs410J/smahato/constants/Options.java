@@ -27,6 +27,11 @@ public enum Options {
    */
   final String option;
 
+  /**
+   * Constructor
+   *
+   * @param option Option value
+   */
   Options(String option) {
     this.option = option;
   }

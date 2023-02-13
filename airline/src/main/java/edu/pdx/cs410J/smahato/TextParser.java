@@ -14,6 +14,11 @@ import static edu.pdx.cs410J.smahato.constants.FileConstants.TEXT_FILE_SEPARATOR
 public class TextParser implements AirlineParser<Airline> {
   private final Reader reader;
 
+  /**
+   * Creates a new <code>TextParser</code> object.
+   *
+   * @param reader The reader from which the airline will be read
+   */
   public TextParser(Reader reader) {
     this.reader = reader;
   }

@@ -47,36 +47,57 @@ public class Flight extends AbstractFlight implements Comparable<Flight> {
       throw new DateTimeException(DEPARTURE_BEFORE_ARRIVAL);
   }
 
+  /**
+   * @return the Flight number
+   */
   @Override
   public int getNumber() {
     return this.number;
   }
 
+  /**
+   * @return the source airport code
+   */
   @Override
   public String getSource() {
     return this.source;
   }
 
+  /**
+   * @return the departure time String
+   */
   @Override
   public String getDepartureString() {
     return this.departureString;
   }
 
+  /**
+   * @return the destination airport code
+   */
   @Override
   public String getDestination() {
     return this.destination;
   }
 
+  /**
+   * @return the arrival time String
+   */
   @Override
   public String getArrivalString() {
     return this.arrivalString;
   }
 
+  /**
+   * @return the departure date
+   */
   @Override
   public Date getDeparture() {
     return this.departure;
   }
 
+  /**
+   * @return the arrival date
+   */
   @Override
   public Date getArrival() {
     return this.arrival;

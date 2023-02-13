@@ -52,6 +52,7 @@ public class P2InputUtils extends P1InputUtils implements FilePathInputUtils {
   /**
    * Gets the index of the file path in the input list
    *
+   * @param option options allowed by airline application
    * @return Index of the file path in the input list
    */
   private int getFilePathIndex(String option) {
