@@ -42,7 +42,6 @@ public class AboutMocks {
         // objective of this test to test that collaborator, so replace it
         new ClassUnderTest(new Collaborator() {
             public void doBusinessStuff() {
-                System.out.println("Business stuff");
             }
         }).doSomething();
     }
