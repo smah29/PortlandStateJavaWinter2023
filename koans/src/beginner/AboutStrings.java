@@ -5,7 +5,7 @@ import com.sandwich.koan.Koan;
 import java.text.MessageFormat;
 import java.util.MissingFormatArgumentException;
 
-import static com.sandwich.koan.constant.KoanConstants.__;
+
 import static com.sandwich.util.Assert.assertEquals;
 import static com.sandwich.util.Assert.fail;
 

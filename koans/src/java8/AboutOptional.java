@@ -4,7 +4,7 @@ import com.sandwich.koan.Koan;
 
 import java.util.Optional;
 
-import static com.sandwich.koan.constant.KoanConstants.__;
+
 import static com.sandwich.util.Assert.assertEquals;
 
 public class AboutOptional {

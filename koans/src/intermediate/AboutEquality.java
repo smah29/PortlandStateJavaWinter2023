@@ -2,7 +2,7 @@ package intermediate;
 
 import com.sandwich.koan.Koan;
 
-import static com.sandwich.koan.constant.KoanConstants.__;
+
 import static com.sandwich.util.Assert.assertEquals;
 
 public class AboutEquality {

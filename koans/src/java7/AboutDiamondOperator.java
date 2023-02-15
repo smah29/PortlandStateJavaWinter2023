@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.sandwich.koan.constant.KoanConstants.__;
+
 import static com.sandwich.util.Assert.assertEquals;
 
 public class AboutDiamondOperator {

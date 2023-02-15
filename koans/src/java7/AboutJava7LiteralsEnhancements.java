@@ -2,7 +2,7 @@ package java7;
 
 import com.sandwich.koan.Koan;
 
-import static com.sandwich.koan.constant.KoanConstants.__;
+
 import static com.sandwich.util.Assert.assertEquals;
 
 public class AboutJava7LiteralsEnhancements {

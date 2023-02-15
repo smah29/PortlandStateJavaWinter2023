@@ -6,7 +6,7 @@ import com.sandwich.koan.Koan;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.sandwich.koan.constant.KoanConstants.__;
+
 import static com.sandwich.util.Assert.assertEquals;
 
 
