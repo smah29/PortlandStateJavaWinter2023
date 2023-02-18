@@ -18,7 +18,7 @@ import static edu.pdx.cs410J.smahato.constants.Options.*;
 /**
  * The main class for the CS410J airline Project 2
  */
-public class Project3 {
+public class Project4 {
   /**
    * Main method for Project 2,
    * it has the logic to check the command line arguments and print the README or flight or save the airline to a file
@@ -71,7 +71,7 @@ public class Project3 {
    */
   private static void printFile(String fileName) {
     try {
-      InputStream resource = Project3.class.getResourceAsStream(fileName);
+      InputStream resource = Project4.class.getResourceAsStream(fileName);
       BufferedReader reader = new BufferedReader(new InputStreamReader(resource));
       String line;
       while ((line = reader.readLine()) != null) {

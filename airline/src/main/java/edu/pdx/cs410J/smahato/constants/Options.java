@@ -11,17 +11,21 @@ public enum Options {
    */
   README("-README"),
   /**
-   * If print option is not present, then flights information is not printed
+   * If print option is not present, then added flight information is not printed to the console
    */
   PRINT("-print"),
   /**
-   * If textFile option is not present, then flights information is not dumped to a file
+   * If textFile option is not present, then flights information is not dumped to a text file
    */
   TEXT_FILE("-textFile"),
   /**
-   * If pretty option is not present, then flights information is not be pretty printed
+   * If pretty option is not present, then flights information is not be pretty printed to the console
    */
-  PRETTY("-pretty");
+  PRETTY("-pretty"),
+  /**
+   * If xmlFile option is not present, then flights information is not dumped to a xml file
+   */
+  XML_FILE("-xmlFile");
   /**
    * Option value
    */
