@@ -3,6 +3,7 @@ package edu.pdx.cs410J.smahato;
 import edu.pdx.cs410J.smahato.utils.P1InputUtils;
 import edu.pdx.cs410J.smahato.utils.P2InputUtils;
 import edu.pdx.cs410J.smahato.utils.P3InputUtils;
+import edu.pdx.cs410J.smahato.utils.P4InputUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -34,6 +35,13 @@ public class Project4 {
       printFile("usage.txt");
     } else if (input.contains(README.getOption())) {
       printFile("README.txt");
+    } else if (input.contains(XML_FILE.getOption())) {
+      P4InputUtils p4InputUtils = new P4InputUtils(input);
+      airline = p4InputUtils.getAirline();
+      if (airline != null) {
+        boolean noConsoleOutputOrError = p4InputUtils.prettyPrintAirline(airline);
+        if (noConsoleOutputOrError && input.contains(PRINT.getOption())) printAddedFlight(airline);
+      }
     } else if (input.contains(PRETTY.getOption())) {
       P3InputUtils p3InputUtils = new P3InputUtils(input);
       airline = p3InputUtils.getAirline();
@@ -67,6 +75,7 @@ public class Project4 {
 
   /**
    * Prints the file
+   *
    * @param fileName Name of the file
    */
   private static void printFile(String fileName) {

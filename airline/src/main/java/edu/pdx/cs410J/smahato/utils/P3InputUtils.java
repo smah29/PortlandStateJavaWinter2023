@@ -32,7 +32,23 @@ public class P3InputUtils extends P2InputUtils {
    */
   public P3InputUtils(List<String> input) {
     super(input, EXPECTED_INPUT_SIZE, START_INDEX);
-    if (!this.input.contains(TEXT_FILE.getOption())) {
+    checkForTextFileOption();
+  }
+
+  /**
+   * Constructor for P3InputUtils used by {@link P4InputUtils}
+   *
+   * @param input                List of arguments
+   * @param expectedNumberOfArgs Expected number of arguments according to Project ex 15 in Project 3
+   * @param startIndex           Index of the first argument where airline name starts ex 5 in Project 3
+   */
+  public P3InputUtils(List<String> input, int expectedNumberOfArgs, int startIndex) {
+    super(input, expectedNumberOfArgs, startIndex);
+    checkForTextFileOption();
+  }
+
+  private void checkForTextFileOption() {
+    if (!doesInputContainsTextFileOption()) {
       this.expectedNumberOfArgs = this.getExpectedNumberOfArgs() - 2;
       this.startIndex = this.getStartIndex() - 2;
     }
@@ -44,7 +60,7 @@ public class P3InputUtils extends P2InputUtils {
    */
   public boolean prettyPrintAirline(Airline airline) {
     Airline airlineFromTextFile = null;
-    if (this.input.contains(TEXT_FILE.getOption())) {
+    if (doesInputContainsTextFileOption()) {
       airlineFromTextFile = saveAirlineToFile(airline);
     } else {
       airlineFromTextFile = airline;
@@ -67,5 +83,9 @@ public class P3InputUtils extends P2InputUtils {
       }
     }
     return false;
+  }
+
+  private boolean doesInputContainsTextFileOption() {
+    return this.input.contains(TEXT_FILE.getOption());
   }
 }

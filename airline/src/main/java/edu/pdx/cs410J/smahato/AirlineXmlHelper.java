@@ -16,6 +16,9 @@ public class AirlineXmlHelper extends ProjectXmlHelper {
   protected static final String PUBLIC_ID =
     "-//Portland State University//DTD CS410J Airline//EN";
 
+  /** The qualified name of the root element */
+  protected static final String QUALIFIED_NAME = "airline";
+
 
   public AirlineXmlHelper() {
     super(PUBLIC_ID, SYSTEM_ID, "airline.dtd");
