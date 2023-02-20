@@ -11,12 +11,12 @@ public interface DateFormatConstants {
   /**
    * expected date time pattern/regex from user
    */
-  String MM_DD_YYYY_HH_MM_A = "MM/dd/yyyy hh:mm a";
+  String MM_DD_YYYY_HH_MM = "MM/dd/yyyy HH:mm";
 
   /**
-   * flight schedule format for regex MM/dd/yyyy hh:mm a
+   * flight schedule format for regex MM/dd/yyyy hh:mm
    */
-  SimpleDateFormat FLIGHT_SCHEDULE_FORMAT = new SimpleDateFormat(MM_DD_YYYY_HH_MM_A);
+  SimpleDateFormat FLIGHT_SCHEDULE_FORMAT = new SimpleDateFormat(MM_DD_YYYY_HH_MM);
 
   /**
    * short date format for writing to file ex MM/dd/yyyy, hh:mm a

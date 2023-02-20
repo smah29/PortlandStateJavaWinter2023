@@ -23,5 +23,5 @@ public interface FilePathInputUtils extends InputUtils {
    * @param airline Airline object
    * @return Airline if airline is saved to file, null otherwise
    */
-  Airline saveAirlineToFile(Airline airline);
+  Airline saveAirlineToTextFile(Airline airline);
 }

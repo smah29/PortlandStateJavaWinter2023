@@ -5,7 +5,7 @@ import java.util.Arrays;
 /**
  * This enum contains all the options that can be used in the airline project
  */
-public enum Options {
+public enum Option {
   /**
    * Prints only the README.txt file
    */
@@ -36,7 +36,7 @@ public enum Options {
    *
    * @param option Option value
    */
-  Options(String option) {
+  Option(String option) {
     this.option = option;
   }
 

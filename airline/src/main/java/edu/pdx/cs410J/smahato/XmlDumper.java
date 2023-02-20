@@ -59,8 +59,8 @@ public class XmlDumper extends AirlineXmlHelper implements AirlineDumper<Airline
     builder.setErrorHandler(this);
     builder.setEntityResolver(this);
     DOMImplementation dom = builder.getDOMImplementation();
-    DocumentType docType = dom.createDocumentType(QUALIFIED_NAME, PUBLIC_ID, SYSTEM_ID);
-    Document doc = dom.createDocument(null, QUALIFIED_NAME, docType);
+    DocumentType docType = dom.createDocumentType(AIRLINE, PUBLIC_ID, SYSTEM_ID);
+    Document doc = dom.createDocument(null, AIRLINE, docType);
 
     updateDocWithAirlineDetails(airline, doc);
 
@@ -68,10 +68,7 @@ public class XmlDumper extends AirlineXmlHelper implements AirlineDumper<Airline
   }
 
   private static void updateDocWithAirlineDetails(Airline airline, Document doc) {
-    Element root = doc.getDocumentElement();
-
-    Element airlineElement = doc.createElement(AIRLINE);
-    root.appendChild(airlineElement);
+    Element airlineElement = doc.getDocumentElement();
 
     Element airlineName = doc.createElement(AIRLINE_NAME);
     airlineElement.appendChild(airlineName);

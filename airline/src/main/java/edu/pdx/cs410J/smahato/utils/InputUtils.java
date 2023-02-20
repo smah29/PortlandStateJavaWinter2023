@@ -5,7 +5,7 @@ import edu.pdx.cs410J.smahato.Airline;
 import java.util.Arrays;
 import java.util.List;
 
-import static edu.pdx.cs410J.smahato.constants.ErrorMessages.EXTRA_COMMAND_LINE_ARGS;
+import static edu.pdx.cs410J.smahato.constants.Option.TEXT_FILE;
 
 /**
  * Interface InputUtils contains abstract methods to get values (airline and flight information) from arguments
@@ -25,6 +25,10 @@ public interface InputUtils {
   default String getValueAtIndex(List<String> input, int startIndex, int... indexArray) {
     int inputSize = input.size();
     return Arrays.stream(indexArray).filter(idx -> (startIndex + idx) < inputSize).mapToObj(index -> input.get(startIndex + index)).reduce("", (a, b) -> a + " " + b).trim();
+  }
+
+  default boolean doesInputContainsOption(List<String> input, String option) {
+    return input.contains(option);
   }
 
   /**

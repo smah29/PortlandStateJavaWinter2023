@@ -8,17 +8,17 @@ import edu.pdx.cs410J.ProjectXmlHelper;
  */
 public class AirlineXmlHelper extends ProjectXmlHelper {
 
-  /** The System ID for the Family Tree DTD */
+  /**
+   * The System ID for the Family Tree DTD
+   */
   protected static final String SYSTEM_ID =
-    "http://www.cs.pdx.edu/~whitlock/dtds/airline.dtd";
+      "http://www.cs.pdx.edu/~whitlock/dtds/airline.dtd";
 
-  /** The Public ID for the Family Tree DTD */
+  /**
+   * The Public ID for the Family Tree DTD
+   */
   protected static final String PUBLIC_ID =
-    "-//Portland State University//DTD CS410J Airline//EN";
-
-  /** The qualified name of the root element */
-  protected static final String QUALIFIED_NAME = "airline";
-
+      "-//Portland State University//DTD CS410J Airline//EN";
 
   public AirlineXmlHelper() {
     super(PUBLIC_ID, SYSTEM_ID, "airline.dtd");

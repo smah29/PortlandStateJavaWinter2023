@@ -5,16 +5,13 @@ import edu.pdx.cs410J.smahato.utils.P2InputUtils;
 import edu.pdx.cs410J.smahato.utils.P3InputUtils;
 import edu.pdx.cs410J.smahato.utils.P4InputUtils;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static edu.pdx.cs410J.smahato.constants.ErrorMessages.MISSING_COMMAND_LINE_ARGS;
-import static edu.pdx.cs410J.smahato.constants.Options.*;
+import static edu.pdx.cs410J.smahato.constants.Option.*;
 
 /**
  * The main class for the CS410J airline Project 2
@@ -39,26 +36,33 @@ public class Project4 {
       P4InputUtils p4InputUtils = new P4InputUtils(input);
       airline = p4InputUtils.getAirline();
       if (airline != null) {
-        boolean noConsoleOutputOrError = p4InputUtils.prettyPrintAirline(airline);
-        if (noConsoleOutputOrError && input.contains(PRINT.getOption())) printAddedFlight(airline);
+        Airline airlineFromFile = p4InputUtils.saveAirlineToXmlFile(airline);
+        if (airlineFromFile != null) {
+          if (input.contains(PRINT.getOption())) printAddedFlight(airline);
+          if (input.contains(PRETTY.getOption()))
+            p4InputUtils.prettyPrintAirlineInConsole(airlineFromFile);
+        }
       }
     } else if (input.contains(PRETTY.getOption())) {
       P3InputUtils p3InputUtils = new P3InputUtils(input);
       airline = p3InputUtils.getAirline();
       if (airline != null) {
-        boolean noConsoleOutputOrError = p3InputUtils.prettyPrintAirline(airline);
-        if (noConsoleOutputOrError && input.contains(PRINT.getOption())) printAddedFlight(airline);
+        Airline airlineFromFile = p3InputUtils.prettyPrintAirlineInFile(airline);
+        if (airlineFromFile != null) {
+          if (input.contains(PRINT.getOption())) printAddedFlight(airline);
+          p3InputUtils.prettyPrintAirlineInConsole(airlineFromFile);
+        }
       }
     } else if (input.contains(TEXT_FILE.getOption())) {
-      P2InputUtils filePathInputUtils = new P2InputUtils(input);
-      airline = filePathInputUtils.getAirline();
+      P2InputUtils p2InputUtils = new P2InputUtils(input);
+      airline = p2InputUtils.getAirline();
       if (airline != null) {
-        Airline airlineFromFile = filePathInputUtils.saveAirlineToFile(airline);
+        Airline airlineFromFile = p2InputUtils.saveAirlineToTextFile(airline);
         if (airlineFromFile != null && input.contains(PRINT.getOption())) printAddedFlight(airline);
       }
     } else {
-      P1InputUtils inputUtils = new P1InputUtils(input);
-      airline = inputUtils.getAirline();
+      P1InputUtils p1InputUtils = new P1InputUtils(input);
+      airline = p1InputUtils.getAirline();
       if (airline != null && input.contains(PRINT.getOption())) printAddedFlight(airline);
     }
   }

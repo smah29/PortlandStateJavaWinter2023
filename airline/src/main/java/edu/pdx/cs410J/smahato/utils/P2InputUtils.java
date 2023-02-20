@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static edu.pdx.cs410J.smahato.constants.ErrorMessages.AIRLINE_NAME_MISMATCH;
-import static edu.pdx.cs410J.smahato.constants.Options.TEXT_FILE;
+import static edu.pdx.cs410J.smahato.constants.Option.TEXT_FILE;
 
 /**
  * P2InputUtils implements {@link FilePathInputUtils} and extends {@link P1InputUtils} is used to get the input from the command line arguments.
@@ -23,7 +23,7 @@ public class P2InputUtils extends P1InputUtils implements FilePathInputUtils {
   /**
    * Constant field Expected number of arguments in the input list ex 11 in Project 2
    */
-  public static final int EXPECTED_INPUT_SIZE = 13;
+  public static final int EXPECTED_INPUT_SIZE = 11;
   /**
    * Constant field Index of the first argument where airline name starts ex 3 in Project 2
    */
@@ -71,13 +71,13 @@ public class P2InputUtils extends P1InputUtils implements FilePathInputUtils {
   }
 
   /**
-   * Saves the airline to a file
+   * Saves the airline to a text file
    *
    * @param airline Airline to be saved
    * @return Airline if airline is saved successfully, null otherwise
    */
   @Override
-  public Airline saveAirlineToFile(Airline airline) {
+  public Airline saveAirlineToTextFile(Airline airline) {
     String filePath = getFilePath(TEXT_FILE.getOption());
     File file = new File(filePath);
     if (file.exists()) {

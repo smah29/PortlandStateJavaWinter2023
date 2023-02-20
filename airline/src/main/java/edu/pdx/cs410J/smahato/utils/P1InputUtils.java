@@ -2,14 +2,14 @@ package edu.pdx.cs410J.smahato.utils;
 
 import edu.pdx.cs410J.smahato.Airline;
 import edu.pdx.cs410J.smahato.Flight;
-import edu.pdx.cs410J.smahato.constants.Options;
+import edu.pdx.cs410J.smahato.constants.Option;
 import edu.pdx.cs410J.smahato.exception.AirportCodeException;
 
 import java.time.DateTimeException;
 import java.util.List;
 
 import static edu.pdx.cs410J.smahato.constants.ErrorMessages.*;
-import static edu.pdx.cs410J.smahato.constants.Options.PRINT;
+import static edu.pdx.cs410J.smahato.constants.Option.PRINT;
 
 /**
  * P1InputUtils implements {@link InputUtils} is used to get the input from the command line arguments.
@@ -19,7 +19,7 @@ public class P1InputUtils implements InputUtils {
   /**
    * Constant field Expected number of arguments in the input list
    */
-  public static final int EXPECTED_INPUT_SIZE = 11;
+  public static final int EXPECTED_INPUT_SIZE = 9;
   /**
    * Constant field Index of the first argument where airline name starts
    */
@@ -55,12 +55,11 @@ public class P1InputUtils implements InputUtils {
    */
   public P1InputUtils(List<String> input, int expectedNumberOfArgs, int startIndex) {
     this.input = input;
-    if (!this.input.contains(PRINT.getOption())) {
-      this.expectedNumberOfArgs = expectedNumberOfArgs - 1;
-      this.startIndex = startIndex - 1;
-    } else {
-      this.expectedNumberOfArgs = expectedNumberOfArgs;
-      this.startIndex = startIndex;
+    this.expectedNumberOfArgs = expectedNumberOfArgs;
+    this.startIndex = startIndex;
+    if (!doesInputContainsOption(input, PRINT.getOption())) {
+      this.expectedNumberOfArgs = this.getExpectedNumberOfArgs() - 1;
+      this.startIndex = this.getStartIndex() - 1;
     }
   }
 
@@ -115,7 +114,7 @@ public class P1InputUtils implements InputUtils {
    */
   @Override
   public String getDepartureString() {
-    return getValueAtIndex(input, startIndex, 3, 4, 5);
+    return getValueAtIndex(input, startIndex, 3, 4);
   }
 
   /**
@@ -125,7 +124,7 @@ public class P1InputUtils implements InputUtils {
    */
   @Override
   public String getDestination() {
-    return getValueAtIndex(input, startIndex, 6);
+    return getValueAtIndex(input, startIndex, 5);
   }
 
   /**
@@ -135,7 +134,7 @@ public class P1InputUtils implements InputUtils {
    */
   @Override
   public String getArrivalString() {
-    return getValueAtIndex(input, startIndex, 7, 8, 9);
+    return getValueAtIndex(input, startIndex, 6, 7);
   }
 
   /**
@@ -146,7 +145,7 @@ public class P1InputUtils implements InputUtils {
   public boolean isActualNumberOfArgsSameOrLessThanExpected() {
     int compare = compare(input.size(), this.expectedNumberOfArgs);
     if (compare > 0) {
-      if (input.stream().filter(val -> val.startsWith("-") && val.length() > 1).anyMatch(val -> !Options.exists(val))) {
+      if (input.stream().filter(val -> val.startsWith("-") && val.length() > 1).anyMatch(val -> !Option.exists(val))) {
         System.err.print(UNKNOWN_OPTION);
       } else {
         System.err.print(EXTRA_COMMAND_LINE_ARGS);
