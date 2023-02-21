@@ -32,6 +32,7 @@ public class XmlDumper extends AirlineXmlHelper implements AirlineDumper<Airline
    * Creates a new <code>XmlDumper</code> object.
    *
    * @param file The file to which the airline will be written
+   * @throws IOException If there is a problem writing to the file
    */
   public XmlDumper(File file) throws IOException {
     this(new PrintWriter(new FileWriter(file), true));

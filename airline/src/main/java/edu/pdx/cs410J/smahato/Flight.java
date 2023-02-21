@@ -8,7 +8,7 @@ import java.time.DateTimeException;
 import java.util.Date;
 
 import static edu.pdx.cs410J.smahato.constants.AirlineConstants.*;
-import static edu.pdx.cs410J.smahato.constants.DateFormatConstants.SHORT_DF;
+import static edu.pdx.cs410J.smahato.constants.DateFormatConstants.PRETTY_DATE_FORMAT;
 import static edu.pdx.cs410J.smahato.constants.ErrorMessages.DEPARTURE_BEFORE_ARRIVAL;
 import static edu.pdx.cs410J.smahato.constants.ErrorMessages.SOURCE_AND_DESTINATION_CANNOT_BE_SAME;
 import static edu.pdx.cs410J.smahato.utils.DateTimeUtils.getDateFromString;
@@ -17,13 +17,33 @@ import static edu.pdx.cs410J.smahato.utils.DateTimeUtils.getDateFromString;
  * Flight has a number, source, destination, departure time and arrival time
  */
 public class Flight extends AbstractFlight implements Comparable<Flight> {
-
+  /**
+   * Flight number
+   */
   private int number;
+  /**
+   * Source airport code
+   */
   private String source;
+  /**
+   * Destination airport code
+   */
   private String destination;
+  /**
+   * Departure date and time String
+   */
   private String departureString;
+  /**
+   * Arrival date and time String
+   */
   private String arrivalString;
+  /**
+   * Departure date
+   */
   private Date departure;
+  /**
+   * Arrival date
+   */
   private Date arrival;
 
   /**
@@ -118,12 +138,12 @@ public class Flight extends AbstractFlight implements Comparable<Flight> {
 
   private void setDeparture(String departureString) {
     this.departure = getDateFromString(departureString, DEPARTURE);
-    this.departureString = SHORT_DF.format(this.departure);
+    this.departureString = PRETTY_DATE_FORMAT.format(this.departure);
   }
 
   private void setArrival(String arrivalString) {
     this.arrival = getDateFromString(arrivalString, ARRIVAL);
-    this.arrivalString = SHORT_DF.format(this.arrival);
+    this.arrivalString = PRETTY_DATE_FORMAT.format(this.arrival);
   }
 
   private void setSource(String source) {

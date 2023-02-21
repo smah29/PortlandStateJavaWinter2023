@@ -4,8 +4,7 @@ import java.text.ParseException;
 import java.time.DateTimeException;
 import java.util.Date;
 
-import static edu.pdx.cs410J.smahato.constants.DateFormatConstants.FLIGHT_SCHEDULE_FORMAT;
-import static edu.pdx.cs410J.smahato.constants.DateFormatConstants.MM_DD_YYYY_HH_MM;
+import static edu.pdx.cs410J.smahato.constants.DateFormatConstants.*;
 import static edu.pdx.cs410J.smahato.constants.ErrorMessages.CANNOT_BE_NULL_OR_EMPTY;
 
 /**
@@ -21,8 +20,8 @@ public class DateTimeUtils {
    * @param flightScheduleType <p>flight schedule type such as departure or arrival</p>
    */
   public static void dateTimeFormatCheck(String dateTime, String flightScheduleType) {
-    if (!dateTime.matches("\\d{1,2}/\\d{1,2}/\\d{4} \\d{1,2}:\\d{1,2}")) {
-      throw new DateTimeException("Invalid " + flightScheduleType + " date format - " + dateTime + "! Please follow the format: " + MM_DD_YYYY_HH_MM);
+    if (!dateTime.matches("\\d{1,2}/\\d{1,2}/\\d{4} \\d{1,2}:\\d{1,2} [apAP][mM]")) {
+      throw new DateTimeException("Invalid " + flightScheduleType + " date format - " + dateTime + "! Please follow the format: " + MM_DD_YYYY_hh_MM_a);
     }
     String[] dateTimeSplit = dateTime.split(" ");
     String date = dateTimeSplit[0];
@@ -53,8 +52,8 @@ public class DateTimeUtils {
         }
       }
     }
-    if (hourInt > 23) {
-      throw new DateTimeException(flightScheduleType + " hour should be between 0 and 23");
+    if (hourInt > 12) {
+      throw new DateTimeException(flightScheduleType + " hour should be between 0 and 12");
     }
     if (minuteInt > 59) {
       throw new DateTimeException(flightScheduleType + " minute should be between 0 and 59");
@@ -101,11 +100,11 @@ public class DateTimeUtils {
   public static Date getDateFromString(String dateTime, String flightScheduleType) {
     try {
       dateTimeNullCheck(dateTime, flightScheduleType);
-      Date date = FLIGHT_SCHEDULE_FORMAT.parse(dateTime);
+      Date date = TWELVE_HOUR_TIME_FORMAT.parse(dateTime);
       dateTimeFormatCheck(dateTime, flightScheduleType);
       return date;
     } catch (ParseException e) {
-      throw new DateTimeException("Invalid " + flightScheduleType + " date format - " + dateTime + "! Please follow the format: " + MM_DD_YYYY_HH_MM);
+      throw new DateTimeException("Invalid " + flightScheduleType + " date format - " + dateTime + "! Please follow the format: " + MM_DD_YYYY_hh_MM_a);
     }
   }
 }

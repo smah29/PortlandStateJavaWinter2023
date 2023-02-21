@@ -27,6 +27,12 @@ public interface InputUtils {
     return Arrays.stream(indexArray).filter(idx -> (startIndex + idx) < inputSize).mapToObj(index -> input.get(startIndex + index)).reduce("", (a, b) -> a + " " + b).trim();
   }
 
+  /**
+   * checks if the input list contains the option
+   * @param input
+   * @param option
+   * @return true if the input list contains the option
+   */
   default boolean doesInputContainsOption(List<String> input, String option) {
     return input.contains(option);
   }

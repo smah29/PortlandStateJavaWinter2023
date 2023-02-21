@@ -6,6 +6,7 @@ import edu.pdx.cs410J.smahato.XmlParser;
 
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,13 +19,13 @@ import static edu.pdx.cs410J.smahato.constants.Option.XML_FILE;
  */
 public class P4InputUtils extends P3InputUtils {
   /**
-   * Constant field Expected number of arguments in the input list ex 15 in Project 4
+   * Constant field Expected number of arguments in the input list
    */
-  public static final int EXPECTED_INPUT_SIZE = 15;
+  public static final int EXPECTED_INPUT_SIZE = P3InputUtils.EXPECTED_INPUT_SIZE + 2;
   /**
    * Constant field Index of the first argument where airline name starts ex 7 in Project 4
    */
-  public static final int START_INDEX = 7;
+  public static final int START_INDEX = P3InputUtils.START_INDEX + 2;
 
   /**
    * Constructor for P4InputUtils, set the expected number of arguments and start index to Project 4 specific values
@@ -66,8 +67,7 @@ public class P4InputUtils extends P3InputUtils {
           Airline airlineFromFile = new XmlParser(new FileReader(file)).parse();
           if (airline.getName().equals(airlineFromFile.getName())) {
             airlineFromFile.addFlight(new ArrayList<>(airline.getFlights()).get(0));
-            new XmlDumper(file).dump(airlineFromFile);
-            return airlineFromFile;
+            return dumpAirline(airlineFromFile, file);
           } else {
             System.err.println(AIRLINE_NAME_MISMATCH.replace("text", "xml"));
           }
@@ -76,13 +76,17 @@ public class P4InputUtils extends P3InputUtils {
         }
       } else {
         try {
-          new XmlDumper(file).dump(airline);
-          return airline;
+          return dumpAirline(airline, file);
         } catch (Exception e) {
           System.err.println("Error creating file: " + xmlFilePath + ", " + e.getMessage());
         }
       }
     }
     return null;
+  }
+
+  private static Airline dumpAirline(Airline airline, File file) throws IOException {
+    new XmlDumper(file).dump(airline);
+    return airline;
   }
 }

@@ -17,13 +17,13 @@ import static edu.pdx.cs410J.smahato.constants.Option.*;
  */
 public class P3InputUtils extends P2InputUtils {
   /**
-   * Constant field Expected number of arguments in the input list ex 13 in Project 3
+   * Constant field Expected number of arguments in the input list
    */
-  public static final int EXPECTED_INPUT_SIZE = 13;
+  public static final int EXPECTED_INPUT_SIZE = P2InputUtils.EXPECTED_INPUT_SIZE + 2;
   /**
    * Constant field Index of the first argument where airline name starts ex 5 in Project 3
    */
-  public static final int START_INDEX = 5;
+  public static final int START_INDEX = P2InputUtils.START_INDEX + 2;
   private String prettyFilePath;
 
   /**

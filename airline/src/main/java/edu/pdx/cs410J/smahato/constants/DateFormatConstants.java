@@ -9,17 +9,16 @@ import java.util.Locale;
  */
 public interface DateFormatConstants {
   /**
-   * expected date time pattern/regex from user
+   * 12-hour time format
    */
-  String MM_DD_YYYY_HH_MM = "MM/dd/yyyy HH:mm";
-
+  String MM_DD_YYYY_hh_MM_a = "MM/dd/yyyy hh:mm a";
   /**
-   * flight schedule format for regex MM/dd/yyyy hh:mm
+   * flight schedule format for regex MM/dd/yyyy hh:mm a
    */
-  SimpleDateFormat FLIGHT_SCHEDULE_FORMAT = new SimpleDateFormat(MM_DD_YYYY_HH_MM);
+  SimpleDateFormat TWELVE_HOUR_TIME_FORMAT = new SimpleDateFormat(MM_DD_YYYY_hh_MM_a);
 
   /**
    * short date format for writing to file ex MM/dd/yyyy, hh:mm a
    */
-  DateFormat SHORT_DF = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.US);
+  DateFormat PRETTY_DATE_FORMAT = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.US);
 }

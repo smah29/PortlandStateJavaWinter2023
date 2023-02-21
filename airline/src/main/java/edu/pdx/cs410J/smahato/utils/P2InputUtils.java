@@ -21,13 +21,13 @@ import static edu.pdx.cs410J.smahato.constants.Option.TEXT_FILE;
  */
 public class P2InputUtils extends P1InputUtils implements FilePathInputUtils {
   /**
-   * Constant field Expected number of arguments in the input list ex 11 in Project 2
+   * Constant field Expected number of arguments in the input list
    */
-  public static final int EXPECTED_INPUT_SIZE = 11;
+  public static final int EXPECTED_INPUT_SIZE = P1InputUtils.EXPECTED_INPUT_SIZE + 2;
   /**
    * Constant field Index of the first argument where airline name starts ex 3 in Project 2
    */
-  public static final int START_INDEX = 3;
+  public static final int START_INDEX = P1InputUtils.START_INDEX + 2;
 
   /**
    * Constructor for P2InputUtils, set the expected number of arguments and start index to Project 2 specific values
@@ -85,8 +85,7 @@ public class P2InputUtils extends P1InputUtils implements FilePathInputUtils {
         Airline airlineFromFile = new TextParser(new FileReader(file)).parse();
         if (airline.getName().equals(airlineFromFile.getName())) {
           airlineFromFile.addFlight(new ArrayList<>(airline.getFlights()).get(0));
-          new TextDumper(new FileWriter(file)).dump(airlineFromFile);
-          return airlineFromFile;
+          return dumpAirline(airlineFromFile, file);
         } else {
           System.err.println(AIRLINE_NAME_MISMATCH);
         }
@@ -95,13 +94,17 @@ public class P2InputUtils extends P1InputUtils implements FilePathInputUtils {
       }
     } else {
       try {
-        new TextDumper(new FileWriter(file)).dump(airline);
-        return airline;
+        return dumpAirline(airline, file);
       } catch (IOException e) {
         System.err.println("Error creating file: " + filePath);
       }
     }
     return null;
+  }
+
+  private static Airline dumpAirline(Airline airline, File file) throws IOException {
+    new TextDumper(new FileWriter(file)).dump(airline);
+    return airline;
   }
 
 }

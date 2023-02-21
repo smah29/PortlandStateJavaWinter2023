@@ -16,6 +16,11 @@ public class PrettyPrinter implements AirlineDumper<Airline> {
   private static final String PRETTY_PRINT_FORMAT = "%1$-2s|%2$-10s|%3$-42s|%4$-42s|%5$-20s|%6$-20s|%7$-6s\n";
   private final Writer writer;
 
+  /**
+   * Creates a new <code>PrettyPrinter</code> object
+   *
+   * @param writer
+   */
   public PrettyPrinter(Writer writer) {
     this.writer = writer;
   }

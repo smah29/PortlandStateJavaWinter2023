@@ -6,7 +6,7 @@ import java.io.PrintWriter;
 import java.io.Writer;
 import java.util.ArrayList;
 
-import static edu.pdx.cs410J.smahato.constants.DateFormatConstants.FLIGHT_SCHEDULE_FORMAT;
+import static edu.pdx.cs410J.smahato.constants.DateFormatConstants.TWELVE_HOUR_TIME_FORMAT;
 import static edu.pdx.cs410J.smahato.constants.FileConstants.TEXT_FILE_SEPARATOR;
 
 /**
@@ -37,8 +37,8 @@ public class TextDumper implements AirlineDumper<Airline> {
     ) {
       pw.println(airline.getName());
       new ArrayList<>(airline.getFlights()).forEach(flight -> {
-        String destinationString = FLIGHT_SCHEDULE_FORMAT.format(flight.getDeparture()).toLowerCase();
-        String arrivalString = FLIGHT_SCHEDULE_FORMAT.format(flight.getArrival()).toLowerCase();
+        String destinationString = TWELVE_HOUR_TIME_FORMAT.format(flight.getDeparture()).toLowerCase();
+        String arrivalString = TWELVE_HOUR_TIME_FORMAT.format(flight.getArrival()).toLowerCase();
         String[] array = {String.valueOf(flight.getNumber()), flight.getSource(), flight.getDestination(), destinationString, arrivalString};
         pw.println(String.join(TEXT_FILE_SEPARATOR, array));
       });

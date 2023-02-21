@@ -19,7 +19,7 @@ import java.io.Reader;
 import java.time.DateTimeException;
 import java.util.Calendar;
 
-import static edu.pdx.cs410J.smahato.constants.DateFormatConstants.FLIGHT_SCHEDULE_FORMAT;
+import static edu.pdx.cs410J.smahato.constants.DateFormatConstants.TWELVE_HOUR_TIME_FORMAT;
 import static edu.pdx.cs410J.smahato.constants.ErrorMessages.FLIGHT_NUMBER_MUST_BE_AN_INTEGER;
 import static edu.pdx.cs410J.smahato.constants.XMLConstants.*;
 
@@ -156,7 +156,7 @@ public class XmlParser extends AirlineXmlHelper implements AirlineParser<Airline
           throw new XMLException(UNKNOWN_ELEMENT + element.getNodeName());
       }
     }
-    return FLIGHT_SCHEDULE_FORMAT.format(cal.getTime()).toLowerCase();
+    return TWELVE_HOUR_TIME_FORMAT.format(cal.getTime()).toLowerCase();
   }
 
   private static void setTime(Calendar cal, Element element) {
