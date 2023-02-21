@@ -96,7 +96,7 @@ public class P3InputUtils extends P2InputUtils {
     }
   }
 
-  private boolean doesInputContainsTextFileOption() {
+  protected boolean doesInputContainsTextFileOption() {
     return doesInputContainsOption(this.input, TEXT_FILE.getOption());
   }
 }

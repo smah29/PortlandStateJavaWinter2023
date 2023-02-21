@@ -33,7 +33,13 @@ public class Project4 {
     } else if (input.contains(README.getOption())) {
       printFile("README.txt");
     } else if (input.contains(XML_FILE.getOption())) {
-      P4InputUtils p4InputUtils = new P4InputUtils(input);
+      P4InputUtils p4InputUtils;
+      try {
+        p4InputUtils = new P4InputUtils(input);
+      } catch (IllegalArgumentException e) {
+        System.err.println(e.getMessage());
+        return;
+      }
       airline = p4InputUtils.getAirline();
       if (airline != null) {
         Airline airlineFromFile = p4InputUtils.saveAirlineToXmlFile(airline);

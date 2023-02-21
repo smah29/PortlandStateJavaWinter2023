@@ -18,4 +18,6 @@ options are (options may appear in any order):
 -print           Prints a description of the new flight
 -README          Prints a README for this project and exits
 
-Date and time should be in the format: MM/dd/yyyy hh:mm
+It is an error to specify both -textFile and -xmlFile
+
+Date and time should be in the format: MM/dd/yyyy hh:mm a
