@@ -88,7 +88,7 @@ public class Project4 {
    *
    * @param fileName Name of the file
    */
-  private static void printFile(String fileName) {
+  public static void printFile(String fileName) {
     try {
       InputStream resource = Project4.class.getResourceAsStream(fileName);
       BufferedReader reader = new BufferedReader(new InputStreamReader(resource));
