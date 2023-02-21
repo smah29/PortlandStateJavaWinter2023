@@ -72,16 +72,10 @@ public class XmlParser extends AirlineXmlHelper implements AirlineParser<Airline
   }
 
   private Airline getAirline(Element root) {
-    if (!root.getNodeName().equals(AIRLINE)) {
-      throw new XMLException("Not a " + AIRLINE + " XML source: " + root.getNodeName());
-    }
     NodeList entries = root.getChildNodes();
     Airline airline = null;
     for (int i = 0; i < entries.getLength(); i++) {
       Node node = entries.item(i);
-      if (!(node instanceof Element)) {
-        continue;
-      }
       Element element = (Element) node;
       switch (element.getNodeName()) {
         case AIRLINE_NAME:
@@ -97,8 +91,6 @@ public class XmlParser extends AirlineXmlHelper implements AirlineParser<Airline
             throw new XMLException(e.getMessage());
           }
           break;
-        default:
-          throw new XMLException(UNKNOWN_ELEMENT + element.getNodeName());
       }
     }
     return airline;
@@ -109,9 +101,6 @@ public class XmlParser extends AirlineXmlHelper implements AirlineParser<Airline
     String flightNumber = null, src = null, dest = null, depatureString = null, arrivalString = null;
     for (int i = 0; i < elements.getLength(); i++) {
       Node node = elements.item(i);
-      if (!(node instanceof Element)) {
-        continue;
-      }
       Element element = (Element) node;
       switch (element.getNodeName()) {
         case FLIGHT_NUMBER:
@@ -129,8 +118,6 @@ public class XmlParser extends AirlineXmlHelper implements AirlineParser<Airline
         case ARRIVAL:
           arrivalString = extractDateTimeString(element);
           break;
-        default:
-          throw new XMLException(UNKNOWN_ELEMENT + element.getNodeName());
       }
     }
     return new Flight(flightNumber, src, dest, depatureString, arrivalString);
@@ -141,9 +128,6 @@ public class XmlParser extends AirlineXmlHelper implements AirlineParser<Airline
     Calendar cal = Calendar.getInstance();
     for (int i = 0; i < elements.getLength(); i++) {
       Node node = elements.item(i);
-      if (!(node instanceof Element)) {
-        continue;
-      }
       Element element = (Element) node;
       switch (element.getNodeName()) {
         case DATE:
@@ -152,8 +136,6 @@ public class XmlParser extends AirlineXmlHelper implements AirlineParser<Airline
         case TIME:
           setTime(cal, element);
           break;
-        default:
-          throw new XMLException(UNKNOWN_ELEMENT + element.getNodeName());
       }
     }
     return TWELVE_HOUR_TIME_FORMAT.format(cal.getTime()).toLowerCase();
