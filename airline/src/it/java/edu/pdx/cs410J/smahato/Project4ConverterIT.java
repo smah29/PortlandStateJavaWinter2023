@@ -7,7 +7,7 @@ import static edu.pdx.cs410J.smahato.constants.ErrorMessages.MISSING_COMMAND_LIN
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class ConverterIT extends InvokeMainTestCase {
+public class Project4ConverterIT extends InvokeMainTestCase {
   private MainMethodResult invokeMain(String... args) {
     return invokeMain(Converter.class, args);
   }
