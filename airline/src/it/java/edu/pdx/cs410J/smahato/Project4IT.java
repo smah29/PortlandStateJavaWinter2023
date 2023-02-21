@@ -162,7 +162,7 @@ class Project4IT extends InvokeMainTestCase {
    */
   @Test
   void testP2WithSameDestinationArrivalTime() {
-    MainMethodResult result = invokeMain("-print", "-textFile", "textFile", "CS410J Air Express", "1", "PDX", "10/10/2020", "10:10", "LAX", "10/10/2020", "10:10");
+    MainMethodResult result = invokeMain("-print", "-textFile", "txtFile", "CS410J Air Express", "1", "PDX", "10/10/2020", "10:10", "LAX", "10/10/2020", "10:10");
     assertThat(result.getTextWrittenToStandardError(), equalTo(DEPARTURE_BEFORE_ARRIVAL + README_MESSAGE + "\n"));
   }
 
@@ -171,7 +171,7 @@ class Project4IT extends InvokeMainTestCase {
    */
   @Test
   void testP2AllValidCommandLineArguments() {
-    MainMethodResult result = invokeMain("-print", "-textFile", "textFile", "CS410J Air Express", "1", "PDX", "10/10/2020", "10:10", "LAX", "10/10/2020", "11:10");
+    MainMethodResult result = invokeMain("-print", "-textFile", "txtFile", "CS410J Air Express", "1", "PDX", "10/10/2020", "10:10", "LAX", "10/10/2020", "11:10");
     assertThat(result.getTextWrittenToStandardOut(), equalTo("Flight 1 departs PDX at 10/10/20, 10:10 AM arrives LAX at 10/10/20, 11:10 AM\n"));
   }
 
@@ -180,7 +180,7 @@ class Project4IT extends InvokeMainTestCase {
    */
   @Test
   void testP2AppendingFlightsInText() {
-    MainMethodResult result = invokeMain("-print", "-textFile", "textFile", "CS410J Air Express", "2", "PDX", "10/10/2020", "10:10", "LAX", "10/10/2020", "11:10");
+    MainMethodResult result = invokeMain("-print", "-textFile", "txtFile", "CS410J Air Express", "2", "PDX", "10/10/2020", "10:10", "LAX", "10/10/2020", "11:10");
     assertThat(result.getTextWrittenToStandardOut(), equalTo("Flight 2 departs PDX at 10/10/20, 10:10 AM arrives LAX at 10/10/20, 11:10 AM\n"));
   }
 
@@ -189,7 +189,7 @@ class Project4IT extends InvokeMainTestCase {
    */
   @Test
   void testP2WithSameFileButNewAirlineName() {
-    MainMethodResult result = invokeMain("-print", "-textFile", "textFile", "CS410J Air Express1", "1", "PDX", "10/10/2020", "10:10", "LAX", "10/10/2020", "11:10");
+    MainMethodResult result = invokeMain("-print", "-textFile", "txtFile", "CS410J Air Express1", "1", "PDX", "10/10/2020", "10:10", "LAX", "10/10/2020", "11:10");
     assertThat(result.getTextWrittenToStandardError(), equalTo(AIRLINE_NAME_MISMATCH + "\n"));
   }
 
@@ -198,7 +198,7 @@ class Project4IT extends InvokeMainTestCase {
    */
   @Test
   void testP2WithNoPrint() {
-    MainMethodResult result = invokeMain("-textFile", "textFile", "CS410J Air Express", "1", "PDX", "10/10/2020", "10:10", "LAX", "10/10/2020", "10:11");
+    MainMethodResult result = invokeMain("-textFile", "txtFile", "CS410J Air Express", "1", "PDX", "10/10/2020", "10:10", "LAX", "10/10/2020", "10:11");
     assertThat(result.getTextWrittenToStandardOut(), equalTo(""));
   }
 
@@ -207,7 +207,7 @@ class Project4IT extends InvokeMainTestCase {
    */
   @Test
   void testP2WithNoPrintButError() {
-    MainMethodResult result = invokeMain("-textFile", "textFile", "", "1", "PDX", "10/10/2020", "10:10", "LAX", "10/10/2020", "10:10");
+    MainMethodResult result = invokeMain("-textFile", "txtFile", "", "1", "PDX", "10/10/2020", "10:10", "LAX", "10/10/2020", "10:10");
     assertThat(result.getTextWrittenToStandardError(), equalTo("Airline name" + CANNOT_BE_NULL_OR_EMPTY + README_MESSAGE + "\n"));
   }
 
@@ -216,7 +216,7 @@ class Project4IT extends InvokeMainTestCase {
    */
   @Test
   void testP2BySwitchingOptionsOrderAndInvalidFlightNumber() {
-    MainMethodResult result = invokeMain("-textFile", "textFile", "-print", "CS410J Air Express", "3s", "PDX", "10/10/2020", "10:10", "LAX", "10/10/2020", "11:10");
+    MainMethodResult result = invokeMain("-textFile", "txtFile", "-print", "CS410J Air Express", "3s", "PDX", "10/10/2020", "10:10", "LAX", "10/10/2020", "11:10");
     assertThat(result.getTextWrittenToStandardError(), equalTo("3s - " + FLIGHT_NUMBER_MUST_BE_AN_INTEGER + README_MESSAGE + "\n"));
   }
 
@@ -234,19 +234,19 @@ class Project4IT extends InvokeMainTestCase {
    */
   @Test
   void testP3AllValidCommandLineArguments() {
-    MainMethodResult result = invokeMain("-print", "-textFile", "textFile", "-pretty", "prettyFile", "CS410J Air Express", "1", "PDX", "10/10/2020", "10:10", "LAX", "10/10/2020", "11:10");
+    MainMethodResult result = invokeMain("-print", "-textFile", "txtFile", "-pretty", "prettyFile", "CS410J Air Express", "1", "PDX", "10/10/2020", "10:10", "LAX", "10/10/2020", "11:10");
     assertThat(result.getTextWrittenToStandardOut(), equalTo("Flight 1 departs PDX at 10/10/20, 10:10 AM arrives LAX at 10/10/20, 11:10 AM\n"));
   }
 
   @Test
   void testP3WithInvalidFlight() {
-    MainMethodResult result = invokeMain("-print", "-textFile", "textFile", "-pretty", "prettyFile", "CS410J Air Express", "1s", "PDX", "10/10/2020", "10:10", "LAX", "10/10/2020", "11:10");
+    MainMethodResult result = invokeMain("-print", "-textFile", "txtFile", "-pretty", "prettyFile", "CS410J Air Express", "1s", "PDX", "10/10/2020", "10:10", "LAX", "10/10/2020", "11:10");
     assertThat(result.getTextWrittenToStandardError(), equalTo("1s - " + FLIGHT_NUMBER_MUST_BE_AN_INTEGER + README_MESSAGE + "\n"));
   }
 
   @Test
   void testP3InvalidPrettyFile() {
-    MainMethodResult result = invokeMain("-print", "-textFile", "textFile", "-pretty", "/a/a.txt", "CS410J Air Express", "1", "PDX", "10/10/2020", "10:10", "LAX", "10/10/2020", "11:10");
+    MainMethodResult result = invokeMain("-print", "-textFile", "txtFile", "-pretty", "/a/a.txt", "CS410J Air Express", "1", "PDX", "10/10/2020", "10:10", "LAX", "10/10/2020", "11:10");
     assertThat(result.getTextWrittenToStandardError(), equalTo("Error creating file: /a/a.txt\n"));
   }
 
@@ -258,7 +258,7 @@ class Project4IT extends InvokeMainTestCase {
 
   @Test
   void testP3WithNoPrint() {
-    MainMethodResult result = invokeMain("-textFile", "textFile", "-pretty", "prettyFile", "CS410J Air Express", "1", "PDX", "10/10/2020", "9:10", "LAX", "10/10/2020", "11:10");
+    MainMethodResult result = invokeMain("-textFile", "txtFile", "-pretty", "prettyFile", "CS410J Air Express", "1", "PDX", "10/10/2020", "9:10", "LAX", "10/10/2020", "11:10");
     assertThat(result.getTextWrittenToStandardOut(), equalTo(""));
   }
 
@@ -285,7 +285,7 @@ class Project4IT extends InvokeMainTestCase {
    */
   @Test
   void testP4AllValidCommandLineArguments() {
-    MainMethodResult result = invokeMain("-xmlFile", "xmlFile", "-print", "-textFile", "textFile", "-pretty", "prettyFile", "CS410J Air Express", "1", "PDX", "10/10/2020", "10:10", "LAX", "10/10/2020", "11:10");
+    MainMethodResult result = invokeMain("-xmlFile", "xmlFile", "-print", "-textFile", "txtFile", "-pretty", "prettyFile", "CS410J Air Express", "1", "PDX", "10/10/2020", "10:10", "LAX", "10/10/2020", "11:10");
     assertThat(result.getTextWrittenToStandardOut(), equalTo("Flight 1 departs PDX at 10/10/20, 10:10 AM arrives LAX at 10/10/20, 11:10 AM\n"));
   }
 
@@ -294,7 +294,16 @@ class Project4IT extends InvokeMainTestCase {
    */
   @Test
   void testP4AddAnotherFlight() {
-    MainMethodResult result = invokeMain("-xmlFile", "xmlFile", "-print", "-textFile", "textFile", "-pretty", "prettyFile", "CS410J Air Express", "2", "ABE", "10/10/2020", "10:10", "LAX", "10/10/2020", "13:10");
-    assertThat(result.getTextWrittenToStandardError(), equalTo("Flight 2 departs ABE at 10/10/20, 10:10 AM arrives LAX at 10/10/20, 1:10 PM\n"));
+    MainMethodResult result = invokeMain("-xmlFile", "xmlFile", "-print", "-textFile", "txtFile", "-pretty", "prettyFile", "CS410J Air Express", "2", "ABE", "10/10/2020", "10:10", "LAX", "10/10/2020", "13:10");
+    assertThat(result.getTextWrittenToStandardOut(), equalTo("Flight 2 departs ABE at 10/10/20, 10:10 AM arrives LAX at 10/10/20, 1:10 PM\n"));
+  }
+
+  /**
+   * P4 test add another flight with different airline, in same file
+   */
+  @Test
+  void testP4AddAnotherFlightWithDifferentAirlineName() {
+    MainMethodResult result = invokeMain("-xmlFile", "xmlFile", "-print", "-pretty", "prettyFile", "CS410J Air Express1", "2", "ABE", "10/10/2020", "10:10", "LAX", "10/10/2020", "13:10");
+    assertThat(result.getTextWrittenToStandardError(), equalTo(AIRLINE_NAME_MISMATCH.replace("text", "xml") + "\n"));
   }
 }
