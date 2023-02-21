@@ -5,8 +5,6 @@ import edu.pdx.cs410J.smahato.Airline;
 import java.util.Arrays;
 import java.util.List;
 
-import static edu.pdx.cs410J.smahato.constants.Option.TEXT_FILE;
-
 /**
  * Interface InputUtils contains abstract methods to get values (airline and flight information) from arguments
  * and check if the number of arguments are correct

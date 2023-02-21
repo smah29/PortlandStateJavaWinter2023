@@ -4,7 +4,8 @@ import java.text.ParseException;
 import java.time.DateTimeException;
 import java.util.Date;
 
-import static edu.pdx.cs410J.smahato.constants.DateFormatConstants.*;
+import static edu.pdx.cs410J.smahato.constants.DateFormatConstants.MM_DD_YYYY_hh_MM_a;
+import static edu.pdx.cs410J.smahato.constants.DateFormatConstants.TWELVE_HOUR_TIME_FORMAT;
 import static edu.pdx.cs410J.smahato.constants.ErrorMessages.CANNOT_BE_NULL_OR_EMPTY;
 
 /**

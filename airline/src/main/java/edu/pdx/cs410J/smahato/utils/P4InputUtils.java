@@ -3,7 +3,6 @@ package edu.pdx.cs410J.smahato.utils;
 import edu.pdx.cs410J.smahato.Airline;
 import edu.pdx.cs410J.smahato.XmlDumper;
 import edu.pdx.cs410J.smahato.XmlParser;
-import edu.pdx.cs410J.smahato.constants.Option;
 
 import java.io.File;
 import java.io.FileReader;

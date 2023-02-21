@@ -8,7 +8,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import static edu.pdx.cs410J.smahato.constants.AirlineConstants.*;
+import static edu.pdx.cs410J.smahato.constants.AirlineConstants.DEPARTURE;
+import static edu.pdx.cs410J.smahato.constants.AirlineConstants.DESTINATION;
 import static edu.pdx.cs410J.smahato.constants.DateFormatConstants.MM_DD_YYYY_hh_MM_a;
 import static edu.pdx.cs410J.smahato.constants.ErrorMessages.*;
 import static edu.pdx.cs410J.smahato.constants.Option.TEXT_FILE;

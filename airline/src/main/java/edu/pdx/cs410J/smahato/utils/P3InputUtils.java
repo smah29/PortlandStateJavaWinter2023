@@ -10,7 +10,8 @@ import java.io.PrintWriter;
 import java.util.List;
 
 import static edu.pdx.cs410J.smahato.constants.FileConstants.PRETTY_PRINT_IN_CONSOLE;
-import static edu.pdx.cs410J.smahato.constants.Option.*;
+import static edu.pdx.cs410J.smahato.constants.Option.PRETTY;
+import static edu.pdx.cs410J.smahato.constants.Option.TEXT_FILE;
 
 /**
  * P3InputUtils extends {@link P2InputUtils} has additional logic of pretty printing
