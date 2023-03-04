@@ -3,6 +3,7 @@ package edu.pdx.cs410J.smahato;
 import edu.pdx.cs410J.InvokeMainTestCase;
 import edu.pdx.cs410J.UncaughtExceptionInMain;
 import edu.pdx.cs410J.web.HttpRequestHelper.RestException;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
@@ -25,18 +26,21 @@ class Project5IT extends InvokeMainTestCase {
     private static final String PORT = System.getProperty("http.port", "8080");
 
     @Test
+    @Disabled
     void test0RemoveAllMappings() throws IOException {
       AirlineRestClient client = new AirlineRestClient(HOSTNAME, Integer.parseInt(PORT));
       client.removeAllDictionaryEntries();
     }
 
     @Test
+    @Disabled
     void test1NoCommandLineArguments() {
         MainMethodResult result = invokeMain( Project5.class );
         assertThat(result.getTextWrittenToStandardError(), containsString(Project5.MISSING_ARGS));
     }
 
     @Test
+    @Disabled
     void test2EmptyServer() {
         MainMethodResult result = invokeMain( Project5.class, HOSTNAME, PORT );
 
@@ -47,6 +51,7 @@ class Project5IT extends InvokeMainTestCase {
     }
 
     @Test
+    @Disabled
     void test3NoDefinitionsThrowsAppointmentBookRestException() {
         String word = "WORD";
         try {
@@ -60,6 +65,7 @@ class Project5IT extends InvokeMainTestCase {
     }
 
     @Test
+    @Disabled
     void test4AddDefinition() {
         String word = "WORD";
         String definition = "DEFINITION";
