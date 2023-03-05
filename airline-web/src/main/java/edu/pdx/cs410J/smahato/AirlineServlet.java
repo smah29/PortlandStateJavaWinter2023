@@ -1,6 +1,8 @@
 package edu.pdx.cs410J.smahato;
 
+import edu.pdx.cs410J.smahato.constants.AirlineConstants;
 import edu.pdx.cs410J.smahato.exception.AirportCodeException;
+import edu.pdx.cs410J.smahato.utils.AirlineValidationUtils;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +17,9 @@ import static edu.pdx.cs410J.smahato.Messages.MISSING_SRC_DEST;
 import static edu.pdx.cs410J.smahato.constants.AirlineParams.*;
 import static edu.pdx.cs410J.smahato.constants.ErrorMessages.FLIGHT_NUMBER_MUST_BE_AN_INTEGER;
 
+/**
+ * This servlet provides a REST API for working with an <code>Airline</code>.
+ */
 public class AirlineServlet extends HttpServlet {
   private final Map<String, Airline> airlineNameMap = new HashMap<>();
 
@@ -96,11 +101,18 @@ public class AirlineServlet extends HttpServlet {
       String source = getParameter(SOURCE.getParameterName(), request);
       String destination = getParameter(DESTINATION.getParameterName(), request);
       if (source != null && destination != null) {
+        try {
+          AirlineValidationUtils.validateAirportCode(source, AirlineConstants.SOURCE);
+          AirlineValidationUtils.validateAirportCode(destination, AirlineConstants.DESTINATION);
+        } catch (AirportCodeException e) {
+          response.sendError(HttpServletResponse.SC_BAD_REQUEST, e.getMessage());
+          return;
+        }
         List<Flight> flights = airline.getFlights(source, destination);
         if (flights.isEmpty())
           response.sendError(HttpServletResponse.SC_NOT_FOUND, Messages.flightDoesNotExist(source, destination, airlineName));
         else {
-          airline = new Airline(airlineName);
+          airline = new Airline(airline.getName());
           airline.getFlights().addAll(flights);
           new XmlDumper(response.getWriter()).dump(airline);
           response.setStatus(HttpServletResponse.SC_OK);

@@ -11,19 +11,32 @@ import static edu.pdx.cs410J.smahato.constants.ErrorMessages.UNKNOWN_OPTION;
 import static edu.pdx.cs410J.smahato.constants.Option.HOST;
 import static edu.pdx.cs410J.smahato.constants.Option.PORT;
 
+/**
+ * This class is used to get the input from the command line and parse it
+ */
 public class CommonInputUtils implements InputUtils {
   protected final List<String> input;
   /**
-   * Expected number of arguments according to Project ex 9 in Project 1
+   * Expected number of arguments in the input list
    */
-  public int expectedNumberOfArgs;
+  protected int expectedNumberOfArgs;
   /**
-   * Index of the first argument where airline name starts ex 5 in Project 5
+   * Index of the first argument where airline name starts
    */
-  public int startIndex;
-  final AirlineRestClient client;
+  protected int startIndex;
+  /**
+   * Airline Rest Client
+   */
+  protected final AirlineRestClient client;
 
-  public CommonInputUtils(List<String> input, int startIndex, int expectedNumberOfArgs) {
+  /**
+   * Constructor to initialize the input list and expected number of arguments in the input list and index of the first argument where airline name starts
+   *
+   * @param input                List of input arguments
+   * @param startIndex           Index of the first argument where airline name starts
+   * @param expectedNumberOfArgs Expected number of arguments in the input list
+   */
+  protected CommonInputUtils(List<String> input, int startIndex, int expectedNumberOfArgs) {
     this.input = input;
     this.startIndex = startIndex;
     this.expectedNumberOfArgs = expectedNumberOfArgs;
@@ -39,14 +52,14 @@ public class CommonInputUtils implements InputUtils {
   /**
    * @return the start index of the airline name in the input list
    */
-  public int getStartIndex() {
+  protected int getStartIndex() {
     return startIndex;
   }
 
   /**
    * @return the expected number of arguments in the input list
    */
-  public int getExpectedNumberOfArgs() {
+  protected int getExpectedNumberOfArgs() {
     return expectedNumberOfArgs;
   }
 
@@ -56,14 +69,17 @@ public class CommonInputUtils implements InputUtils {
    *
    * @return String by coming all given index values with space as separator
    */
-  String getValueAtIndexAfterStartIndex(int... indexArray) {
+  protected String getValueAtIndexAfterStartIndex(int... indexArray) {
     return getValueAtIndex(startIndex, indexArray);
   }
 
-  String getOptionValue(String option) {
+  protected String getOptionValue(String option) {
     int index = input.indexOf(option);
     if (index == -1) {
       throw new IllegalArgumentException(option + " option is missing");
+    }
+    if (index + 1 >= input.size()) {
+      throw new IllegalArgumentException(option + " option value is missing");
     }
     return this.input.get(index + 1);
   }

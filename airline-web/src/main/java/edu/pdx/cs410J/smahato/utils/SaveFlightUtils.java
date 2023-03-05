@@ -7,7 +7,10 @@ import java.util.List;
 
 import static edu.pdx.cs410J.smahato.constants.Option.*;
 
-
+/**
+ * This class is used to get the input from the command line and save the flight
+ * extends {@link CommonInputUtils}
+ */
 public class SaveFlightUtils extends CommonInputUtils {
   /**
    * Constant field Expected number of arguments in the input list

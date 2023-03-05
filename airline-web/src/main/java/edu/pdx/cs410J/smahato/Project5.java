@@ -19,6 +19,12 @@ import static edu.pdx.cs410J.smahato.constants.Option.*;
  */
 public class Project5 {
 
+  /**
+   * Main method that parses the command line and communicates with the
+   * Airline server using REST.
+   *
+   * @param args The command line arguments
+   */
   public static void main(String... args) {
     List<String> input = Arrays.asList(args);
     int inputSize = input.size();
@@ -40,12 +46,7 @@ public class Project5 {
     }
   }
 
-  /**
-   * Prints the file
-   *
-   * @param fileName Name of the file
-   */
-  public static void printFile(String fileName) {
+  private static void printFile(String fileName) {
     try {
       InputStream resource = Project5.class.getResourceAsStream(fileName);
       BufferedReader reader = new BufferedReader(new InputStreamReader(resource));

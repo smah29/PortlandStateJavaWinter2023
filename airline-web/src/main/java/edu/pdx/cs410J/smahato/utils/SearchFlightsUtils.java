@@ -8,8 +8,7 @@ import java.util.List;
 import static edu.pdx.cs410J.smahato.constants.Option.*;
 
 /**
- * SearchInputUtils implements {@link InputUtils} is used to get the input from the command line arguments.
- * <p> It has Project 5 specific methods to get airline and flight information from the input list
+ * SearchInputUtils extends {@link CommonInputUtils} is used to search flights
  */
 public class SearchFlightsUtils extends CommonInputUtils {
   /**

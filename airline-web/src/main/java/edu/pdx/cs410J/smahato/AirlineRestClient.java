@@ -16,9 +16,7 @@ import static edu.pdx.cs410J.web.HttpRequestHelper.RestException;
 import static java.net.HttpURLConnection.HTTP_OK;
 
 /**
- * A helper class for accessing the rest client.  Note that this class provides
- * an example of how to make gets and posts to a URL.  You'll need to change it
- * to do something other than just send dictionary entries.
+ * A helper class for accessing the rest client.  this class gets and posts to a URL.
  */
 public class AirlineRestClient {
   private static final String WEB_APP = "airline";
@@ -83,6 +81,15 @@ public class AirlineRestClient {
     }
   }
 
+  /**
+   * Searches for flights
+   *
+   * @param airlineName Name of the airline
+   * @param source      Source of the flight
+   * @param destination Destination of the flight
+   * @throws IOException     if there is an error communicating with the server
+   * @throws ParserException if there is an error parsing the response from the server
+   */
   public void searchFlights(String airlineName, String source, String destination) throws IOException, ParserException {
     Response response = http.get(Map.of(
         AirlineParams.AIRLINE_NAME.getParameterName(), airlineName,
@@ -98,6 +105,17 @@ public class AirlineRestClient {
     }
   }
 
+  /**
+   * Saves a flight
+   *
+   * @param airlineName     Name of the airline
+   * @param flightNumber    Flight number
+   * @param source          Source of the flight
+   * @param destination     Destination of the flight
+   * @param departureString Departure time
+   * @param arrivalString   Arrival time
+   * @throws IOException if there is an error communicating with the server
+   */
   public void saveFlight(String airlineName, String flightNumber, String source, String destination, String departureString, String arrivalString) throws IOException {
     Response response = http.post(Map.of(
         AirlineParams.AIRLINE_NAME.getParameterName(), airlineName,
