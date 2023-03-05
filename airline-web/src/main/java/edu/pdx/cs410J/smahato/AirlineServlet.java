@@ -108,7 +108,7 @@ public class AirlineServlet extends HttpServlet {
           response.sendError(HttpServletResponse.SC_BAD_REQUEST, e.getMessage());
           return;
         }
-        List<Flight> flights = airline.getFlights(source, destination);
+        List<Flight> flights = airline.getFlights(source.toUpperCase(), destination.toUpperCase());
         if (flights.isEmpty())
           response.sendError(HttpServletResponse.SC_NOT_FOUND, Messages.flightDoesNotExist(source, destination, airlineName));
         else {

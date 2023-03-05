@@ -78,8 +78,8 @@ public class Airline extends AbstractAirline<Flight> {
    */
   public List<Flight> getFlights(String source, String destination) {
     return this.flights.stream().filter
-            (flight -> flight.getSource().equalsIgnoreCase(source)
-                && flight.getDestination().equalsIgnoreCase(destination))
+            (flight -> flight.getSource().equals(source)
+                && flight.getDestination().equals(destination))
         .collect(Collectors.toList());
   }
 }
