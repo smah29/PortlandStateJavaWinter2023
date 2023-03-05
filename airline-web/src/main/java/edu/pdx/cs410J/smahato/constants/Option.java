@@ -11,6 +11,18 @@ public enum Option {
    */
   README("-README"),
   /**
+   * If search option is present, then flights are searched for the given airline
+   */
+  SEARCH("-search"),
+  /**
+   * host of application ex localhost
+   */
+  HOST("-host"),
+  /**
+   * port of application ex 8080
+   */
+  PORT("-port"),
+  /**
    * If print option is not present, then added flight information is not printed to the console
    */
   PRINT("-print");

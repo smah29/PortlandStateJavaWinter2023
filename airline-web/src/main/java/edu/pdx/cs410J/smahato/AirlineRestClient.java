@@ -2,9 +2,12 @@ package edu.pdx.cs410J.smahato;
 
 import com.google.common.annotations.VisibleForTesting;
 import edu.pdx.cs410J.ParserException;
+import edu.pdx.cs410J.smahato.constants.AirlineParams;
 import edu.pdx.cs410J.web.HttpRequestHelper;
 
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.StringReader;
 import java.util.Map;
 
@@ -17,28 +20,27 @@ import static java.net.HttpURLConnection.HTTP_OK;
  * an example of how to make gets and posts to a URL.  You'll need to change it
  * to do something other than just send dictionary entries.
  */
-public class AirlineRestClient
-{
-    private static final String WEB_APP = "airline";
-    private static final String SERVLET = "flights";
+public class AirlineRestClient {
+  private static final String WEB_APP = "airline";
+  private static final String SERVLET = "flights";
 
-    private final HttpRequestHelper http;
+  private final HttpRequestHelper http;
 
 
-    /**
-     * Creates a client to the airline REST service running on the given host and port
-     * @param hostName The name of the host
-     * @param port The port
-     */
-    public AirlineRestClient( String hostName, int port )
-    {
-        this(new HttpRequestHelper(String.format("http://%s:%d/%s/%s", hostName, port, WEB_APP, SERVLET)));
-    }
+  /**
+   * Creates a client to the airline REST service running on the given host and port
+   *
+   * @param hostName The name of the host
+   * @param port     The port
+   */
+  public AirlineRestClient(String hostName, int port) {
+    this(new HttpRequestHelper(String.format("http://%s:%d/%s/%s", hostName, port, WEB_APP, SERVLET)));
+  }
 
-    @VisibleForTesting
-    AirlineRestClient(HttpRequestHelper http) {
-      this.http = http;
-    }
+  @VisibleForTesting
+  AirlineRestClient(HttpRequestHelper http) {
+    this.http = http;
+  }
 
   /**
    * Returns all dictionary entries from the server
@@ -81,4 +83,29 @@ public class AirlineRestClient
     }
   }
 
+  public void searchFlights(String airlineName, String source, String destination) throws IOException, ParserException {
+    Response response = http.get(Map.of(
+        AirlineParams.AIRLINE_NAME.getParameterName(), airlineName,
+        AirlineParams.SOURCE.getParameterName(), source,
+        AirlineParams.DESTINATION.getParameterName(), destination));
+    String content = response.getContent();
+    int code = response.getHttpStatusCode();
+    if (code != HTTP_OK) {
+      throw new RestException(code, content);
+    } else {
+      Airline airline = new XmlParser(new StringReader(content)).parse();
+      new AirlinePrettyPrinter(new PrintWriter(System.out)).dump(airline);
+    }
+  }
+
+  public void saveFlight(String airlineName, String flightNumber, String source, String destination, String departureString, String arrivalString) throws IOException {
+    Response response = http.post(Map.of(
+        AirlineParams.AIRLINE_NAME.getParameterName(), airlineName,
+        AirlineParams.FLIGHT_NUMBER.getParameterName(), flightNumber,
+        AirlineParams.SOURCE.getParameterName(), source,
+        AirlineParams.DESTINATION.getParameterName(), destination,
+        AirlineParams.DEPARTURE.getParameterName(), departureString,
+        AirlineParams.ARRIVAL.getParameterName(), arrivalString));
+    throwExceptionIfNotOkayHttpStatus(response);
+  }
 }
