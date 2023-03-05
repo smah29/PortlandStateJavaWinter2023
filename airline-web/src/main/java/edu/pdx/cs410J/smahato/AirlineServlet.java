@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.DateTimeException;
 import java.util.HashMap;
 import java.util.List;
@@ -95,8 +96,7 @@ public class AirlineServlet extends HttpServlet {
     }
     Airline airline = airlineNameMap.get(airlineName.toLowerCase());
     if (airline == null) {
-      String message = Messages.airlineDoesNotExist(airlineName);
-      response.sendError(HttpServletResponse.SC_NOT_FOUND, message);
+      airlineDoesNotExist(response, airlineName);
     } else {
       String source = getParameter(SOURCE.getParameterName(), request);
       String destination = getParameter(DESTINATION.getParameterName(), request);
@@ -152,4 +152,25 @@ public class AirlineServlet extends HttpServlet {
     response.sendError(HttpServletResponse.SC_PRECONDITION_FAILED, message);
   }
 
+  @Override
+  protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    response.setContentType("text/plain");
+    String airlineName = getParameter(AIRLINE_NAME.getParameterName(), request);
+    PrintWriter pw = response.getWriter();
+    if (airlineName == null) {
+      missingRequiredParameter(response, AIRLINE_NAME.getParameterName());
+    } else if (this.airlineNameMap.containsKey(airlineName.toLowerCase())) {
+      this.airlineNameMap.remove(airlineName.toLowerCase());
+      pw.println(Messages.airlineEntryDeleted(airlineName));
+      pw.flush();
+      response.setStatus(HttpServletResponse.SC_OK);
+    } else {
+      airlineDoesNotExist(response, airlineName);
+    }
+  }
+
+  private static void airlineDoesNotExist(HttpServletResponse response, String airlineName) throws IOException {
+    String message = Messages.airlineDoesNotExist(airlineName);
+    response.sendError(HttpServletResponse.SC_NOT_FOUND, message);
+  }
 }

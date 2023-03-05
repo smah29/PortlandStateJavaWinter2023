@@ -42,12 +42,8 @@ public class Messages {
     return String.format("No flights found between \"%s\" and \"%s\" for airline \"%s\"", source, destination, airlineName);
   }
 
-  public static String definedWordAs(String word, String definition) {
-    return String.format("Defined %s as %s", word, definition);
-  }
-
-  public static String allDictionaryEntriesDeleted() {
-    return "All dictionary entries have been deleted";
+  public static String airlineEntryDeleted(String airlineName) {
+    return String.format("%s entry have been deleted", airlineName);
   }
 
 }

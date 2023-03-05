@@ -40,33 +40,33 @@ public class AirlineRestClient {
     this.http = http;
   }
 
-  /**
-   * Returns all dictionary entries from the server
-   */
-  public Map<String, String> getAllDictionaryEntries() throws IOException, ParserException {
-    Response response = http.get(Map.of());
-    throwExceptionIfNotOkayHttpStatus(response);
-
-    TextParser parser = new TextParser(new StringReader(response.getContent()));
-    return parser.parse();
-  }
-
-  /**
-   * Returns the definition for the given word
-   */
-  public String getDefinition(String word) throws IOException, ParserException {
-    Response response = http.get(Map.of(AirlineServlet2.WORD_PARAMETER, word));
-    throwExceptionIfNotOkayHttpStatus(response);
-    String content = response.getContent();
-
-    TextParser parser = new TextParser(new StringReader(content));
-    return parser.parse().get(word);
-  }
-
-  public void addDictionaryEntry(String word, String definition) throws IOException {
-    Response response = http.post(Map.of(AirlineServlet2.WORD_PARAMETER, word, AirlineServlet2.DEFINITION_PARAMETER, definition));
-    throwExceptionIfNotOkayHttpStatus(response);
-  }
+//  /**
+//   * Returns all dictionary entries from the server
+//   */
+//  public Map<String, String> getAllDictionaryEntries() throws IOException, ParserException {
+//    Response response = http.get(Map.of());
+//    throwExceptionIfNotOkayHttpStatus(response);
+//
+//    TextParser parser = new TextParser(new StringReader(response.getContent()));
+//    return parser.parse();
+//  }
+//
+//  /**
+//   * Returns the definition for the given word
+//   */
+//  public String getDefinition(String word) throws IOException, ParserException {
+//    Response response = http.get(Map.of(AirlineServlet2.WORD_PARAMETER, word));
+//    throwExceptionIfNotOkayHttpStatus(response);
+//    String content = response.getContent();
+//
+//    TextParser parser = new TextParser(new StringReader(content));
+//    return parser.parse().get(word);
+//  }
+//
+//  public void addDictionaryEntry(String word, String definition) throws IOException {
+//    Response response = http.post(Map.of(AirlineServlet2.WORD_PARAMETER, word, AirlineServlet2.DEFINITION_PARAMETER, definition));
+//    throwExceptionIfNotOkayHttpStatus(response);
+//  }
 
   public void removeAllDictionaryEntries() throws IOException {
     Response response = http.delete(Map.of());
