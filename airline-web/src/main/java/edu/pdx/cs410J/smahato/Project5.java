@@ -27,8 +27,7 @@ public class Project5 {
    */
   public static void main(String... args) {
     List<String> input = Arrays.asList(args);
-    int inputSize = input.size();
-    if (inputSize == 0) {
+    if (input.size() == 0) {
       System.err.println(MISSING_COMMAND_LINE_ARGS);
       printFile("usage.txt");
     } else if (input.contains(README.getOption())) {

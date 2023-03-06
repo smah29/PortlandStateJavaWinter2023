@@ -287,6 +287,13 @@ public class FlightTest {
     assertThrows(DateTimeException.class, () -> new Flight("1", "PDX", "LAX", "10/10/2020 11:10 am", "2/10/2020 10:60 am"));
   }
 
+  @Test
+  void createFlightWithSameDepartureArrival() {
+    assertThrows(DateTimeException.class, () ->
+        new Flight("123", "PDX", "LAX", "10/10/2020 10:10 am", "10/10/2020 10:10 am")
+    );
+  }
+
   // No more test cases required for the arrivalString as the same tests have been written for the departureString
   // invalid validateFlightSchedule have been already tested both for departureString and arrivalString
 

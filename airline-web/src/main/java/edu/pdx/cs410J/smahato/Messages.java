@@ -42,6 +42,12 @@ public class Messages {
     return String.format("No flights found between \"%s\" and \"%s\" for airline \"%s\"", source, destination, airlineName);
   }
 
+  /**
+   * airline entry deleted message
+   *
+   * @param airlineName airline name
+   * @return formatted message
+   */
   public static String airlineEntryDeleted(String airlineName) {
     return String.format("%s entry have been deleted", airlineName);
   }

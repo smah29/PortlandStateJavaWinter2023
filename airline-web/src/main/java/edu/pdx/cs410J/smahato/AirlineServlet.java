@@ -17,6 +17,7 @@ import java.util.Map;
 import static edu.pdx.cs410J.smahato.Messages.MISSING_SRC_DEST;
 import static edu.pdx.cs410J.smahato.constants.AirlineParams.*;
 import static edu.pdx.cs410J.smahato.constants.ErrorMessages.FLIGHT_NUMBER_MUST_BE_AN_INTEGER;
+import static edu.pdx.cs410J.smahato.constants.ErrorMessages.SOURCE_AND_DESTINATION_CANNOT_BE_SAME;
 
 /**
  * This servlet provides a REST API for working with an <code>Airline</code>.
@@ -104,6 +105,8 @@ public class AirlineServlet extends HttpServlet {
         try {
           AirlineValidationUtils.validateAirportCode(source, AirlineConstants.SOURCE);
           AirlineValidationUtils.validateAirportCode(destination, AirlineConstants.DESTINATION);
+          if (source.equalsIgnoreCase(destination))
+            throw new AirportCodeException(SOURCE_AND_DESTINATION_CANNOT_BE_SAME);
         } catch (AirportCodeException e) {
           response.sendError(HttpServletResponse.SC_BAD_REQUEST, e.getMessage());
           return;
@@ -152,6 +155,13 @@ public class AirlineServlet extends HttpServlet {
     response.sendError(HttpServletResponse.SC_PRECONDITION_FAILED, message);
   }
 
+  /**
+   * deletes an airline from the airline map
+   *
+   * @param request  HttpServletRequest
+   * @param response HttpServletResponse
+   * @throws IOException if there is an error writing to the HTTP response
+   */
   @Override
   protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("text/plain");

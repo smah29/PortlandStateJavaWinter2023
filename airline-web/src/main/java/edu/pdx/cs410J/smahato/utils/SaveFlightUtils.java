@@ -5,6 +5,7 @@ import edu.pdx.cs410J.smahato.Flight;
 import java.io.IOException;
 import java.util.List;
 
+import static edu.pdx.cs410J.smahato.constants.ErrorMessages.invalidHostOrPort;
 import static edu.pdx.cs410J.smahato.constants.Option.*;
 
 /**
@@ -38,13 +39,13 @@ public class SaveFlightUtils extends CommonInputUtils {
    * saves the flight and prints it if the print option is present
    */
   public void saveFlight() {
-    if (isActualNumberOfArgsSameOrLessThanExpected(this.expectedNumberOfArgs)) {
+    if (isActualNumberOfArgsSameOrLessThanExpected()) {
       try {
         this.client.saveFlight(getAirlineName(), getFlightNumber(), getSource(), getDestination(), getDepartureString(), getArrivalString());
         if (doesInputContainsOption(PRINT.getOption()))
           System.out.println(new Flight(getFlightNumber(), getSource(), getDestination(), getDepartureString(), getArrivalString()));
       } catch (IOException e) {
-        System.err.println("Invalid host " + getOptionValue(HOST.getOption()) + " or port " + getOptionValue(PORT.getOption()));
+        System.err.println(invalidHostOrPort(getOptionValue(HOST.getOption()), getOptionValue(PORT.getOption())));
       }
     }
   }

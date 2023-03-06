@@ -13,7 +13,9 @@ import java.util.Map;
 
 import static edu.pdx.cs410J.web.HttpRequestHelper.Response;
 import static edu.pdx.cs410J.web.HttpRequestHelper.RestException;
+import static java.net.HttpURLConnection.HTTP_NOT_FOUND;
 import static java.net.HttpURLConnection.HTTP_OK;
+import static javax.servlet.http.HttpServletResponse.SC_NOT_FOUND;
 
 /**
  * A helper class for accessing the rest client.  this class gets and posts to a URL.
@@ -35,42 +37,14 @@ public class AirlineRestClient {
     this(new HttpRequestHelper(String.format("http://%s:%d/%s/%s", hostName, port, WEB_APP, SERVLET)));
   }
 
+  /**
+   * Creates a client to the airline REST service running on the given host and port
+   *
+   * @param http
+   */
   @VisibleForTesting
   AirlineRestClient(HttpRequestHelper http) {
     this.http = http;
-  }
-
-//  /**
-//   * Returns all dictionary entries from the server
-//   */
-//  public Map<String, String> getAllDictionaryEntries() throws IOException, ParserException {
-//    Response response = http.get(Map.of());
-//    throwExceptionIfNotOkayHttpStatus(response);
-//
-//    TextParser parser = new TextParser(new StringReader(response.getContent()));
-//    return parser.parse();
-//  }
-//
-//  /**
-//   * Returns the definition for the given word
-//   */
-//  public String getDefinition(String word) throws IOException, ParserException {
-//    Response response = http.get(Map.of(AirlineServlet2.WORD_PARAMETER, word));
-//    throwExceptionIfNotOkayHttpStatus(response);
-//    String content = response.getContent();
-//
-//    TextParser parser = new TextParser(new StringReader(content));
-//    return parser.parse().get(word);
-//  }
-//
-//  public void addDictionaryEntry(String word, String definition) throws IOException {
-//    Response response = http.post(Map.of(AirlineServlet2.WORD_PARAMETER, word, AirlineServlet2.DEFINITION_PARAMETER, definition));
-//    throwExceptionIfNotOkayHttpStatus(response);
-//  }
-
-  public void removeAllDictionaryEntries() throws IOException {
-    Response response = http.delete(Map.of());
-    throwExceptionIfNotOkayHttpStatus(response);
   }
 
   private void throwExceptionIfNotOkayHttpStatus(Response response) {
@@ -98,7 +72,10 @@ public class AirlineRestClient {
     String content = response.getContent();
     int code = response.getHttpStatusCode();
     if (code != HTTP_OK) {
-      throw new RestException(code, content);
+      if (code == SC_NOT_FOUND)
+        System.err.println(content);
+      else
+        throw new RestException(code, content);
     } else {
       Airline airline = new XmlParser(new StringReader(content)).parse();
       new AirlinePrettyPrinter(new PrintWriter(System.out)).dump(airline);

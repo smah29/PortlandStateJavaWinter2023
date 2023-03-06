@@ -21,7 +21,7 @@ import java.util.Date;
 import static edu.pdx.cs410J.smahato.constants.XMLConstants.*;
 
 /**
- * <code>XmlDumper</code> class for Project 4 dumps airline object in XML file.
+ * <code>XmlDumper</code> class for Project 5 dumps airline object in XML.
  */
 public class XmlDumper extends AirlineXmlHelper implements AirlineDumper<Airline> {
   private final PrintWriter pw;

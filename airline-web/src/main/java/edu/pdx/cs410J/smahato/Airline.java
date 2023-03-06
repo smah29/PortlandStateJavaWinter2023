@@ -11,7 +11,7 @@ import static edu.pdx.cs410J.smahato.constants.ErrorMessages.CANNOT_BE_NULL_OR_E
 
 
 /**
- * Airline has and name and a list of flights
+ * Airline has name and a list of flights
  */
 public class Airline extends AbstractAirline<Flight> {
   /**

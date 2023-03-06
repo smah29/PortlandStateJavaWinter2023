@@ -6,8 +6,7 @@ import edu.pdx.cs410J.smahato.constants.Option;
 import java.util.Arrays;
 import java.util.List;
 
-import static edu.pdx.cs410J.smahato.constants.ErrorMessages.EXTRA_COMMAND_LINE_ARGS;
-import static edu.pdx.cs410J.smahato.constants.ErrorMessages.UNKNOWN_OPTION;
+import static edu.pdx.cs410J.smahato.constants.ErrorMessages.*;
 import static edu.pdx.cs410J.smahato.constants.Option.HOST;
 import static edu.pdx.cs410J.smahato.constants.Option.PORT;
 
@@ -15,6 +14,7 @@ import static edu.pdx.cs410J.smahato.constants.Option.PORT;
  * This class is used to get the input from the command line and parse it
  */
 public class CommonInputUtils implements InputUtils {
+  private final int inputSize;
   protected final List<String> input;
   /**
    * Expected number of arguments in the input list
@@ -38,15 +38,16 @@ public class CommonInputUtils implements InputUtils {
    */
   protected CommonInputUtils(List<String> input, int startIndex, int expectedNumberOfArgs) {
     this.input = input;
-    this.startIndex = startIndex;
-    this.expectedNumberOfArgs = expectedNumberOfArgs;
+    this.inputSize = input.size();
     String host = getOptionValue(HOST.getOption());
     try {
       int port = Integer.parseInt(getOptionValue(PORT.getOption()));
       this.client = new AirlineRestClient(host, port);
     } catch (NumberFormatException e) {
-      throw new IllegalArgumentException("Port number should be an integer");
+      throw new IllegalArgumentException(PORT_NUMBER_SHOULD_BE_AN_INTEGER);
     }
+    this.startIndex = startIndex;
+    this.expectedNumberOfArgs = expectedNumberOfArgs;
   }
 
   /**
@@ -76,16 +77,16 @@ public class CommonInputUtils implements InputUtils {
   protected String getOptionValue(String option) {
     int index = input.indexOf(option);
     if (index == -1) {
-      throw new IllegalArgumentException(option + " option is missing");
+      throw new IllegalArgumentException(option + OPTION_MISSING);
     }
-    if (index + 1 >= input.size()) {
-      throw new IllegalArgumentException(option + " option value is missing");
+    if (index + 1 >= this.inputSize) {
+      throw new IllegalArgumentException(option + OPTION_VALUE_MISSING);
     }
     return this.input.get(index + 1);
   }
 
   private String getValueAtIndex(int startIndex, int... indexArray) {
-    int inputSize = input.size();
+    int inputSize = this.inputSize;
     return Arrays.stream(indexArray).filter(idx -> (startIndex + idx) < inputSize).mapToObj(index -> input.get(startIndex + index)).reduce("", (a, b) -> a + " " + b).trim();
   }
 
@@ -182,8 +183,8 @@ public class CommonInputUtils implements InputUtils {
    *
    * @return true if actual number of arguments is same or less than expected number of arguments else false and prints the error message accordingly
    */
-  protected boolean isActualNumberOfArgsSameOrLessThanExpected(int expectedNumberOfArgs) {
-    int compare = compare(input.size(), expectedNumberOfArgs);
+  protected boolean isActualNumberOfArgsSameOrLessThanExpected() {
+    int compare = compare(this.inputSize, this.expectedNumberOfArgs);
     if (compare > 0) {
       if (input.stream().filter(val -> val.startsWith("-")).anyMatch(val -> !Option.exists(val))) {
         System.err.print(UNKNOWN_OPTION);

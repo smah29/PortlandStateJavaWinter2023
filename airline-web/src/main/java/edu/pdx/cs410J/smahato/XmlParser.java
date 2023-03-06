@@ -24,10 +24,9 @@ import static edu.pdx.cs410J.smahato.constants.ErrorMessages.FLIGHT_NUMBER_MUST_
 import static edu.pdx.cs410J.smahato.constants.XMLConstants.*;
 
 /**
- * <code>XmlParser</code> class for Project 4 parses XML file and creates airline object.
+ * <code>XmlParser</code> class for Project 5 parses XML and creates airline object.
  */
 public class XmlParser extends AirlineXmlHelper implements AirlineParser<Airline> {
-  private static final String UNKNOWN_ELEMENT = "Unknown element: ";
   private final Reader reader;
 
   /**
@@ -40,10 +39,10 @@ public class XmlParser extends AirlineXmlHelper implements AirlineParser<Airline
   }
 
   /**
-   * Parses the XML file and creates airline object.
+   * Parses the XML and creates airline object.
    *
    * @return Airline object
-   * @throws ParserException If there is an error while parsing the XML file
+   * @throws ParserException If there is an error while parsing the XML
    */
   @Override
   public Airline parse() throws ParserException {

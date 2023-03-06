@@ -5,6 +5,8 @@ import edu.pdx.cs410J.ParserException;
 import java.io.IOException;
 import java.util.List;
 
+import static edu.pdx.cs410J.smahato.constants.ErrorMessages.XML_PARSING_ERROR;
+import static edu.pdx.cs410J.smahato.constants.ErrorMessages.invalidHostOrPort;
 import static edu.pdx.cs410J.smahato.constants.Option.*;
 
 /**
@@ -20,6 +22,7 @@ public class SearchFlightsUtils extends CommonInputUtils {
    */
   public static final int START_INDEX = 5;
 
+
   /**
    * Constructor for SearchInputUtils
    *
@@ -27,10 +30,6 @@ public class SearchFlightsUtils extends CommonInputUtils {
    */
   public SearchFlightsUtils(List<String> input) {
     super(input, START_INDEX, EXPECTED_INPUT_SIZE);
-    if (!doesInputContainsOption(SEARCH.getOption())) {
-      this.startIndex = this.getStartIndex() - 1;
-      this.expectedNumberOfArgs = this.getExpectedNumberOfArgs() - 1;
-    }
     if (doesInputContainsOption(PRINT.getOption())) {
       this.startIndex = this.getStartIndex() + 1;
       this.expectedNumberOfArgs = this.getExpectedNumberOfArgs() + 1;
@@ -72,13 +71,13 @@ public class SearchFlightsUtils extends CommonInputUtils {
    * make a rest call to the server, searches and pretty prints the flights
    */
   public void searchFlights() {
-    if (isActualNumberOfArgsSameOrLessThanExpected(this.expectedNumberOfArgs)) {
+    if (isActualNumberOfArgsSameOrLessThanExpected()) {
       try {
         this.client.searchFlights(getAirlineName(), getSource(), getDestination());
       } catch (IOException e) {
-        System.err.println("Invalid host " + getOptionValue(HOST.getOption()) + " or port " + getOptionValue(PORT.getOption()));
+        System.err.println(invalidHostOrPort(getOptionValue(HOST.getOption()), getOptionValue(PORT.getOption())));
       } catch (ParserException e) {
-        System.err.println("Issue in parsing the XML response from the server");
+        System.err.println(XML_PARSING_ERROR);
       }
     }
   }

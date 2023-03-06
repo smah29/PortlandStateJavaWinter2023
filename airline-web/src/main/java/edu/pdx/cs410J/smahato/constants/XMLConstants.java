@@ -1,7 +1,7 @@
 package edu.pdx.cs410J.smahato.constants;
 
 /**
- * <code>XMLConstants</code> interface for Project 4 contains all the XML file element or attribute tags.
+ * <code>XMLConstants</code> interface for Project 5 contains all the XML element or attribute tags.
  */
 public interface XMLConstants {
   /**
