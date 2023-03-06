@@ -5,8 +5,8 @@ import edu.pdx.cs410J.ParserException;
 import java.io.IOException;
 import java.util.List;
 
-import static edu.pdx.cs410J.smahato.constants.ErrorMessages.XML_PARSING_ERROR;
-import static edu.pdx.cs410J.smahato.constants.ErrorMessages.invalidHostOrPort;
+import static edu.pdx.cs410J.smahato.Messages.XML_PARSING_ERROR;
+import static edu.pdx.cs410J.smahato.Messages.invalidHostOrPort;
 import static edu.pdx.cs410J.smahato.constants.Option.*;
 
 /**

@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import static edu.pdx.cs410J.smahato.Messages.MISSING_SRC_DEST;
+import static edu.pdx.cs410J.smahato.Messages.*;
 import static edu.pdx.cs410J.smahato.constant.AirlineTestValues.*;
 import static edu.pdx.cs410J.smahato.constants.DateFormatConstants.MM_DD_YYYY_hh_MM_a;
 import static edu.pdx.cs410J.smahato.constants.ErrorMessages.*;

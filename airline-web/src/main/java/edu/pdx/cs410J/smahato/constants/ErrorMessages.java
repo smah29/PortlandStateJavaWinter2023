@@ -2,9 +2,6 @@ package edu.pdx.cs410J.smahato.constants;
 
 import static edu.pdx.cs410J.smahato.constants.AirlineConstants.ARRIVAL;
 import static edu.pdx.cs410J.smahato.constants.AirlineConstants.DEPARTURE;
-import static edu.pdx.cs410J.smahato.constants.DateFormatConstants.MM_DD_YYYY_hh_MM_a;
-import static edu.pdx.cs410J.smahato.constants.Option.HOST;
-import static edu.pdx.cs410J.smahato.constants.Option.PORT;
 
 /**
  * This class contains error messages used in the airline project
@@ -68,17 +65,4 @@ public interface ErrorMessages {
    * Port number should be an integer
    */
   String PORT_NUMBER_SHOULD_BE_AN_INTEGER = "Port number should be an integer";
-
-  static String invalidHostOrPort(String host, String port) {
-    return String.format("Error : Invalid host %s or port %s", host, port);
-  }
-
-  /**
-   * issue in parsing the XML response from the server
-   */
-  String XML_PARSING_ERROR = "Issue in parsing the XML response from the server";
-
-  static String invalidDateFormat(String flightScheduleType, String dateTime, String dateTimeFormat) {
-    return String.format("Invalid %s date format - %s! Please follow the format: %s", flightScheduleType, dateTime, dateTimeFormat);
-  }
 }

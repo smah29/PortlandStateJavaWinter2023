@@ -7,8 +7,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import static edu.pdx.cs410J.smahato.constants.ErrorMessages.*;
-import static edu.pdx.cs410J.smahato.constants.Option.HOST;
-import static edu.pdx.cs410J.smahato.constants.Option.PORT;
 
 /**
  * This class is used to get the input from the command line and parse it
@@ -39,9 +37,9 @@ public class CommonInputUtils implements InputUtils {
   protected CommonInputUtils(List<String> input, int startIndex, int expectedNumberOfArgs) {
     this.input = input;
     this.inputSize = input.size();
-    String host = getOptionValue(HOST.getOption());
+    String host = getOptionValue(Option.HOST.getOption());
     try {
-      int port = Integer.parseInt(getOptionValue(PORT.getOption()));
+      int port = Integer.parseInt(getOptionValue(Option.PORT.getOption()));
       this.client = new AirlineRestClient(host, port);
     } catch (NumberFormatException e) {
       throw new IllegalArgumentException(PORT_NUMBER_SHOULD_BE_AN_INTEGER);
@@ -154,7 +152,7 @@ public class CommonInputUtils implements InputUtils {
   /**
    * checks if the input list contains the option
    *
-   * @param option
+   * @param option Option to be checked
    * @return true if the input list contains the option
    */
   protected boolean doesInputContainsOption(String option) {

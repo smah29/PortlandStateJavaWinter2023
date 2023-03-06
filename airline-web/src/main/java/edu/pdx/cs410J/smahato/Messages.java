@@ -52,4 +52,17 @@ public class Messages {
     return String.format("%s entry have been deleted", airlineName);
   }
 
+  public static String invalidHostOrPort(String host, String port) {
+    return String.format("Error : Invalid host %s or port %s", host, port);
+  }
+
+  /**
+   * issue in parsing the XML response from the server
+   */
+  public static String XML_PARSING_ERROR = "Issue in parsing the XML response from the server";
+
+  public static String invalidDateFormat(String flightScheduleType, String dateTime, String dateTimeFormat) {
+    return String.format("Invalid %s date format - %s! Please follow the format: %s", flightScheduleType, dateTime, dateTimeFormat);
+  }
+
 }
