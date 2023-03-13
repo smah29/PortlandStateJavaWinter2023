@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Airline</string>
+    <string name="hello_class">Hello Class!</string>
+    <string name="click_me">Click me!</string>
 </resources>
