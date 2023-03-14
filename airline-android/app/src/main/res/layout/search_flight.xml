@@ -24,7 +24,7 @@
 
             <TextView
                 android:id="@+id/airlineName"
-                android:layout_width="236dp"
+                android:layout_width="230dp"
                 android:layout_height="59dp"
                 android:layout_weight="1"
                 android:labelFor="@id/airlineNameValue"
@@ -33,10 +33,11 @@
 
             <EditText
                 android:id="@+id/airlineNameValue"
-                android:layout_width="236dp"
+                android:layout_width="280dp"
                 android:layout_height="59dp"
                 android:layout_weight="1"
                 android:autofillHints="Air Express"
+                android:hint="@string/airline_name"
                 android:inputType="text" />
         </LinearLayout>
 
@@ -47,7 +48,7 @@
 
             <TextView
                 android:id="@+id/source"
-                android:layout_width="236dp"
+                android:layout_width="230dp"
                 android:layout_height="59dp"
                 android:layout_weight="1"
                 android:labelFor="@id/sourceValue"
@@ -56,10 +57,11 @@
 
             <EditText
                 android:id="@+id/sourceValue"
-                android:layout_width="236dp"
+                android:layout_width="280dp"
                 android:layout_height="59dp"
                 android:layout_weight="1"
                 android:autofillHints="PDX"
+                android:hint="@string/flight_source"
                 android:inputType="text" />
         </LinearLayout>
 
@@ -70,7 +72,7 @@
 
             <TextView
                 android:id="@+id/destination"
-                android:layout_width="236dp"
+                android:layout_width="230dp"
                 android:layout_height="59dp"
                 android:layout_weight="1"
                 android:labelFor="@id/destinationVal"
@@ -79,10 +81,11 @@
 
             <EditText
                 android:id="@+id/destinationVal"
-                android:layout_width="236dp"
+                android:layout_width="280dp"
                 android:layout_height="59dp"
                 android:layout_weight="1"
                 android:autofillHints="LAX"
+                android:hint="@string/flight_destination"
                 android:inputType="text" />
         </LinearLayout>
 

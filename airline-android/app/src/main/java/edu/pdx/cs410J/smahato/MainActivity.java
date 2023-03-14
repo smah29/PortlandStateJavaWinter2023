@@ -16,8 +16,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void displayMessage(View view) {
-        Flight flight = new Flight();
-        Toast.makeText(this, flight.toString(), Toast.LENGTH_LONG).show();
+        //Flight flight = new Flight();
+        //Toast.makeText(this, flight.toString(), Toast.LENGTH_LONG).show();
         view.setEnabled(false);
         ((Button) view).setText("Disabled!");
         int id;

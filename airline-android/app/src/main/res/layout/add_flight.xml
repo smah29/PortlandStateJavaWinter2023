@@ -24,17 +24,20 @@
 
             <TextView
                 android:id="@+id/airlineName"
-                android:layout_width="236dp"
+                android:layout_width="230dp"
                 android:layout_height="59dp"
                 android:layout_weight="1"
+                android:labelFor="@id/airlineNameValue"
                 android:text="@string/airline"
                 android:textAlignment="center" />
 
             <EditText
                 android:id="@+id/airlineNameValue"
-                android:layout_width="236dp"
+                android:layout_width="280dp"
                 android:layout_height="59dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:hint="@string/airline_name"
+                android:inputType="text" />
         </LinearLayout>
 
         <LinearLayout
@@ -44,15 +47,16 @@
 
             <TextView
                 android:id="@+id/flightNumber"
-                android:layout_width="236dp"
+                android:layout_width="230dp"
                 android:layout_height="59dp"
                 android:layout_weight="1"
+                android:labelFor="@id/flightNumberValue"
                 android:text="@string/flight_number"
                 android:textAlignment="center" />
 
             <EditText
                 android:id="@+id/flightNumberValue"
-                android:layout_width="236dp"
+                android:layout_width="280dp"
                 android:layout_height="59dp"
                 android:layout_weight="1"
                 android:inputType="number" />
@@ -65,17 +69,19 @@
 
             <TextView
                 android:id="@+id/source"
-                android:layout_width="236dp"
+                android:layout_width="230dp"
                 android:layout_height="59dp"
                 android:layout_weight="1"
+                android:labelFor="@id/sourceValue"
                 android:text="@string/source"
                 android:textAlignment="center" />
 
             <EditText
                 android:id="@+id/sourceValue"
-                android:layout_width="236dp"
+                android:layout_width="280dp"
                 android:layout_height="59dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:hint="@string/flight_source" />
         </LinearLayout>
 
         <LinearLayout
@@ -85,17 +91,19 @@
 
             <TextView
                 android:id="@+id/depart"
-                android:layout_width="236dp"
+                android:layout_width="230dp"
                 android:layout_height="59dp"
                 android:layout_weight="1"
+                android:labelFor="@id/departureValue"
                 android:text="@string/departure"
                 android:textAlignment="center" />
 
             <EditText
                 android:id="@+id/departureValue"
-                android:layout_width="236dp"
+                android:layout_width="280dp"
                 android:layout_height="59dp"
                 android:layout_weight="1"
+                android:hint="@string/mm_dd_yyyy_hh_mm_a"
                 android:inputType="datetime" />
         </LinearLayout>
 
@@ -106,17 +114,19 @@
 
             <TextView
                 android:id="@+id/destination"
-                android:layout_width="236dp"
+                android:layout_width="230dp"
                 android:layout_height="59dp"
                 android:layout_weight="1"
+                android:labelFor="@id/destinationVal"
                 android:text="@string/destination"
                 android:textAlignment="center" />
 
             <EditText
                 android:id="@+id/destinationVal"
-                android:layout_width="236dp"
+                android:layout_width="280dp"
                 android:layout_height="59dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:hint="@string/flight_destination" />
         </LinearLayout>
 
         <LinearLayout
@@ -126,24 +136,26 @@
 
             <TextView
                 android:id="@+id/arrival"
-                android:layout_width="236dp"
+                android:layout_width="230dp"
                 android:layout_height="59dp"
                 android:layout_weight="1"
+                android:labelFor="@id/arrivalValue"
                 android:text="@string/arrival"
                 android:textAlignment="center" />
 
             <EditText
                 android:id="@+id/arrivalValue"
-                android:layout_width="236dp"
+                android:layout_width="280dp"
                 android:layout_height="59dp"
                 android:layout_weight="1"
+                android:hint="@string/mm_dd_yyyy_hh_mm_a"
                 android:inputType="datetime" />
         </LinearLayout>
 
     </LinearLayout>
 
     <Button
-        android:id="@+id/searchFlightButton"
+        android:id="@+id/addFlightButton"
         android:layout_width="149dp"
         android:layout_height="wrap_content"
         android:onClick="addFlight"
