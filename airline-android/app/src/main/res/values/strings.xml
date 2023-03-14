@@ -1,5 +1,15 @@
 <resources>
     <string name="app_name">Airline</string>
-    <string name="hello_class">Hello Class!</string>
+    <string name="welcome_text">Choose between us!</string>
     <string name="click_me">Click me!</string>
+    <string name="vanished">Vanished!</string>
+    <string name="another_button">another button</string>
+
+    <string name="airline">Airline</string>
+    <string name="flight_number">Flight Number</string>
+    <string name="source">Source</string>
+    <string name="departure">Departure</string>
+    <string name="destination">Destination</string>
+    <string name="arrival">Arrival</string>
+    <string name="add_flight">Add Flight</string>
 </resources>
