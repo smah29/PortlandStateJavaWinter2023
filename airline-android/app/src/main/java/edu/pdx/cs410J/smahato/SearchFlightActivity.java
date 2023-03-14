@@ -1,5 +1,6 @@
 package edu.pdx.cs410J.smahato;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -21,6 +22,10 @@ public class SearchFlightActivity extends AppCompatActivity {
         EditText destination = findViewById(R.id.destinationVal);
         String str = airlineName.getText() + " " + source.getText() + " "
                 + destination.getText();
-        Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(this, ShowFlightsActivity.class);
+        intent.putExtra(getString(R.string.pretty_flights), str);
+        startActivity(intent);
     }
 }

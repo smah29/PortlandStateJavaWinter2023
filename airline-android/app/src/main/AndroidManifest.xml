@@ -22,6 +22,11 @@
             android:label="Search Flights"
             android:parentActivityName=".HomeActivity" />
         <activity
+            android:name=".ShowFlightsActivity"
+            android:exported="false"
+            android:label="Flights"
+            android:parentActivityName=".SearchFlightActivity" />
+        <activity
             android:name=".HomeActivity"
             android:exported="true">
             <intent-filter>
