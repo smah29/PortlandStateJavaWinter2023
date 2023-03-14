@@ -12,4 +12,5 @@
     <string name="destination">Destination</string>
     <string name="arrival">Arrival</string>
     <string name="add_flight">Add Flight</string>
+    <string name="search_flight">Search Flight</string>
 </resources>
