@@ -23,7 +23,7 @@ public class DateTimeUtils {
      */
     public static void dateTimeFormatCheck(String dateTime, String flightScheduleType) {
         if (!dateTime.matches("\\d{1,2}/\\d{1,2}/\\d{4} \\d{1,2}:\\d{1,2} [apAP][mM]")) {
-            throw new DateTimeException(invalidDateFormat(flightScheduleType, dateTime, MM_DD_YYYY_hh_MM_a));
+            throw new DateTimeException(invalidDateFormat(MM_DD_YYYY_hh_MM_a));
         }
         String[] dateTimeSplit = dateTime.split(" ");
         String date = dateTimeSplit[0];
@@ -106,7 +106,7 @@ public class DateTimeUtils {
             dateTimeFormatCheck(dateTime, flightScheduleType);
             return date;
         } catch (ParseException e) {
-            throw new DateTimeException(invalidDateFormat(flightScheduleType, dateTime, MM_DD_YYYY_hh_MM_a));
+            throw new DateTimeException(invalidDateFormat(MM_DD_YYYY_hh_MM_a));
         }
     }
 }

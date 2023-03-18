@@ -16,7 +16,7 @@ public class ShowFlightsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.show_flights);
         Intent intent = getIntent();
-        String airline = intent.getStringExtra(getString(R.string.pretty_flights));
+        String airline = intent.getStringExtra("flight1");
         ListView listView = (ListView) findViewById(R.id.prettyFlights);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, Arrays.asList(airline, airline));
         listView.setAdapter(arrayAdapter);

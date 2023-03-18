@@ -7,15 +7,15 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="330dp"
-        android:layout_height="350dp"
+        android:layout_width="389dp"
+        android:layout_height="353dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.175">
+        app:layout_constraintVertical_bias="0.01">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -24,7 +24,7 @@
 
             <TextView
                 android:id="@+id/airlineName"
-                android:layout_width="230dp"
+                android:layout_width="200dp"
                 android:layout_height="59dp"
                 android:layout_weight="1"
                 android:labelFor="@id/airlineNameValue"
@@ -33,7 +33,7 @@
 
             <EditText
                 android:id="@+id/airlineNameValue"
-                android:layout_width="280dp"
+                android:layout_width="300dp"
                 android:layout_height="59dp"
                 android:layout_weight="1"
                 android:hint="@string/airline_name"
@@ -47,7 +47,7 @@
 
             <TextView
                 android:id="@+id/flightNumber"
-                android:layout_width="230dp"
+                android:layout_width="200dp"
                 android:layout_height="59dp"
                 android:layout_weight="1"
                 android:labelFor="@id/flightNumberValue"
@@ -56,9 +56,10 @@
 
             <EditText
                 android:id="@+id/flightNumberValue"
-                android:layout_width="280dp"
+                android:layout_width="300dp"
                 android:layout_height="59dp"
                 android:layout_weight="1"
+                android:hint="Enter a number"
                 android:inputType="number" />
         </LinearLayout>
 
@@ -69,7 +70,7 @@
 
             <TextView
                 android:id="@+id/source"
-                android:layout_width="230dp"
+                android:layout_width="200dp"
                 android:layout_height="59dp"
                 android:layout_weight="1"
                 android:labelFor="@id/sourceValue"
@@ -78,7 +79,7 @@
 
             <EditText
                 android:id="@+id/sourceValue"
-                android:layout_width="280dp"
+                android:layout_width="300dp"
                 android:layout_height="59dp"
                 android:layout_weight="1"
                 android:hint="@string/flight_source" />
@@ -91,7 +92,7 @@
 
             <TextView
                 android:id="@+id/depart"
-                android:layout_width="230dp"
+                android:layout_width="200dp"
                 android:layout_height="59dp"
                 android:layout_weight="1"
                 android:labelFor="@id/departureValue"
@@ -100,7 +101,7 @@
 
             <EditText
                 android:id="@+id/departureValue"
-                android:layout_width="280dp"
+                android:layout_width="300dp"
                 android:layout_height="59dp"
                 android:layout_weight="1"
                 android:hint="@string/mm_dd_yyyy_hh_mm_a"
@@ -114,7 +115,7 @@
 
             <TextView
                 android:id="@+id/destination"
-                android:layout_width="230dp"
+                android:layout_width="200dp"
                 android:layout_height="59dp"
                 android:layout_weight="1"
                 android:labelFor="@id/destinationVal"
@@ -123,7 +124,7 @@
 
             <EditText
                 android:id="@+id/destinationVal"
-                android:layout_width="280dp"
+                android:layout_width="300dp"
                 android:layout_height="59dp"
                 android:layout_weight="1"
                 android:hint="@string/flight_destination" />
@@ -136,7 +137,7 @@
 
             <TextView
                 android:id="@+id/arrival"
-                android:layout_width="230dp"
+                android:layout_width="200dp"
                 android:layout_height="59dp"
                 android:layout_weight="1"
                 android:labelFor="@id/arrivalValue"
@@ -145,7 +146,7 @@
 
             <EditText
                 android:id="@+id/arrivalValue"
-                android:layout_width="280dp"
+                android:layout_width="300dp"
                 android:layout_height="59dp"
                 android:layout_weight="1"
                 android:hint="@string/mm_dd_yyyy_hh_mm_a"
@@ -158,6 +159,7 @@
         android:id="@+id/addFlightButton"
         android:layout_width="149dp"
         android:layout_height="wrap_content"
+        android:enabled="false"
         android:onClick="addFlight"
         android:text="@string/add_flight"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -165,6 +167,6 @@
         app:layout_constraintHorizontal_bias="0.545"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.31" />
+        app:layout_constraintVertical_bias="0.01" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

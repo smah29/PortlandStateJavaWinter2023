@@ -13,7 +13,6 @@
     <string name="arrival">Arrival</string>
     <string name="add_flight">Add Flight</string>
     <string name="search_flight">Search Flight</string>
-    <string name="pretty_flights">flight</string>
     <string name="airline_name">Airline Name</string>
     <string name="flight_source">Flight Source</string>
     <string name="mm_dd_yyyy_hh_mm_a">MM/dd/yyyy hh:mm a</string>
