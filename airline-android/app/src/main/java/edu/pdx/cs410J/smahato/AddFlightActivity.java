@@ -127,19 +127,9 @@ public class AddFlightActivity extends AppCompatActivity {
                 validateArrival(arrival, departure);
         });
 
-        TextWatcher enableAddFLightButton = new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
+        OnTextChangeWatcher enableAddFLightButton = new OnTextChangeWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
                 if (airlineName.getError() == null && !isInputLengthZero(airlineName)
                         && flightNumber.getError() == null && !isInputLengthZero(flightNumber)
                         && source.getError() == null && !isInputLengthZero(source)

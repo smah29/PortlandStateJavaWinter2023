@@ -4,6 +4,7 @@ import static edu.pdx.cs410J.smahato.constants.AirlineConstants.ARRIVAL;
 import static edu.pdx.cs410J.smahato.constants.AirlineConstants.DEPARTURE;
 import static edu.pdx.cs410J.smahato.constants.ErrorMessages.DEPARTURE_BEFORE_ARRIVAL;
 import static edu.pdx.cs410J.smahato.constants.ErrorMessages.SOURCE_AND_DESTINATION_CANNOT_BE_SAME;
+import static edu.pdx.cs410J.smahato.constants.Messages.MISSING_SRC_DEST;
 import static edu.pdx.cs410J.smahato.utils.DateTimeUtils.getDateFromString;
 
 import android.widget.EditText;
@@ -30,7 +31,24 @@ public class ActivityHelper {
         if (isInputLengthZero(source)) {
             setRequiredError(source);
             return false;
-        } else try {
+        } else {
+            return validateNonEmptyAirportCode(source, destination, airportType);
+        }
+    }
+
+    public static boolean validateAirportForSearch(EditText source, EditText destination, String airportType) {
+        if (isInputLengthZero(source) && isInputLengthZero(destination)) {
+            return true;
+        } else if (!isInputLengthZero(source)) {
+            return validateNonEmptyAirportCode(source, destination, airportType);
+        } else {
+            source.setError(MISSING_SRC_DEST);
+            return false;
+        }
+    }
+
+    private static boolean validateNonEmptyAirportCode(EditText source, EditText destination, String airportType) {
+        try {
             AirlineValidationUtils.validateAirportCode(source.getText().toString(), airportType);
             if (source.getText().toString().equalsIgnoreCase(destination.getText().toString())) {
                 source.setError(SOURCE_AND_DESTINATION_CANNOT_BE_SAME);
