@@ -101,13 +101,13 @@ public class SearchFlightActivity extends AppCompatActivity {
         String airlineNameText = airlineName.getText().toString();
         String sourceValue = source.getText().toString();
         String destinationValue = destination.getText().toString();
-        File file = new File(this.getDataDir(), airlineNameText);
+        File file = new File(this.getDataDir(), airlineNameText.toLowerCase());
         if (file.exists()) {
             try {
                 Airline airline = new TextParser(new FileReader(file)).parse();
                 if (airline == null) {
                     errorMessage.setText(airlineDoesNotExist(airlineNameText));
-                    errorMessage.setError("");
+                    errorMessage.setTextColor(Color.RED);
                 } else {
                     Airline newAirline = new Airline(airlineNameText);
                     if (source.length() > 0 && destination.length() > 0) {

@@ -156,14 +156,15 @@ public class AddFlightActivity extends AppCompatActivity {
         EditText source = findViewById(R.id.sourceValue);
         EditText destination = findViewById(R.id.destinationVal);
         EditText arrival = findViewById(R.id.arrivalValue);
+        String airlineNameText = airlineName.getText().toString();
         try {
-            File file = new File(this.getDataDir(), airlineName.getText().toString());
+            File file = new File(this.getDataDir(), airlineNameText.toLowerCase());
             Airline airline = null;
             if (file.exists()) {
                 airline = new TextParser(new FileReader(file)).parse();
             }
             if (airline == null) {
-                airline = new Airline(airlineName.getText().toString());
+                airline = new Airline(airlineNameText);
             }
             Flight flight = new Flight(flightNumber.getText().toString(), source.getText().toString(), destination.getText().toString(), departure.getText().toString(), arrival.getText().toString());
             airline.addFlight(flight);
