@@ -11,4 +11,5 @@
     <string name="air_express">Air Express</string>
     <string name="lax">LAX</string>
     <string name="pdx">PDX</string>
+    <string name="clicked">Clicked!</string>
 </resources>

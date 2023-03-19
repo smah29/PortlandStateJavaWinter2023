@@ -1,21 +1,14 @@
 package edu.pdx.cs410J.smahato;
 
-import static edu.pdx.cs410J.smahato.constants.AirlineConstants.ARRIVAL;
-import static edu.pdx.cs410J.smahato.constants.AirlineConstants.DEPARTURE;
 import static edu.pdx.cs410J.smahato.constants.AirlineConstants.DESTINATION;
 import static edu.pdx.cs410J.smahato.constants.AirlineConstants.SOURCE;
-import static edu.pdx.cs410J.smahato.constants.ErrorMessages.DEPARTURE_BEFORE_ARRIVAL;
-import static edu.pdx.cs410J.smahato.constants.ErrorMessages.SOURCE_AND_DESTINATION_CANNOT_BE_SAME;
 import static edu.pdx.cs410J.smahato.utils.ActivityHelper.isEmpty;
 import static edu.pdx.cs410J.smahato.utils.ActivityHelper.isInputLengthZero;
 import static edu.pdx.cs410J.smahato.utils.ActivityHelper.validateAirportCode;
 import static edu.pdx.cs410J.smahato.utils.ActivityHelper.validateArrival;
 import static edu.pdx.cs410J.smahato.utils.ActivityHelper.validateDeparture;
-import static edu.pdx.cs410J.smahato.utils.DateTimeUtils.getDateFromString;
 
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -29,13 +22,15 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.DateTimeException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import edu.pdx.cs410J.ParserException;
 import edu.pdx.cs410J.smahato.exception.AirportCodeException;
 import edu.pdx.cs410J.smahato.storage.TextDumper;
 import edu.pdx.cs410J.smahato.storage.TextParser;
 import edu.pdx.cs410J.smahato.utils.Airline;
-import edu.pdx.cs410J.smahato.utils.AirlineValidationUtils;
 import edu.pdx.cs410J.smahato.utils.OnTextChangeWatcher;
 
 public class AddFlightActivity extends AppCompatActivity {
@@ -61,8 +56,7 @@ public class AddFlightActivity extends AppCompatActivity {
             }
         });
         airlineName.setOnFocusChangeListener((view, hasFocus) -> {
-            if (hasFocus)
-                isEmpty(airlineName);
+            if (hasFocus) isEmpty(airlineName);
         });
         flightNumber.addTextChangedListener(new OnTextChangeWatcher() {
             @Override
@@ -92,8 +86,7 @@ public class AddFlightActivity extends AppCompatActivity {
             }
         });
         source.setOnFocusChangeListener((view, hasFocus) -> {
-            if (hasFocus)
-                validateAirportCode(source, destination, SOURCE);
+            if (hasFocus) validateAirportCode(source, destination, SOURCE);
         });
         destination.addTextChangedListener(new OnTextChangeWatcher() {
             @Override
@@ -102,8 +95,7 @@ public class AddFlightActivity extends AppCompatActivity {
             }
         });
         destination.setOnFocusChangeListener((view, hasFocus) -> {
-            if (hasFocus)
-                validateAirportCode(destination, source, DESTINATION);
+            if (hasFocus) validateAirportCode(destination, source, DESTINATION);
         });
         departure.addTextChangedListener(new OnTextChangeWatcher() {
             @Override
@@ -112,8 +104,7 @@ public class AddFlightActivity extends AppCompatActivity {
             }
         });
         departure.setOnFocusChangeListener((view, hasFocus) -> {
-            if (hasFocus)
-                validateDeparture(arrival, departure);
+            if (hasFocus) validateDeparture(arrival, departure);
         });
 
         arrival.addTextChangedListener(new OnTextChangeWatcher() {
@@ -123,22 +114,15 @@ public class AddFlightActivity extends AppCompatActivity {
             }
         });
         arrival.setOnFocusChangeListener((view, hasFocus) -> {
-            if (hasFocus)
-                validateArrival(arrival, departure);
+            if (hasFocus) validateArrival(arrival, departure);
         });
 
         OnTextChangeWatcher enableAddFLightButton = new OnTextChangeWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (airlineName.getError() == null && !isInputLengthZero(airlineName)
-                        && flightNumber.getError() == null && !isInputLengthZero(flightNumber)
-                        && source.getError() == null && !isInputLengthZero(source)
-                        && destination.getError() == null && !isInputLengthZero(destination)
-                        && departure.getError() == null && !isInputLengthZero(departure)
-                        && arrival.getError() == null && !isInputLengthZero(arrival))
+                if (airlineName.getError() == null && !isInputLengthZero(airlineName) && flightNumber.getError() == null && !isInputLengthZero(flightNumber) && source.getError() == null && !isInputLengthZero(source) && destination.getError() == null && !isInputLengthZero(destination) && departure.getError() == null && !isInputLengthZero(departure) && arrival.getError() == null && !isInputLengthZero(arrival))
                     addFlightButton.setEnabled(true);
-                else
-                    addFlightButton.setEnabled(false);
+                else addFlightButton.setEnabled(false);
             }
         };
         airlineName.addTextChangedListener(enableAddFLightButton);
@@ -150,6 +134,10 @@ public class AddFlightActivity extends AppCompatActivity {
     }
 
     public void addFlight(View view) {
+        ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+        final String originalText = ((Button) view).getText().toString();
+        ((Button) view).setText(R.string.clicked);
+        executor.schedule(() -> ((Button) view).setText(originalText), 1000, TimeUnit.MILLISECONDS);
         EditText airlineName = findViewById(R.id.airlineNameValue);
         EditText flightNumber = findViewById(R.id.flightNumberValue);
         EditText departure = findViewById(R.id.departureValue);
