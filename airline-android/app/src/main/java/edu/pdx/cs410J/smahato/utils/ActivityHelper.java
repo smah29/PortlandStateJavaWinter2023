@@ -9,6 +9,8 @@ import static edu.pdx.cs410J.smahato.utils.DateTimeUtils.getDateFromString;
 
 import android.widget.EditText;
 
+import java.util.Date;
+
 public class ActivityHelper {
 
     public static final String THIS_FIELD_IS_REQUIRED = "This field is required";
@@ -71,6 +73,7 @@ public class ActivityHelper {
             return false;
         } else try {
             getDateFromString(departure.getText().toString(), DEPARTURE);
+            departure.setError(null);
             if (isDepartureBeforeArrival(departure, arrival)) {
                 departure.setError(DEPARTURE_BEFORE_ARRIVAL);
                 return false;
@@ -82,7 +85,6 @@ public class ActivityHelper {
         if (arrival.getError() != null && arrival.getError().toString().equals(DEPARTURE_BEFORE_ARRIVAL)) {
             arrival.setError(null);
         }
-        departure.setError(null);
         return true;
     }
 
@@ -92,6 +94,7 @@ public class ActivityHelper {
             return false;
         } else try {
             getDateFromString(arrival.getText().toString(), ARRIVAL);
+            arrival.setError(null);
             if (isDepartureBeforeArrival(departure, arrival)) {
                 arrival.setError(DEPARTURE_BEFORE_ARRIVAL);
                 return false;
@@ -103,13 +106,18 @@ public class ActivityHelper {
         if (departure.getError() != null && departure.getError().toString().equals(DEPARTURE_BEFORE_ARRIVAL)) {
             departure.setError(null);
         }
-        arrival.setError(null);
         return true;
     }
 
     public static boolean isDepartureBeforeArrival(EditText departure, EditText arrival) {
-        if (departure.length() > 0 && arrival.length() > 0)
-            return departure.getText().toString().compareTo(arrival.getText().toString()) > -1;
+        if (departure.length() > 0 &&
+                (departure.getError() == null || (departure.getError() != null && departure.getError().toString().equals(DEPARTURE_BEFORE_ARRIVAL)))
+                && arrival.length() > 0 &&
+                (arrival.getError() == null || (arrival.getError() != null && arrival.getError().toString().equals(DEPARTURE_BEFORE_ARRIVAL)))) {
+            Date departureDate = getDateFromString(departure.getText().toString(), DEPARTURE);
+            Date arrivalDate = getDateFromString(arrival.getText().toString(), ARRIVAL);
+            return departureDate.compareTo(arrivalDate) > -1;
+        }
         return false;
     }
 }

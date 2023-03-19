@@ -6,22 +6,15 @@ import static edu.pdx.cs410J.smahato.constants.Messages.airlineDoesNotExist;
 import static edu.pdx.cs410J.smahato.constants.Messages.flightDoesNotExist;
 import static edu.pdx.cs410J.smahato.utils.ActivityHelper.isEmpty;
 import static edu.pdx.cs410J.smahato.utils.ActivityHelper.isInputLengthZero;
-import static edu.pdx.cs410J.smahato.utils.ActivityHelper.validateAirportCode;
 import static edu.pdx.cs410J.smahato.utils.ActivityHelper.validateAirportForSearch;
-import static edu.pdx.cs410J.smahato.utils.ActivityHelper.validateArrival;
-import static edu.pdx.cs410J.smahato.utils.ActivityHelper.validateDeparture;
 
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -109,7 +102,7 @@ public class SearchFlightActivity extends AppCompatActivity {
                     errorMessage.setText(airlineDoesNotExist(airlineNameText));
                     errorMessage.setTextColor(Color.RED);
                 } else {
-                    Airline newAirline = new Airline(airlineNameText);
+                    Airline newAirline = new Airline(airline.getName());
                     if (source.length() > 0 && destination.length() > 0) {
                         List<Flight> flights = airline.getFlights(sourceValue.toUpperCase(), destinationValue.toUpperCase());
                         if (flights.isEmpty()) {
