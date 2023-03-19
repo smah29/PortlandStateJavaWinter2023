@@ -37,7 +37,7 @@
                 android:layout_height="59dp"
                 android:layout_weight="1"
                 android:autofillHints="Air Express"
-                android:hint="@string/airline_name"
+                android:hint="@string/air_express"
                 android:inputType="text" />
         </LinearLayout>
 
@@ -61,7 +61,7 @@
                 android:layout_height="59dp"
                 android:layout_weight="1"
                 android:autofillHints="PDX"
-                android:hint="@string/flight_source"
+                android:hint="@string/pdx"
                 android:inputType="text" />
         </LinearLayout>
 
@@ -85,7 +85,7 @@
                 android:layout_height="59dp"
                 android:layout_weight="1"
                 android:autofillHints="LAX"
-                android:hint="@string/flight_destination"
+                android:hint="@string/lax"
                 android:inputType="text" />
         </LinearLayout>
 
@@ -101,5 +101,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.176" />
+        app:layout_constraintVertical_bias="0.13" />
 </androidx.constraintlayout.widget.ConstraintLayout>

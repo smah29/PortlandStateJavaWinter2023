@@ -1,10 +1,5 @@
 <resources>
     <string name="app_name">Airline</string>
-    <string name="welcome_text">Choose between us!</string>
-    <string name="click_me">Click me!</string>
-    <string name="vanished">Vanished!</string>
-    <string name="another_button">another button</string>
-
     <string name="airline">Airline</string>
     <string name="flight_number">Flight Number</string>
     <string name="source">Source</string>
@@ -13,8 +8,7 @@
     <string name="arrival">Arrival</string>
     <string name="add_flight">Add Flight</string>
     <string name="search_flight">Search Flight</string>
-    <string name="airline_name">Airline Name</string>
-    <string name="flight_source">Flight Source</string>
-    <string name="mm_dd_yyyy_hh_mm_a">MM/dd/yyyy hh:mm a</string>
-    <string name="flight_destination">Flight Destination</string>
+    <string name="air_express">Air Express</string>
+    <string name="lax">LAX</string>
+    <string name="pdx">PDX</string>
 </resources>

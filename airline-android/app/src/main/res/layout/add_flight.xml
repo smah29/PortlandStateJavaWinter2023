@@ -36,7 +36,7 @@
                 android:layout_width="300dp"
                 android:layout_height="59dp"
                 android:layout_weight="1"
-                android:hint="@string/airline_name"
+                android:hint="@string/air_express"
                 android:inputType="text" />
         </LinearLayout>
 
@@ -82,7 +82,7 @@
                 android:layout_width="300dp"
                 android:layout_height="59dp"
                 android:layout_weight="1"
-                android:hint="@string/flight_source" />
+                android:hint="@string/pdx" />
         </LinearLayout>
 
         <LinearLayout
@@ -104,7 +104,7 @@
                 android:layout_width="300dp"
                 android:layout_height="59dp"
                 android:layout_weight="1"
-                android:hint="@string/mm_dd_yyyy_hh_mm_a"
+                android:hint="10/10/2023 10:20 am"
                 android:inputType="datetime" />
         </LinearLayout>
 
@@ -127,7 +127,7 @@
                 android:layout_width="300dp"
                 android:layout_height="59dp"
                 android:layout_weight="1"
-                android:hint="@string/flight_destination" />
+                android:hint="@string/lax" />
         </LinearLayout>
 
         <LinearLayout
@@ -149,7 +149,7 @@
                 android:layout_width="300dp"
                 android:layout_height="59dp"
                 android:layout_weight="1"
-                android:hint="@string/mm_dd_yyyy_hh_mm_a"
+                android:hint="10/10/2023 11:20 am"
                 android:inputType="datetime" />
         </LinearLayout>
 
@@ -164,9 +164,8 @@
         android:text="@string/add_flight"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.545"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.01" />
+        app:layout_constraintVertical_bias="0.138" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

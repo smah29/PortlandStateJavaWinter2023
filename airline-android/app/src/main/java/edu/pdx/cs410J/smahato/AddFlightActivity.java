@@ -39,7 +39,9 @@ import edu.pdx.cs410J.smahato.utils.AirlineValidationUtils;
 import edu.pdx.cs410J.smahato.utils.OnTextChangeWatcher;
 
 public class AddFlightActivity extends AppCompatActivity {
-
+    public static final String SOME_ERROR_OCCURRED_WHILE_ADDING_FLIGHT = "Some error occurred while adding flight";
+    public static final String FLIGHT_NUMBER_CONTAINS_ONLY_NUMBERS = "Flight Number contains only numbers";
+    public static final String PLEASE_ENTER_A_NUMBER = "Please enter a number";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +72,7 @@ public class AddFlightActivity extends AppCompatActivity {
         });
         flightNumber.setOnFocusChangeListener((view, hasFocus) -> {
             if (hasFocus && isEmpty((EditText) view))
-                Toast.makeText(getBaseContext(), "Flight Number contains only numbers", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), FLIGHT_NUMBER_CONTAINS_ONLY_NUMBERS, Toast.LENGTH_SHORT).show();
         });
         flightNumber.setOnKeyListener((v, keyCode, event) -> {
             if (event.getAction() == KeyEvent.ACTION_UP) {
@@ -78,7 +80,7 @@ public class AddFlightActivity extends AppCompatActivity {
                     // numeric key pressed, do nothing
                 } else {
                     // non-numeric key pressed, show a Toast message
-                    Toast.makeText(getBaseContext(), "Please enter a number", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getBaseContext(), PLEASE_ENTER_A_NUMBER, Toast.LENGTH_SHORT).show();
                 }
             }
             return false;
@@ -180,7 +182,7 @@ public class AddFlightActivity extends AppCompatActivity {
         } catch (DateTimeException | AirportCodeException | NullPointerException e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
         } catch (IOException | ParserException e) {
-            Toast.makeText(this, "Some error occurred while adding flight", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, SOME_ERROR_OCCURRED_WHILE_ADDING_FLIGHT, Toast.LENGTH_LONG).show();
         }
     }
 }
