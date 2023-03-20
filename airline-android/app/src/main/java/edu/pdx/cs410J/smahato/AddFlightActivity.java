@@ -157,7 +157,7 @@ public class AddFlightActivity extends AppCompatActivity {
             Flight flight = new Flight(flightNumber.getText().toString(), source.getText().toString(), destination.getText().toString(), departure.getText().toString(), arrival.getText().toString());
             airline.addFlight(flight);
             new TextDumper(new FileWriter(file)).dump(airline);
-            Toast.makeText(this, flight.toString(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Flight added successfully!", Toast.LENGTH_SHORT).show();
         } catch (DateTimeException | AirportCodeException | NullPointerException e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
         } catch (IOException | ParserException e) {
