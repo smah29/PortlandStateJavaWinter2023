@@ -12,6 +12,11 @@
         android:theme="@style/Theme.Airline"
         tools:targetApi="31">
         <activity
+            android:name=".HelpActivity"
+            android:exported="false"
+            android:label="Help"
+            android:parentActivityName=".HomeActivity" />
+        <activity
             android:name=".AddFlightActivity"
             android:exported="false"
             android:label="Add Flights"

@@ -23,4 +23,9 @@ public class HomeActivity extends AppCompatActivity {
         Intent intent = new Intent(this, SearchFlightActivity.class);
         startActivity(intent);
     }
+
+    public void helpIntent(View view) {
+        Intent intent = new Intent(this, HelpActivity.class);
+        startActivity(intent);
+    }
 }

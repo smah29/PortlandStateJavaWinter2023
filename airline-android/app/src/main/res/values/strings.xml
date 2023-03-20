@@ -12,4 +12,5 @@
     <string name="lax">LAX</string>
     <string name="pdx">PDX</string>
     <string name="clicked">Clicked!</string>
+    <string name="help">Help</string>
 </resources>
